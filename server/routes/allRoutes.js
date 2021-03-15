@@ -7,9 +7,10 @@ const taskController = require("../controllers/taskController");
 
 const router = express.Router();
 
+// https://dev.to/itz_giddy/how-to-build-dynamic-mongoose-queries-2ka8
 // https://masteringjs.io/tutorials/mongoose/aggregate
-//https://mongoosejs.com/docs/populate.html#populate_multiple_documents
-//https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose
+// https://mongoosejs.com/docs/populate.html#populate_multiple_documents
+// https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose
 // https://chunkofcode.net/how-to-deep-populate-using-mongodb-and-mongoose/
 
 // Users
