@@ -1,9 +1,10 @@
-const port = 3000;
+const port = 3001;
 
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const allRoutes = require("./routes/allRoutes");
 
@@ -18,6 +19,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFi
     .then(() => console.log("MongoDB Atlas connected."))
     .catch((err) => console.log(err));
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static("static"));
