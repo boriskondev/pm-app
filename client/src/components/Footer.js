@@ -3,7 +3,7 @@ import "./Footer.css"
 function Footer() {
     return (
         <footer>
-            <img src="images/footer-logo.png" alt="footer-logo" />
+            <img src="/images/footer-logo.png" alt="footer-logo" />
                 <div className="statistics">
                     <p>Справки</p>
                     <ul>
