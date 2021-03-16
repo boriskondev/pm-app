@@ -20,7 +20,7 @@ class Data extends Component {
         let result;
 
         if (this.state.data.length === 0 ) {
-            result = <p>No available data.</p>
+            result = <p>No available data at this moment...</p>
         } else {
             result = this.state.data.map(person => (
                 <p key={person._id}>

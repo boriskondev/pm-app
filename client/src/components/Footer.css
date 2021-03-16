@@ -1,0 +1,40 @@
+footer {
+    background-color: #D62130;
+    height: 160px;
+    position: relative;
+}
+
+footer img {
+    position: relative;
+    left: 20px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+footer .statistics {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: right;
+}
+
+footer .statistics p {
+    padding-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+footer .statistics ul li {
+    padding: 3px 0;
+}
+
+footer .statistics ul li a {
+    font-size: 14px;
+    color: white;
+}
+
+footer .statistics ul li a:hover {
+    text-decoration: #303030 underline;
+}

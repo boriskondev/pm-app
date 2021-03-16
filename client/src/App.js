@@ -1,12 +1,22 @@
 import './App.css';
-import Data from "./components/Data"
+import Data from "./components/Data";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 
 function App() {
 
     return (
         <div className="App">
-            <h1>If you are seeing this, the app works.</h1>
-            <Data />
+
+            <Navigation />
+
+            <main>
+                <Data />
+            </main>
+
+            <Footer />
+
+
         </div>
     );
 }
