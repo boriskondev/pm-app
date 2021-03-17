@@ -5,7 +5,11 @@ function Navigation() {
     return (
         <nav>
             <ul >
-                <li><a href="/"><img src="/images/header-logo.png" alt="header-logo" /></a></li>
+                <li>
+                    <a href="/">
+                        <img src={process.env.PUBLIC_URL + "/images/header-logo.png"} alt="header-logo" />
+                    </a>
+                </li>
                 <li><a href="/">Добави задача</a></li>
                 <li><a href="/">Добави проект</a></li>
                 <li><a href="/">Добави клиент</a></li>

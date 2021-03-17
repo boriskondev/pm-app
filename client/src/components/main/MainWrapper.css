@@ -1,6 +1,7 @@
 main {
-    height: 400px;
     /*min-height: 100vh;*/
     display: flex;
     flex-direction: column;
+    background-color: #F0F0F0;
+    /*box-sizing: border-box;*/
 }

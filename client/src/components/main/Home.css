@@ -1,0 +1,70 @@
+.weekly-status {
+    background-color: white;
+    padding: 20px 0 50px 0;
+    /*width: 60%;*/
+    /*margin: 0 auto;*/
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+table thead tr {
+    color: black;
+}
+
+table thead tr th {
+    color: black;
+    font-size: 32px;
+    font-weight: normal;
+    padding: 18px;
+    border-bottom: 3px solid #D51F2F;
+}
+
+tr td:nth-child(1) {
+    /*text-align: right;*/
+}
+
+tr td:nth-child(5) {
+    width: 10%;
+    /*text-align: left;*/
+}
+
+th, td {
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #F3F3F3;
+}
+
+table i {
+    color: #D62130;
+}
+
+tfoot td {
+    font-size: 32px;
+    border-top: 3px solid #D51F2F;
+}
+
+tr:hover td {
+    background-color: #D51F2F;
+    color: rgb(255, 255, 255);
+}
+
+tr:hover td a {
+    color: rgb(255, 255, 255);
+}
+
+tr:hover td a:hover {
+    font-weight: bold;
+}
+
+tr:hover td i {
+    color: white;
+}
