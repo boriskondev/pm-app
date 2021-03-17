@@ -1,0 +1,6 @@
+main {
+    height: 400px;
+    /*min-height: 100vh;*/
+    display: flex;
+    flex-direction: column;
+}

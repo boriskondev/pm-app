@@ -12,7 +12,7 @@ const app = require("express")();
 
 const user = "boriskondev";
 const pass = "boriskondev123";
-const dbname = "pm-app"
+const dbname = "pm-app";
 
 const dbURI = `mongodb+srv://${user}:${pass}@cluster0.d5skl.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
