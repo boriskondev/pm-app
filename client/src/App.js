@@ -1,8 +1,8 @@
 import "./App.css";
 
 import Navigation from "./components/common/Navigation";
-import Header from "./components/main/Header";
-import Homepage from "./components/main/Homepage";
+import Header from "./components/common/Header";
+import Homepage from "./components/pages/Homepage";
 import Footer from "./components/common/Footer";
 import Data from "./components/Data";
 
