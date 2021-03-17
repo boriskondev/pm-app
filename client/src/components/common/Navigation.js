@@ -7,7 +7,7 @@ function Navigation() {
             <ul >
                 <li>
                     <a href="/">
-                        <img src={process.env.PUBLIC_URL + "/images/header-logo.png"} alt="header-logo" />
+                        <img src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"} alt="header-logo" />
                     </a>
                 </li>
                 <li><a href="/">Добави задача</a></li>

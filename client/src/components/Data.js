@@ -1,4 +1,5 @@
 import { Component } from "react";
+import "./Data.css";
 
 class Data extends Component {
     constructor() {
@@ -20,10 +21,10 @@ class Data extends Component {
         let result;
 
         if (this.state.data.length === 0 ) {
-            result = <p>No available data at this moment...</p>
+            result = <p className="serverData">No data available at this moment...</p>
         } else {
             result = this.state.data.map(person => (
-                <p key={person._id}>
+                <p key={person._id} className="serverData">
                     <p style={{ color: "red", fontWeight: "bold" }}>User: { person.username } </p>
                     <p>Pass: { person.password } </p>
                 </p>

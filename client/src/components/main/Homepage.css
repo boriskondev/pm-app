@@ -68,3 +68,8 @@ tr:hover td a:hover {
 tr:hover td i {
     color: white;
 }
+
+thead tr th:nth-child(1) img,
+thead tr th:nth-child(5) img {
+    height: 14px;
+}

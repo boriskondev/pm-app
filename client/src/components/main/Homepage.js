@@ -1,19 +1,19 @@
 import {Component} from "react";
-import "./Home.css";
+import "./Homepage.css";
 
-class Home extends Component {
+class Homepage extends Component {
     constructor() {
         super();
         this.state = {
             peopleData: [
                 { path: "/", name: "Хилда", tasks: 30, projects: 9, clients: 3, department: "management" },
-                { path: "/", name: "Соня", tasks: 12, projects: 18, clients: 1, department: "management" },
-                { path: "/", name: "Боби", tasks: 25, projects: 13, clients: 2, department: "management" },
+                { path: "/", name: "Соня", tasks: 12, projects: 18, clients: 1, department: "creative" },
+                { path: "/", name: "Боби", tasks: 25, projects: 13, clients: 2, department: "clientService" },
                 { path: "/", name: "Милена", tasks: 22, projects: 33, clients: 22, department: "management" },
-                { path: "/", name: "Веско", tasks: 11, projects: 23, clients: 22, department: "management" },
-                { path: "/", name: "Даран", tasks: 0, projects: 3, clients: 1, department: "management" },
-                { path: "/", name: "Елхо", tasks: 1, projects: 1, clients: 2, department: "management" },
-                { path: "/", name: "Зевс", tasks: 225, projects: 213, clients: 122, department: "management" }
+                { path: "/", name: "Веско", tasks: 11, projects: 23, clients: 22, department: "creative" },
+                { path: "/", name: "Даран", tasks: 0, projects: 3, clients: 1, department: "clientService" },
+                { path: "/", name: "Елхо", tasks: 1, projects: 1, clients: 2, department: "creative" },
+                { path: "/", name: "Зевс", tasks: 225, projects: 213, clients: 122, department: "clientService" }
             ],
             weeklyData: { totalTasks: 101, totalProjects: 55, totalClients: 13 }
         }
@@ -21,10 +21,13 @@ class Home extends Component {
 
     render() {
 
+        const iconsPath = process.env.PUBLIC_URL + "images/icons/";
+
         const icons = {
-            management: process.env.PUBLIC_URL + "favicon.ico",
-            creative: "",
-            clientService: ""
+            management: iconsPath + "assessment-24px.svg",
+            creative: iconsPath + "palette-24px.svg",
+            clientService: iconsPath + "email-24px.svg",
+            sort: iconsPath + "sort-24px.svg"
         }
 
         const rowsData = this.state.peopleData.map(person => (
@@ -42,11 +45,11 @@ class Home extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th><img src={icons.sort} alt=""/></th>
                             <th>Задачи</th>
                             <th>Проекти</th>
                             <th>Клиенти</th>
-                            <th></th>
+                            <th><img src={icons.sort} alt=""/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,9 +58,9 @@ class Home extends Component {
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td>{ this.state.weeklyData.totalTasks }</td>
-                            <td>{ this.state.weeklyData.totalProjects }</td>
-                            <td>{ this.state.weeklyData.totalClients }</td>
+                            <td>{this.state.weeklyData.totalTasks}</td>
+                            <td>{this.state.weeklyData.totalProjects}</td>
+                            <td>{this.state.weeklyData.totalClients}</td>
                             <td></td>
                         </tr>
                     </tfoot>
@@ -67,5 +70,5 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Homepage;
 

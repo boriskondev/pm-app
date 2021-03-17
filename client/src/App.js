@@ -1,8 +1,11 @@
-import './App.css';
+import "./App.css";
+
+import Navigation from "./components/common/Navigation";
+import Header from "./components/main/Header";
+import Homepage from "./components/main/Homepage";
+import Footer from "./components/common/Footer";
 import Data from "./components/Data";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import MainWrapper from "./components/main/MainWrapper";
+
 
 function App() {
 
@@ -11,7 +14,11 @@ function App() {
 
             <Navigation />
 
-            <MainWrapper />
+            <main>
+                <Header title="Седмичен обзор" />
+                <Homepage />
+                <Data />
+            </main>
 
             <Footer />
 
