@@ -1,4 +1,5 @@
 import "./Navigation.css";
+import { Link } from "react-router-dom";
 
 function Navigation() {
 
@@ -6,13 +7,13 @@ function Navigation() {
         <nav>
             <ul >
                 <li>
-                    <a href="/">
+                    <Link to="/">
                         <img src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"} alt="header-logo" />
-                    </a>
+                    </Link>
                 </li>
-                <li><a href="/">Добави задача</a></li>
-                <li><a href="/">Добави проект</a></li>
-                <li><a href="/">Добави клиент</a></li>
+                <li><Link to="/add-task">Добави задача</Link></li>
+                <li><Link to="/add-project">Добави проект</Link></li>
+                <li><Link to="/add-client">Добави клиент</Link></li>
             </ul>
             <ul>
                 <li><a className="profile" href="/">Профил</a></li>

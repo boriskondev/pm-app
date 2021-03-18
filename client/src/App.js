@@ -23,7 +23,8 @@ function App() {
                 <Header title="Седмичен обзор" />
                 <Switch>
                     <Route path="/" exact component={Homepage}/>
-                    <Route path="/weekly" exact component={WeeklyStatus}/>
+                    <Route path="/weekly-status" exact component={WeeklyStatus}/>
+                    <Route render={() => <p>Page not found!</p>}/>
                 </Switch>
             </ Main>
 
