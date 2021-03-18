@@ -1,10 +1,15 @@
 import "./App.css";
+import { Route, Link, NavLink, Switch } from "react-router-dom";
 
 import Navigation from "./components/common/Navigation";
+import Main from "./components/common/Main";
+import Footer from "./components/common/Footer";
+
 import Header from "./components/common/Header";
 import Homepage from "./components/pages/Homepage";
-import Footer from "./components/common/Footer";
-import Data from "./components/Data";
+import WeeklyStatus from "./components/pages/WeeklyStatus";
+// import Data from "./components/Data";
+
 
 
 function App() {
@@ -14,14 +19,17 @@ function App() {
 
             <Navigation />
 
-            <main>
+            <Main>
                 <Header title="Седмичен обзор" />
-                <Homepage />
-                <Data />
-            </main>
+                <Switch>
+                    <Route path="/" exact component={Homepage}/>
+                    <Route path="/weekly" exact component={WeeklyStatus}/>
+                </Switch>
+            </ Main>
+
+            {/*<Data />*/}
 
             <Footer />
-
 
         </div>
     );

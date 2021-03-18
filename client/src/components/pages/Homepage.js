@@ -1,4 +1,4 @@
-import {Component} from "react";
+import { Component } from "react";
 import "./Homepage.css";
 
 class Homepage extends Component {
@@ -6,14 +6,14 @@ class Homepage extends Component {
         super();
         this.state = {
             peopleData: [
-                { path: "/", name: "Хилда", tasks: 30, projects: 9, clients: 3, department: "management" },
-                { path: "/", name: "Соня", tasks: 12, projects: 18, clients: 1, department: "creative" },
-                { path: "/", name: "Боби", tasks: 25, projects: 13, clients: 2, department: "clientService" },
-                { path: "/", name: "Милена", tasks: 22, projects: 33, clients: 22, department: "management" },
-                { path: "/", name: "Веско", tasks: 11, projects: 23, clients: 22, department: "creative" },
-                { path: "/", name: "Даран", tasks: 0, projects: 3, clients: 1, department: "clientService" },
-                { path: "/", name: "Елхо", tasks: 1, projects: 1, clients: 2, department: "creative" },
-                { path: "/", name: "Зевс", tasks: 225, projects: 213, clients: 122, department: "clientService" }
+                { id: 1, path: "/", name: "Хилда", tasks: 30, projects: 9, clients: 3, department: "management" },
+                { id: 2, path: "/", name: "Соня", tasks: 12, projects: 18, clients: 1, department: "creative" },
+                { id: 3, path: "/", name: "Боби", tasks: 25, projects: 13, clients: 2, department: "clientService" },
+                { id: 4, path: "/", name: "Милена", tasks: 22, projects: 33, clients: 22, department: "management" },
+                { id: 5, path: "/", name: "Веско", tasks: 11, projects: 23, clients: 22, department: "creative" },
+                { id: 6, path: "/", name: "Даран", tasks: 0, projects: 3, clients: 1, department: "clientService" },
+                { id: 7, path: "/", name: "Елхо", tasks: 1, projects: 1, clients: 2, department: "creative" },
+                { id: 8, path: "/", name: "Зевс", tasks: 225, projects: 213, clients: 122, department: "clientService" }
             ],
             weeklyData: { totalTasks: 101, totalProjects: 55, totalClients: 13 }
         }
@@ -31,17 +31,17 @@ class Homepage extends Component {
         }
 
         const rowsData = this.state.peopleData.map(person => (
-            <tr>
+            <tr key={person.id}>
                 <td><a href={person.path}>{person.name}</a></td>
                 <td>{person.tasks}</td>
                 <td>{person.projects}</td>
                 <td>{person.clients}</td>
-                <td><img src={icons[person.department]} alt=""/></td>
+                <td className="icon"><img src={icons[person.department]} alt=""/></td>
             </tr>
         ));
 
         return (
-            <section className="weekly-status">
+            <section className="weekly-overview">
                 <table>
                     <thead>
                         <tr>
