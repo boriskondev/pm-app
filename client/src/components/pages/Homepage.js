@@ -1,5 +1,7 @@
 import { Component } from "react";
 import "./Homepage.css";
+import Header from "../common/Header";
+import { Link } from "react-router-dom";
 
 class Homepage extends Component {
     constructor() {
@@ -21,6 +23,10 @@ class Homepage extends Component {
 
     render() {
 
+        console.log(this.props.match)
+        console.log(this.props.location)
+        console.log(this.props.history)
+
         const iconsPath = process.env.PUBLIC_URL + "images/icons/";
 
         const icons = {
@@ -41,9 +47,11 @@ class Homepage extends Component {
         ));
 
         return (
-            <section className="weekly-overview">
-                <table>
-                    <thead>
+            <>
+                <Link to="/weekly-status"><Header title="Обща информация" /></Link>
+                <section className="weekly-overview">
+                    <table>
+                        <thead>
                         <tr>
                             <th><img src={icons.sort} alt=""/></th>
                             <th>Задачи</th>
@@ -51,11 +59,11 @@ class Homepage extends Component {
                             <th>Клиенти</th>
                             <th><img src={icons.sort} alt=""/></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         { rowsData }
-                    </tbody>
-                    <tfoot>
+                        </tbody>
+                        <tfoot>
                         <tr>
                             <td></td>
                             <td>{this.state.weeklyData.totalTasks}</td>
@@ -63,9 +71,11 @@ class Homepage extends Component {
                             <td>{this.state.weeklyData.totalClients}</td>
                             <td></td>
                         </tr>
-                    </tfoot>
-                </table>
-            </section>
+                        </tfoot>
+                    </table>
+                </section>
+            </>
+
         )
     }
 }
