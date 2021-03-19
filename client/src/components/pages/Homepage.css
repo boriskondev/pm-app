@@ -43,8 +43,10 @@ table tbody tr:nth-child(even) {
     background-color: #F3F3F3;
 }
 
-table i {
-    color: #D62130;
+.icon {
+    color: black;
+    padding: 0;
+    margin: auto 0;
 }
 
 tfoot td {
@@ -65,11 +67,11 @@ tr:hover td a:hover {
     font-weight: bold;
 }
 
-tr:hover td i {
+.icon:hover {
     color: white;
 }
 
-thead tr th:nth-child(1) img,
-thead tr th:nth-child(5) img {
-    height: 14px;
+svg {
+    position: relative;
+    top: 2px;
 }

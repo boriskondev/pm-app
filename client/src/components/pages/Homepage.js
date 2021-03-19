@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./Homepage.css";
 import Header from "../common/Header";
 import { Link } from "react-router-dom";
+import { MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort } from "react-icons/md";
 
 class Homepage extends Component {
     constructor() {
@@ -23,17 +24,17 @@ class Homepage extends Component {
 
     render() {
 
-        console.log(this.props.match)
-        console.log(this.props.location)
-        console.log(this.props.history)
+        // console.log(this.props.match)
+        // console.log(this.props.location)
+        // console.log(this.props.history)
 
-        const iconsPath = process.env.PUBLIC_URL + "images/icons/";
+        // console.log(EmailIcon)
 
         const icons = {
-            management: iconsPath + "assessment-24px.svg",
-            creative: iconsPath + "palette-24px.svg",
-            clientService: iconsPath + "email-24px.svg",
-            sort: iconsPath + "sort-24px.svg"
+            management: <Assessment size={25} />,
+            creative: <Palette size={25} />,
+            clientService: <Email size={25} />,
+            sort: <Sort size={20} />
         }
 
         const rowsData = this.state.peopleData.map(person => (
@@ -42,7 +43,7 @@ class Homepage extends Component {
                 <td>{person.tasks}</td>
                 <td>{person.projects}</td>
                 <td>{person.clients}</td>
-                <td className="icon"><img src={icons[person.department]} alt=""/></td>
+                <td className="icon">{icons[person.department]}</td>
             </tr>
         ));
 
@@ -53,11 +54,11 @@ class Homepage extends Component {
                     <table>
                         <thead>
                         <tr>
-                            <th><img src={icons.sort} alt=""/></th>
+                            <th>{icons.sort}</th>
                             <th>Задачи</th>
                             <th>Проекти</th>
                             <th>Клиенти</th>
-                            <th><img src={icons.sort} alt=""/></th>
+                            <th>{icons.sort}</th>
                         </tr>
                         </thead>
                         <tbody>
