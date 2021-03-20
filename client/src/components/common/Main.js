@@ -1,5 +1,4 @@
 import "./Main.css";
-import Header from "./Header";
 
 const Main = (props) => {
     return (

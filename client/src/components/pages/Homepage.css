@@ -5,18 +5,18 @@
     /*margin: 0 auto;*/
 }
 
-table {
+.weekly-overview table {
     width: 70%;
     border-collapse: collapse;
     margin: 0 auto;
     padding: 50px;
 }
 
-table thead tr {
+.weekly-overview table thead tr {
     color: black;
 }
 
-table thead tr th {
+.weekly-overview table thead tr th {
     color: black;
     font-size: 32px;
     font-weight: normal;
@@ -24,54 +24,55 @@ table thead tr th {
     border-bottom: 3px solid #D51F2F;
 }
 
-tr td:nth-child(1) {
+.weekly-overview tr td:nth-child(1) {
     /*text-align: right;*/
 }
 
-tr td:nth-child(5) {
+.weekly-overview tr td:nth-child(5) {
     width: 10%;
     /*text-align: left;*/
 }
 
-th, td {
+.weekly-overview th,
+.weekly-overview td {
     padding: 10px;
     font-size: 20px;
     text-align: center;
 }
 
-table tbody tr:nth-child(even) {
+.weekly-overview table tbody tr:nth-child(even) {
     background-color: #F3F3F3;
 }
 
-.icon {
+.weekly-overview .icon {
     color: #D62130;
     padding: 0;
     margin: auto 0;
 }
 
-tfoot td {
+.weekly-overview tfoot td {
     font-size: 32px;
     border-top: 3px solid #D51F2F;
 }
 
-tr:hover td {
+.weekly-overview tr:hover td {
     background-color: #D51F2F;
     color: rgb(255, 255, 255);
 }
 
-tr:hover td a {
+.weekly-overview tr:hover td a {
     color: rgb(255, 255, 255);
 }
 
-tr:hover td a:hover {
+.weekly-overview tr:hover td a:hover {
     font-weight: bold;
 }
 
-.icon:hover {
+.weekly-overview .icon:hover {
     color: white;
 }
 
-svg {
+.weekly-overview svg {
     position: relative;
     top: 2px;
 }
