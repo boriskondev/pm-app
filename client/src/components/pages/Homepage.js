@@ -28,8 +28,6 @@ class Homepage extends Component {
         // console.log(this.props.location)
         // console.log(this.props.history)
 
-        // console.log(EmailIcon)
-
         const icons = {
             management: <Assessment size={25} />,
             creative: <Palette size={25} />,
