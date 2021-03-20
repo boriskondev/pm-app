@@ -3,72 +3,76 @@ import "./WeeklyStatus.css";
 import Header from "../common/Header";
 
 class WeeklyStatus extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            weeklyData: [
+                { id: 1, clientName: "Beiersdorf",
+                    projects: [
+                        {id: 1, projectName: "Nivea Warehouse" }
+                        ] },
+                { id: 2, clientName: "Coca-Cola",
+                    projects: [
+                        { id: 1, projectName: "Cappy" },
+                        { id: 2, projectName: "Fuztea" }
+                        ] },
+                { id: 3, clientName: "Visa",
+                    projects: [
+                        { id: 1, projectName: "Spring promotion" },
+                        { id: 2, projectName: "Mass transit" }
+                    ] },
+                { id: 4, clientName: "Kamenitza",
+                    projects: [
+                        { id: 1, projectName: "Airport branding" },
+                        { id: 2, projectName: "RGB promo" },
+                        { id: 3, projectName: "Events pitch" },
+                        { id: 4, projectName: "Draft materials" },
+                    ] },
+            ]
+        }
+    }
+
+    handleAccordionClick(e) {
+        let accordion = e.target;
+        accordion.classList.toggle("active");
+        let accordionPanel = accordion.nextElementSibling;
+        if (accordionPanel.style.display === "block") {
+            accordionPanel.style.display = "none";
+        } else {
+            accordionPanel.style.display = "block";
+        }
+    }
+
     render() {
+
+        const sidebarData = this.state.weeklyData.map(client => (
+            <article>
+                <button className="project-accordion"
+                        onClick={(e) => this.handleAccordionClick(e)}
+                        key={client.id}>{ client.clientName }
+                </button>
+
+                <div className="project-panel">
+                    <ul>
+                        { client.projects.map(project => (
+                            <li key={ project.id }><a href="#">{ project.projectName }</a></li>
+                        )) }
+                    </ul>
+                </div>
+
+            </article>
+        ));
+
         return (
             <>
                 <Header title="Седмичен обзор" />
+
                 <section className="content-wrapper">
                     <section className="projects-list">
-                        <article>
-                            <button className="project-accordion">Beiersdorf</button>
-                            <div className="project-panel">
-                                <ul>
-                                    <li><a href="#">NIVEA warehouse 2020 (1)</a></li>
-                                </ul>
-                            </div>
-                        </article>
 
-                        <article>
-                            <button className="project-accordion">Coca-Cola</button>
-                            <div className="project-panel">
-                                <ul>
-                                    <li><a href="#">Cappy 1l Campaign (4)</a></li>
-                                    <li><a href="#">Fuzetea campaign 2021 (3)</a></li>
-                                    <li><a href="#">Aquarius Launch Campaign (3)</a></li>
-                                    <li><a href="#">Bankia 2020 (6)</a></li>
-                                </ul>
-                            </div>
-                        </article>
+                        { sidebarData }
 
-                        <article>
-                            <button className="project-accordion">HP Inc Bulgaria</button>
-                            <div className="project-panel">
-                                <ul>
-                                    <li><a href="#">HP разни (4)</a></li>
-                                    <li><a href="#">Instant INK POS материали (4)</a></li>
-                                    <li><a href="#">Sales incentive Gift Cards (1)</a></li>
-                                    <li><a href="#">HTML банери за партньори HP (2)</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article>
-                            <button className="project-accordion">Kamenitza</button>
-                            <div className="project-panel">
-                                <ul>
-                                    <li><a href="#">Multipacks design (2)</a></li>
-                                    <li><a href="#">Airport branding (3)</a></li>
-                                    <li><a href="#">Misc projects (6)</a></li>
-                                    <li><a href="#">Q1 trade activation 2021 (3)</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article>
-                            <button className="project-accordion">Visa</button>
-                            <div className="project-panel">
-                                <ul>
-                                    <li><a href="#">UniCredit 6 month campaign (2)</a></li>
-                                    <li><a href="#">Bansko branding, season 2020-2021 (2)</a></li>
-                                    <li><a href="#">Mass transit (3)</a></li>
-                                    <li><a href="#">Glocalzone (3)</a></li>
-                                    <li><a href="#">Fibank digital wallets (2)</a></li>
-                                    <li><a href="#">Website SME sections (2)</a></li>
-                                    <li><a href="#">Mobile payments promotion (1)</a></li>
-                                    <li><a href="#">Misc projects (2)</a></li>
-                                </ul>
-                            </div>
-                        </article>
                     </section>
 
                     <section className="project-info">
