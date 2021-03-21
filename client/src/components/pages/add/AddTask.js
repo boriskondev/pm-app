@@ -1,19 +1,21 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import {useState} from "react";
-import { clientsOptions, projectsOptions, responsible } from "./sampleData"
+import { useState } from "react";
+import { clientsOptions, projectsOptions, responsible } from "../../sampleData"
 
 const AddTask = () => {
     const [taskName, setTaskName] = useState("");
     const [clientId, setClientId] = useState("");
+    const [projectsDropdownList, setProjectsDropdownList] = useState(null);
     const [projectId, setProjectId] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [peopleResponsible, setPeopleResponsible] = useState([]);
 
-    const filterProjectsOptions = (projectsPerClient, clientId) => {
-        let result = projectsPerClient.filter(client => (client.clientId === clientId));
-        console.log(result)
+    const handleClientDropdownClick = (e, projectsOptions) => {
+        let projectsToEnlist = projectsOptions.filter(client => (client.clientId === Number(e.target.value)));
+        setClientId(e.target.value);
+        setProjectsDropdownList(projectsToEnlist);
     }
 
     let newTask = {taskName, clientId, projectId, startDate, endDate, peopleResponsible}
@@ -41,13 +43,13 @@ const AddTask = () => {
                 <div className="form-field">
                     <label>Клиент</label>
                     <select
-                        onChange={(e) => setClientId(e.target.value)}
+                        onChange={(e) => handleClientDropdownClick(e, projectsOptions)}
                         required
                     >
                         <option hidden>Избери клиент</option>
 
                         {clientsOptions.map(client => (
-                            <option key={client.id} value={client.id}>{client.label}</option>
+                            <option key={client.id} value={client.id}>{client.clientName}</option>
                         ))}
 
                     </select>
@@ -61,8 +63,9 @@ const AddTask = () => {
                     >
 
                         <option hidden="hidden">Избери проект</option>
-                        { projectsOptions.filter(project => (project.clientId === 4)).map(filtered => (
-                            <option key={filtered.projectId} value={filtered.projectId}>{filtered.projectName}</option>
+
+                        { projectsDropdownList && projectsDropdownList.map(project => (
+                            <option key={project.projectId} value={project.projectId}>{project.projectName}</option>
                         )) }
 
                     </select>

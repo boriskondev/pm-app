@@ -1,36 +1,16 @@
 import { Component } from "react";
 import "./WeeklyStatus.css";
 import Header from "../common/Header";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProjectDetails from "./ProjectDetails";
+import { weeklyData } from "../sampleData";
 
 class WeeklyStatus extends Component {
     constructor() {
         super();
 
         this.state = {
-            weeklyData: [
-                {
-                    id: 1, clientName: "Beiersdorf",
-                    projects: [
-                        {id: 1, projectName: "Nivea Warehouse"}
-                    ]
-                },
-                {
-                    id: 2, clientName: "Coca-Cola",
-                    projects: [
-                        {id: 2, projectName: "Cappy"},
-                        {id: 3, projectName: "Fuztea"}
-                    ]
-                },
-                {
-                    id: 3, clientName: "Visa",
-                    projects: [
-                        {id: 4, projectName: "Spring promotion"},
-                        {id: 5, projectName: "Mass transit"}
-                    ]
-                }
-            ],
+            weeklyData,
             projectNotShown: true,
             projectClickedId: null
         }

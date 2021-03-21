@@ -1,7 +1,7 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import {useState} from "react";
-import { clientsOptions } from "./sampleData"
+import { useState } from "react";
+import { clientsOptions } from "../../sampleData"
 
 const AddProject = () => {
     const [projectName, setTaskName] = useState("");
@@ -37,7 +37,7 @@ const AddProject = () => {
                     >
                         <option hidden>Избери</option>
                         {clientsOptions.map(option => (
-                            <option key={option.id} value={option.id}>{option.label}</option>
+                            <option key={option.id} value={option.id}>{option.clientName}</option>
                         ))}
 
                     </select>

@@ -1,6 +1,6 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import {useState} from "react";
+import { useState } from "react";
 
 const AddClient = () => {
     const [clientName, setClientName] = useState("");
