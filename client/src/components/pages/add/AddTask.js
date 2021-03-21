@@ -106,11 +106,11 @@ const AddTask = () => {
 
                 <button className="add-task" name="add-task" type="submit">Добави</button>
 
-                <div className="buttons">
-                    <button name="edit">Приключи</button>
-                    <button name="complete">Редактирай</button>
-                    <button name="delete">Изтрий</button>
-                </div>
+                {/*<div className="buttons">*/}
+                {/*    <button name="edit">Приключи</button>*/}
+                {/*    <button name="complete">Редактирай</button>*/}
+                {/*    <button name="delete">Изтрий</button>*/}
+                {/*</div>*/}
 
             </form>
         </>
