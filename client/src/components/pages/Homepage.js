@@ -48,27 +48,28 @@ class Homepage extends Component {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Обща информация" /></Link>
+
                 <section className="weekly-overview">
                     <table>
                         <thead>
-                        <tr>
-                            <th>{icons.sort}</th>
-                            <th>Задачи</th>
-                            <th>Проекти</th>
-                            <th>Клиенти</th>
-                            <th>{icons.sort}</th>
-                        </tr>
+                            <tr>
+                                <th>{icons.sort}</th>
+                                <th>Задачи</th>
+                                <th>Проекти</th>
+                                <th>Клиенти</th>
+                                <th>{icons.sort}</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        { rowsData }
+                            { rowsData }
                         </tbody>
                         <tfoot>
-                        <tr>
-                            <td></td>
-                            <td>{this.state.weeklyData.totalTasks}</td>
-                            <td>{this.state.weeklyData.totalProjects}</td>
-                            <td>{this.state.weeklyData.totalClients}</td>
-                            <td></td>
+                            <tr>
+                                <td></td>
+                                <td>{this.state.weeklyData.totalTasks}</td>
+                                <td>{this.state.weeklyData.totalProjects}</td>
+                                <td>{this.state.weeklyData.totalClients}</td>
+                                <td></td>
                         </tr>
                         </tfoot>
                     </table>

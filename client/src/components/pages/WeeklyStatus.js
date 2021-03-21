@@ -87,7 +87,7 @@ class WeeklyStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.projectNotShown && <p className="message">Избери клиент и проект и да започваме :)</p> }
+                        {this.state.projectNotShown && <p className="message">Да уеднаквя дизайна на таблиците ;)</p> }
 
                         {!this.state.projectNotShown && (
                             <ProjectDetails projectToDisplay={this.state.projectClickedId}/>

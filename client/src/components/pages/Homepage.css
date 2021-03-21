@@ -24,7 +24,13 @@
     border-bottom: 3px solid #D51F2F;
 }
 
+.weekly-overview table thead tr:hover th {
+    background-color: #D51F2F;
+    color: rgb(255, 255, 255);
+}
+
 .weekly-overview tr td:nth-child(1) {
+    width: 20%;
     /*text-align: right;*/
 }
 
@@ -52,6 +58,7 @@
 
 .weekly-overview tfoot td {
     font-size: 32px;
+    padding: 18px;
     border-top: 3px solid #D51F2F;
 }
 
