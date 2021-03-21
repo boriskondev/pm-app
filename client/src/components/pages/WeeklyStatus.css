@@ -78,3 +78,7 @@
     margin: auto auto;
 }
 
+.content-wrapper table tbody tr {
+    border: 0.5px solid #DDDDDD;
+}
+
