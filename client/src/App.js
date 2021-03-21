@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Link, NavLink, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Navigation from "./components/common/Navigation";
 import Main from "./components/common/Main";
@@ -7,12 +7,10 @@ import Footer from "./components/common/Footer";
 
 import Homepage from "./components/pages/Homepage";
 import WeeklyStatus from "./components/pages/WeeklyStatus";
-import AddTask from "./components/pages/AddTask";
-import AddProject from "./components/pages/AddProject";
-import AddClient from "./components/pages/AddClient";
+import AddTask from "./components/pages/add/AddTask";
+import AddProject from "./components/pages/add/AddProject";
+import AddClient from "./components/pages/add/AddClient";
 // import Data from "./components/Data";
-
-
 
 function App() {
     return (

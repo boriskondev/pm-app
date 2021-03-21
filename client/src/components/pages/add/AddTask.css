@@ -1,0 +1,95 @@
+.create-task-form {
+    width: 600px;
+    margin: 0 auto 50px auto;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+}
+
+.create-task-form .form-field {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+.create-task-form .form-field label {
+    display: block;
+    text-align: center;
+    /*background-color: #D62130;*/
+    color: #303030;
+    /*padding: 10px;*/
+    font-weight: bold;
+}
+
+.create-task-form .form-field input,
+.create-task-form .form-field select {
+    width: 100%;
+    font-size: 20px;
+    border-style: none;
+    border-bottom: 3px solid #D51F2F;
+    overflow: hidden;
+    padding: 10px;
+    color: #303030;
+}
+
+.create-task-form .form-field input:focus,
+.create-task-form .form-field select:focus {
+    outline-width: 0;
+}
+
+.create-task-form .form-field input:hover {
+    cursor: text;
+}
+
+/*::placeholder {*/
+/*    color: black;*/
+/*}*/
+
+.create-task-form .form-field #task-term {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.create-task-form .form-field #task-term input {
+    flex-grow: 1;
+}
+
+.create-task-form .form-field span {
+    margin: auto 20px;
+}
+
+.create-task-form .form-field .buttons {
+    text-align: center;
+}
+
+.create-task-form .buttons button {
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px;
+    border-style: none;
+    background: #D51F2F;
+    margin: 0 10px 20px 10px;
+    width: 150px;
+    font-weight: bold;
+}
+
+.create-task-form .buttons button:nth-child(2) {
+    color: #D51F2F;
+    background: white;
+    border: 1px solid #D62130;
+}
+
+.create-task-form .buttons button:nth-child(3) {
+    color: white;
+    background: #303030;
+}
+
+.create-task-form button.add-task {
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px;
+    border-style: none;
+    background: #D51F2F;
+    margin-bottom: 20px;
+    font-weight: bold;
+    width: 150px;
+}

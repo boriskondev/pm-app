@@ -10,9 +10,6 @@
     /*margin-left: 20px;*/
 }
 
-::-webkit-scrollbar {
-    width: 0;
-}
 
 /*::-webkit-scrollbar-track {*/
 /*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
@@ -76,6 +73,11 @@
 
 .content-wrapper .project-info .message {
     margin: auto auto;
+    text-align: center;
+}
+
+.content-wrapper .project-info .message p {
+    margin: 20px;
 }
 
 .content-wrapper table tbody tr {

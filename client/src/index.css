@@ -45,3 +45,7 @@ h2 {
   background: #D62130;
   color: white;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}

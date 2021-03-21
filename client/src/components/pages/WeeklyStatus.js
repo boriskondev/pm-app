@@ -1,7 +1,7 @@
-import {Component} from "react";
+import { Component } from "react";
 import "./WeeklyStatus.css";
 import Header from "../common/Header";
-import {Route, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import ProjectDetails from "./ProjectDetails";
 
 class WeeklyStatus extends Component {
@@ -87,7 +87,12 @@ class WeeklyStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.projectNotShown && <p className="message">Да уеднаквя дизайна на таблиците ;)</p> }
+                        {this.state.projectNotShown && (
+                            <div className="message">
+                                <p>Тази седмица ни очакват 107 задачи.</p>
+                                <p>Да започваме :)</p>
+                            </div>
+                        )}
 
                         {!this.state.projectNotShown && (
                             <ProjectDetails projectToDisplay={this.state.projectClickedId}/>

@@ -159,8 +159,7 @@ class ProjectDetails extends Component {
 
     render() {
 
-        console.log(this.props.projectToDisplay)
-
+        // This should fetch the project data by ID, not take it from state.
         let projectToDisplay = this.state.projects.filter(project => project.id === this.props.projectToDisplay);
         projectToDisplay = projectToDisplay[0]
 
