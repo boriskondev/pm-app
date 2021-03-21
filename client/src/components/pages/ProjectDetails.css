@@ -1,4 +1,4 @@
-.content-wrapper .project-info {
+.project-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,39 +7,60 @@
     background-color: white;
 }
 
-.content-wrapper .project-info h2 {
-    font-size: 24px;
+.project-info h2 {
+    font-size: 28px;
     padding: 30px;
     text-align: center;
     font-weight: bold;
 }
 
-.content-wrapper .project-info table {
+.project-info table {
     width: 95%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-.content-wrapper th,
-.content-wrapper td {
+.project-info th,
+.project-info td {
     padding: 10px;
     font-size: 14px;
-}
-
-.content-wrapper tr td:nth-child(1) {
-    width: 40%;
-}
-
-.content-wrapper table thead tr {
-    background-color: #D62130;
-    color: #ffffff;
     text-align: left;
 }
 
-.content-wrapper table tbody tr {
-    border: 1px solid #DDDDDD;
+.project-info tr td:nth-child(1) {
+    width: 40%;
 }
 
-.content-wrapper table tbody tr:nth-child(even) {
+.project-info table thead tr {
+    color: black;
+}
+
+.project-info table thead tr th {
+    color: black;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 18px;
+    border-bottom: 2px solid #D51F2F;
+}
+
+.project-info thead tr:hover th {
+    background-color: #D51F2F;
+    color: rgb(255, 255, 255);
+}
+
+.project-info tbody tr:last-child {
+    border-bottom: 2px solid #D51F2F;
+}
+
+.project-info table tbody tr:nth-child(even) {
     background-color: #F3F3F3;
+}
+
+.project-info tr:hover td {
+    background-color: #D51F2F;
+    color: rgb(255, 255, 255);
+}
+
+.project-info tr:hover td a {
+    color: rgb(255, 255, 255);
 }
