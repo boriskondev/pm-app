@@ -5,17 +5,18 @@ import { clientsOptions, projectsOptions, responsible } from "./sampleData"
 
 const AddTask = () => {
     const [taskName, setTaskName] = useState("");
-    const [clientName, setClientName] = useState("");
-    const [projectName, setProjectName] = useState("");
+    const [clientId, setClientId] = useState("");
+    const [projectId, setProjectId] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [peopleResponsible, setPeopleResponsible] = useState([]);
 
-    const filterProjectsOptions = () => {
-        // https://www.geeksforgeeks.org/how-to-change-a-selects-options-based-on-another-dropdown-using-react/
+    const filterProjectsOptions = (projectsPerClient, clientId) => {
+        let result = projectsPerClient.filter(client => (client.clientId === clientId));
+        console.log(result)
     }
 
-    let newTask = {taskName, clientName, projectName, startDate, endDate, peopleResponsible}
+    let newTask = {taskName, clientId, projectId, startDate, endDate, peopleResponsible}
 
     console.log(newTask);
 
@@ -40,12 +41,13 @@ const AddTask = () => {
                 <div className="form-field">
                     <label>Клиент</label>
                     <select
-                        onChange={(e) => setClientName(e.target.value)}
+                        onChange={(e) => setClientId(e.target.value)}
                         required
                     >
-                        <option hidden>Избери</option>
-                        {clientsOptions.map(option => (
-                            <option key={option.id} value={option.id}>{option.label}</option>
+                        <option hidden>Избери клиент</option>
+
+                        {clientsOptions.map(client => (
+                            <option key={client.id} value={client.id}>{client.label}</option>
                         ))}
 
                     </select>
@@ -54,15 +56,15 @@ const AddTask = () => {
                 <div className="form-field">
                     <label>Проект</label>
                     <select
-                        onChange={(e) => setProjectName(e.target.value)}
+                        onChange={(e) => setProjectId(e.target.value)}
                         required
                     >
 
-                        <option hidden="hidden">Все още хардкоднати - търси се решение</option>
-                        <option value="bansko-branding">Bansko branding</option>
-                        <option value="sprint-promotion">Spring promotion</option>
-                        <option value="emag">EMAG</option>
-                        <option value="cash-back">Cash back</option>
+                        <option hidden="hidden">Избери проект</option>
+                        { projectsOptions.filter(project => (project.clientId === 4)).map(filtered => (
+                            <option key={filtered.projectId} value={filtered.projectId}>{filtered.projectName}</option>
+                        )) }
+
                     </select>
                 </div>
 
