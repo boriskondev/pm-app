@@ -1,6 +1,6 @@
 import {Component} from "react";
 import "./ProjectDetails.css";
-import { projects } from "../sampleData";
+import { projects } from "../../sampleData";
 
 class ProjectDetails extends Component {
     constructor() {

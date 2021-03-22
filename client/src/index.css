@@ -1,8 +1,8 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, sans-serif;
 }
 
 /*body {*/
@@ -12,40 +12,123 @@
 /*}*/
 
 a {
-  text-decoration: none;
-  color: #303030;
+    text-decoration: none;
+    color: #303030;
 }
 
 a:visited {
-  color: #303030;
+    color: #303030;
 }
 
 a:hover {
-  /*color: #909090;*/
-  text-decoration: #D62130 underline;
+    /*color: #909090;*/
+    text-decoration: #D62130 underline;
 }
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 h1 {
-  font-size: 60px;
-  font-weight: 300;
-  color: #303030;
+    font-size: 60px;
+    font-weight: 300;
+    color: #303030;
 }
 
 h2 {
-  font-size: 50px;
-  font-weight: 300;
-  color: #303030;
+    font-size: 50px;
+    font-weight: 300;
+    color: #303030;
 }
 
+form {
+    width: 600px;
+    margin: 0 auto 50px auto;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+}
+
+form .form-field {
+    margin: 20px 0;
+}
+
+form .form-field label {
+    display: block;
+    font-size: 24px;
+    text-align: center;
+    /*background-color: #D62130;*/
+    color: #303030;
+    /*padding: 10px;*/
+    font-weight: bold;
+}
+
+form .form-field input,
+form .form-field select {
+    width: 100%;
+    font-size: 20px;
+    border-style: none;
+    border-bottom: 2px solid #D51F2F;
+    overflow: hidden;
+    padding: 10px;
+    color: #303030;
+}
+
+form .form-field input:focus,
+form .form-field select:focus {
+    outline-width: 0;
+}
+
+form .form-field input:hover {
+    cursor: text;
+}
+
+form button.add {
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px;
+    border-style: none;
+    background: #D51F2F;
+    margin: 20px;
+    font-weight: bold;
+    width: 150px;
+}
+
+form .edit-form-buttons {
+    text-align: center;
+}
+
+form .edit-form-buttons button {
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px;
+    border-style: none;
+    background: #D51F2F;
+    margin: 0 10px 20px 10px;
+    width: 150px;
+    font-weight: bold;
+}
+
+form .edit-form-buttons button:nth-child(2) {
+    color: #D51F2F;
+    background: white;
+    border: 1px solid #D62130;
+}
+
+form .edit-form-buttons button:nth-child(3) {
+    color: white;
+    background: #303030;
+}
+
+/*::placeholder {*/
+/*    color: rebeccapurple;*/
+/*}*/
+
 ::selection {
-  background: #D62130;
-  color: white;
+    background: #D62130;
+    color: white;
 }
 
 ::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }

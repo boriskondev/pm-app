@@ -20,19 +20,15 @@
     margin-bottom: 20px;
 }
 
-.project-info th,
-.project-info td {
+.project-info table th,
+.project-info table td {
     padding: 10px;
     font-size: 14px;
     text-align: left;
 }
 
-.project-info tr td:nth-child(1) {
+.project-info table tr td:nth-child(1) {
     width: 40%;
-}
-
-.project-info table thead tr {
-    color: black;
 }
 
 .project-info table thead tr th {

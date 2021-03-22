@@ -12,8 +12,19 @@
     padding: 50px;
 }
 
-.weekly-overview table thead tr {
-    color: black;
+.weekly-overview th,
+.weekly-overview td {
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.weekly-overview tr td:nth-child(1) {
+    width: 20%;
+}
+
+.weekly-overview tr td:nth-child(5) {
+    width: 20%;
 }
 
 .weekly-overview table thead tr th {
@@ -21,29 +32,12 @@
     font-size: 32px;
     font-weight: normal;
     padding: 18px;
-    border-bottom: 3px solid #D51F2F;
+    border-bottom: 2px solid #D51F2F;
 }
 
 .weekly-overview table thead tr:hover th {
     background-color: #D51F2F;
     color: rgb(255, 255, 255);
-}
-
-.weekly-overview tr td:nth-child(1) {
-    width: 20%;
-    /*text-align: right;*/
-}
-
-.weekly-overview tr td:nth-child(5) {
-    width: 20%;
-    /*text-align: left;*/
-}
-
-.weekly-overview th,
-.weekly-overview td {
-    padding: 10px;
-    font-size: 20px;
-    text-align: center;
 }
 
 .weekly-overview table tbody tr:nth-child(even) {
@@ -59,7 +53,7 @@
 .weekly-overview tfoot td {
     font-size: 32px;
     padding: 18px;
-    border-top: 3px solid #D51F2F;
+    border-top: 2px solid #D51F2F;
 }
 
 .weekly-overview tr:hover td {

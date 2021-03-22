@@ -13,7 +13,7 @@ const AddClient = () => {
         <>
             <Header title="Добави клиент"/>
 
-            <form className="create-task-form">
+            <form>
 
                 <div className="form-field">
                     <label>Име</label>
@@ -27,9 +27,9 @@ const AddClient = () => {
                     />
                 </div>
 
-                <button className="add-task" name="add-task" type="submit">Добави</button>
+                <button className="add" type="submit">Добави</button>
 
-                {/*<div className="buttons">*/}
+                {/*<div className="edit-form-buttons">*/}
                 {/*    <button name="edit">Приключи</button>*/}
                 {/*    <button name="complete">Редактирай</button>*/}
                 {/*    <button name="delete">Изтрий</button>*/}

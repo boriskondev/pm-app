@@ -16,6 +16,8 @@ function Navigation() {
                 <li><Link to="/add-client">Добави клиент</Link></li>
             </ul>
             <ul>
+                <li><Link to="/signup">Регистрация</Link></li>
+                <li><Link to="/login">Влизане</Link></li>
                 <li><Link to="/profile">Профил</Link></li>
             </ul>
         </nav>
