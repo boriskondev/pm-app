@@ -1,5 +1,7 @@
 import Header from "../../common/Header";
 import { useState } from "react";
+import "./Register.css";
+import { Link } from "react-router-dom";
 
 // https://medium.com/technoetics/create-basic-login-forms-using-react-js-hooks-and-bootstrap-2ae36c15e551
 
@@ -24,7 +26,7 @@ const Register = () => {
         <>
             <Header title="Регистрация"/>
 
-            <form autoComplete="off">
+            <form className="register">
 
                 <div className="form-field">
                     <label>Име</label>
@@ -89,6 +91,8 @@ const Register = () => {
 
 
                 <button className="add" type="submit">Добави</button>
+
+                <p>Вече имаш акаунт? Влез в системата от <Link to="/login">тук.</Link></p>
 
             </form>
         </>
