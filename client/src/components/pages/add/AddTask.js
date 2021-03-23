@@ -27,7 +27,6 @@ const AddTask = () => {
             <Header title="Добави задача"/>
 
             <form>
-
                 <div className="form-field">
                     <label>Име</label>
                     <input
