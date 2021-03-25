@@ -2,8 +2,12 @@ import Header from "../../common/Header";
 import "./AddTask.css";
 import { useState, useEffect } from "react";
 import baseUrl from "../../../services/api";
+import { useHistory } from "react-router-dom";
+
+// https://daveceddia.com/usestate-hook-examples/
 
 const AddTask = () => {
+    const history = useHistory();
     const [taskName, setTaskName] = useState("");
     const [clientsOptions, setClientsOptions] = useState("");
     const [clientId, setClientId] = useState("");
@@ -15,14 +19,15 @@ const AddTask = () => {
     const [peopleResponsible, setPeopleResponsible] = useState([]);
 
     useEffect(() => {
+        const fetchData = async () => {
+            const allClientsInDB = await fetch(baseUrl.clients).then(response => response.json())
+            const allUsersInDB = await fetch(baseUrl.users).then(response => response.json())
 
-        fetch(baseUrl.clients)
-            .then(response => response.json())
-            .then(data => setClientsOptions(data));
+            setClientsOptions(allClientsInDB);
+            setResponsibleOptions(allUsersInDB);
+        };
 
-        fetch(baseUrl.users)
-            .then(response => response.json())
-            .then(data => setResponsibleOptions(data));
+        fetchData();
 
     }, []);
 
@@ -32,15 +37,42 @@ const AddTask = () => {
         setProjectsOptions(clientWithProjectsToEnlist.projects);
     }
 
-    let newTask = {taskName, clientId, projectId, startDate, endDate, peopleResponsible}
+    const handleResponsibleOptionsClick = (e) => {
+        const personIdClicked = e.target.value;
+        if (!peopleResponsible.includes(personIdClicked)) {
+            setPeopleResponsible([...peopleResponsible, personIdClicked])
+        }
+    }
 
-    console.log(newTask);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Client ID not added here!
+        const newTaskToAdd = {taskName, createdBy: "605a5456b97d5f24dc7c1b38", projectId, startDate, endDate, responsible: peopleResponsible};
+
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newTaskToAdd)
+        };
+
+        fetch(baseUrl.tasks, requestOptions)
+            .then(res => res.json())
+            .then(data => {console.log(data)})
+            .then(() => {
+                history.push("/")
+            })
+
+        //Some stuff to be set after submitting the new task.
+    }
+    const newTaskToAdd = {taskName, createdBy: "605a5456b97d5f24dc7c1b38", projectId, startDate, endDate, responsible: peopleResponsible};
+    console.log(newTaskToAdd)
 
     return (
         <>
             <Header title="Добави задача"/>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-field">
                     <label>Име</label>
                     <input
@@ -104,9 +136,7 @@ const AddTask = () => {
                 <div className="form-field">
                     <label>Отговорни</label>
                     <select
-                        onClick={(e) =>
-                            setPeopleResponsible(peopleResponsible =>
-                                new Set([...peopleResponsible, e.target.value]))}
+                        onClick={(e) => handleResponsibleOptionsClick(e)}
                         size={responsibleOptions.length}
                         multiple
                         required
