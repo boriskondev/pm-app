@@ -6,6 +6,7 @@ import baseUrl from "../../../services/api";
 
 // https://www.positronx.io/react-mern-stack-crud-app-tutorial/
 // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
+// https://jasonwatmore.com/post/2020/10/09/react-crud-example-with-react-hook-form
 // https://codingthesmartway.com/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-3/
 // https://www.pluralsight.com/guides/handling-nested-http-requests-using-the-fetch-api
 // https://stackoverflow.com/questions/55938936/any-approach-to-send-post-request-for-checking-and-inserting-values-in-mongodb-i
