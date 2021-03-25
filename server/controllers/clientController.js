@@ -6,6 +6,13 @@ const clientController = {
     findAllClients: async (req, res) => {
         // const filter = { clientName: { $eq: "Visa" } }; This shit works!
         const filter = { status: "active" };
+        // const allClients = await Client
+        //     .find(filter)
+            // .lean()
+            // .select({ "clientName": 1, "_id": 1 })
+
+        // res.json(allClients);
+
         const allClients = await Client
             .find(filter)
             .lean()

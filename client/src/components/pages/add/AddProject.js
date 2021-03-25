@@ -1,28 +1,48 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import { useState } from "react";
-import { clientsOptions } from "../../sampleData"
+import { useState, useEffect } from "react";
+import baseUrl from "../../../services/api";
 
 const AddProject = () => {
-    const [projectName, setTaskName] = useState("");
-    const [clientName, setClientName] = useState("");
+    const [projectName, setProjectName] = useState("");
+    const [clientId, setClientId] = useState("");
+    const [clientsOptions, setClientsOptions] = useState("");
 
-    let newProject = {projectName, clientName}
+    useEffect(() => {
+        fetch(baseUrl.clients)
+            .then(response => response.json())
+            .then(data => setClientsOptions(data));
+    }, []);
 
-    console.log(newProject);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let newProjectToAdd = { projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38" }
+
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newProjectToAdd)
+        };
+
+        fetch(baseUrl.projects, requestOptions)
+            .then(res => res.json())
+            .then(data => {console.log(data)})
+            .then(() => setProjectName(""));
+    }
 
     return (
         <>
             <Header title="Добави проект"/>
 
-            <form>
+            <form onSubmit={handleSubmit}>
 
                 <div className="form-field">
                     <label>Име</label>
                     <input
                         type="text"
                         value={projectName}
-                        onChange={(e) => setTaskName(e.target.value)}
+                        onChange={(e) => setProjectName(e.target.value)}
                         autoComplete="off"
                         autoFocus
                         required
@@ -32,12 +52,12 @@ const AddProject = () => {
                 <div className="form-field">
                     <label>Клиент</label>
                     <select
-                        onChange={(e) => setClientName(e.target.value)}
+                        onChange={(e) => setClientId(e.target.value)}
                         required
                     >
                         <option hidden>Избери</option>
-                        {clientsOptions.map(option => (
-                            <option key={option.id} value={option.id}>{option.clientName}</option>
+                        {clientsOptions && clientsOptions.map(option => (
+                            <option key={option._id} value={option._id}>{option.clientName}</option>
                         ))}
 
                     </select>
