@@ -39,8 +39,9 @@ const AddClient = () => {
 
         fetch(baseUrl.clients, requestOptions)
             .then(res => res.json())
-            .then(data => {console.log(data)})
-            .then(() => setClientName(""));
+            .then(data => {console.log(data)});
+
+        setClientName("");
     }
 
     return (

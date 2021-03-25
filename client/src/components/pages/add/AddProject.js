@@ -27,8 +27,10 @@ const AddProject = () => {
 
         fetch(baseUrl.projects, requestOptions)
             .then(res => res.json())
-            .then(data => {console.log(data)})
-            .then(() => setProjectName(""));
+            .then(data => {console.log(data)});
+
+        setProjectName("");
+        setClientId("");
     }
 
     return (
