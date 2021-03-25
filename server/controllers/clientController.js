@@ -1,6 +1,4 @@
 const Client = require("../models/client");
-const User = require("../models/user");
-const mongoose = require("mongoose");
 
 const clientController = {
     findAllClients: async (req, res) => {
@@ -18,7 +16,7 @@ const clientController = {
             .lean()
             .populate({
                 path: "projects",
-                select: { "projectName": 1, "tasks": 1, "_id": 0 },
+                select: { "projectName": 1, "tasks": 1, "_id": 1 },
                 populate: {
                     path: "tasks",
                     select: { "taskName": 1, "startDate": 1, "endDate": 1,  "responsible": 1, "_id": 0 },
