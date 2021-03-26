@@ -3,7 +3,8 @@ const Client = require("../models/client");
 // https://www.restapitutorial.com/httpstatuscodes.html
 
 const clientController = {
-    findAllClients: async (req, res) => {
+
+    findAll: async (req, res) => {
         try {
             // const filter = { clientName: { $eq: "Visa" } }; This shit works!
             const filter = { status: "active" };
@@ -31,7 +32,7 @@ const clientController = {
 
     },
 
-    createClient: async (req, res) => {
+    create: async (req, res) => {
         const {clientName, createdBy} = req.body;
         const newClient = new Client({clientName, createdBy});
 
@@ -43,7 +44,7 @@ const clientController = {
         }
     },
 
-    findClient: async (req, res) => {
+    findOne: async (req, res) => {
         try {
             const id = req.params.id;
             const foundClient = await Client.findById(id);
@@ -51,7 +52,7 @@ const clientController = {
         } catch (error) {
             res.status(404).json({ message: error.message });
         }
-    },
+    }
 }
 
 module.exports = clientController;

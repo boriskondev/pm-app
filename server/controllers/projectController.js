@@ -3,26 +3,42 @@ const Client = require("../models/client");
 
 const projectController = {
 
-    findAllProjects: async (req, res) => {
-        const allProjects = await Project.find();
-            // .where("clientId").equals("604d2210c4beba262c820777")
-            // .populate("createdBy", { username: 1 });
-        res.json(allProjects);
+    findAll: async (req, res) => {
+        try {
+            const allProjects = await Project.find();
+            res.status(200).json(allProjects);
+        } catch(error) {
+            res.status(404).json({ message: error.message });
+        }
     },
 
-    createProject: async (req, res) => {
+    create: async (req, res) => {
         const { projectName, createdBy, clientId } = req.body;
         const newProject = new Project({projectName, createdBy, clientId});
 
-        const updatedClient = await Client.findByIdAndUpdate(clientId, {
-            "$push": {
-                projects: newProject
-            }
-        });
+        try {
+            await Client.findByIdAndUpdate(clientId, {
+                "$push": {
+                    projects: newProject
+                }
+            });
 
-        const savedProject = await newProject.save();
-        const message = `${ projectName } successfully created!`
-        res.json(message);
+            await newProject.save();
+
+            res.status(200).json(newProject);
+        } catch (error) {
+            res.status(409).json({ message: error.message });
+        }
+    },
+
+    findOne: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const foundProject = await Project.findById(id);
+            res.status(200).json(foundProject);
+        } catch (error) {
+            res.status(404).json({ message: error.message });
+        }
     }
 }
 

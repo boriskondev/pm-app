@@ -1,7 +1,7 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
 import { useState, useEffect } from "react";
-import baseUrl from "../../../services/api";
+import endpoints from "../../../services/api";
 import { useHistory } from "react-router-dom";
 
 // https://daveceddia.com/usestate-hook-examples/
@@ -20,8 +20,8 @@ const AddTask = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allClientsInDB = await fetch(baseUrl.clients).then(response => response.json())
-            const allUsersInDB = await fetch(baseUrl.users).then(response => response.json())
+            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json())
+            const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json())
 
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
@@ -56,7 +56,7 @@ const AddTask = () => {
             body: JSON.stringify(newTaskToAdd)
         };
 
-        fetch(baseUrl.tasks, requestOptions)
+        fetch(endpoints.TASKS, requestOptions)
             .then(res => res.json())
             .then(data => {console.log(data)})
             .then(() => {

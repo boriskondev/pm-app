@@ -1,7 +1,7 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
 import { useState, useEffect } from "react";
-import baseUrl from "../../../services/api";
+import endpoints from "../../../services/api";
 
 const AddProject = () => {
     const [projectName, setProjectName] = useState("");
@@ -9,7 +9,7 @@ const AddProject = () => {
     const [clientsOptions, setClientsOptions] = useState("");
 
     useEffect(() => {
-        fetch(baseUrl.clients)
+        fetch(endpoints.CLIENTS)
             .then(response => response.json())
             .then(data => setClientsOptions(data));
     }, []);
@@ -25,7 +25,7 @@ const AddProject = () => {
             body: JSON.stringify(newProjectToAdd)
         };
 
-        fetch(baseUrl.projects, requestOptions)
+        fetch(endpoints.PROJECTS, requestOptions)
             .then(res => res.json())
             .then(data => {console.log(data)});
 

@@ -22,13 +22,14 @@ router.delete("/users/:id", userController.deleteUser);
 router.get("/users/:id/tasks", userController.getAllTasks);
 
 // Clients
-router.post("/clients", clientController.createClient);
-router.get("/clients", clientController.findAllClients);
-router.get("/clients/:id", clientController.findClient);
+router.post("/clients", clientController.create);
+router.get("/clients", clientController.findAll);
+router.get("/clients/:id", clientController.findOne);
 
 // Project
-router.post("/projects", projectController.createProject);
-router.get("/projects", projectController.findAllProjects);
+router.post("/projects", projectController.create);
+router.get("/projects", projectController.findAll);
+router.get("/projects/:id", projectController.findOne);
 
 // Tasks
 router.get("/tasks", taskController.findAllTasks);

@@ -1,7 +1,7 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
 import { useState } from "react";
-import baseUrl from "../../../services/api";
+import endpoints from "../../../services/api";
 // import { useHistory } from "react-router-dom";
 
 // https://www.positronx.io/react-mern-stack-crud-app-tutorial/
@@ -22,7 +22,7 @@ const AddClient = () => {
 
         const newClientToAdd = { clientName, createdBy: "605a5456b97d5f24dc7c1b38" };
 
-        const allClientsInDB = await fetch(baseUrl.clients).then(response => response.json());
+        const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
 
         for (let client of allClientsInDB){
             if (client.clientName === clientName){
@@ -38,7 +38,7 @@ const AddClient = () => {
             body: JSON.stringify(newClientToAdd)
         };
 
-        fetch(baseUrl.clients, requestOptions)
+        fetch(endpoints.CLIENTS, requestOptions)
             .then(res => res.json())
             .then(data => {console.log(data)});
 
