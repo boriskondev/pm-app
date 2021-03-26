@@ -32,7 +32,8 @@ router.get("/projects", projectController.findAll);
 router.get("/projects/:id", projectController.findOne);
 
 // Tasks
-router.get("/tasks", taskController.findAllTasks);
-router.post("/tasks", taskController.createTask);
+router.post("/tasks", taskController.create);
+router.get("/tasks", taskController.findAll);
+router.get("/tasks/:id", taskController.findOne);
 
 module.exports = router;
