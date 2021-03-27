@@ -6,7 +6,7 @@
 }
 
 .weekly-overview table {
-    width: 70%;
+    width: 60%;
     border-collapse: collapse;
     margin: 0 auto;
     padding: 50px;
@@ -20,11 +20,14 @@
 }
 
 .weekly-overview tr td:nth-child(1) {
-    width: 20%;
+    width: 30%;
+}
+.weekly-overview tr td:nth-child(2) {
+    width: 30%;
 }
 
-.weekly-overview tr td:nth-child(5) {
-    width: 20%;
+.weekly-overview tr td:nth-child(3) {
+    width: 30%;
 }
 
 .weekly-overview table thead tr th {
