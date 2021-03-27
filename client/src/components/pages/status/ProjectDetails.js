@@ -14,6 +14,7 @@ class ProjectDetails extends Component {
                 {!this.props.clickedProjectData && (
                     <p>Момент, информацията се зарежда :)</p>
                 )}
+
                 {this.props.clickedProjectData && (
                     <>
                         <h2>{this.props.clickedProjectData.projectName}</h2>

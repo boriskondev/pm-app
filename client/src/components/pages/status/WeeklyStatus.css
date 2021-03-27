@@ -78,6 +78,12 @@
 
 .content-wrapper .project-info .message p {
     margin: 20px;
+    font-size: 32px;
+}
+
+.content-wrapper .project-info .message p span {
+    color: #D62130;
+    font-weight: bold;
 }
 
 .content-wrapper table tbody tr {

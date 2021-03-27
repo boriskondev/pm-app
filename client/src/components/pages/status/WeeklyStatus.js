@@ -3,6 +3,9 @@ import "./WeeklyStatus.css";
 import Header from "../../common/Header";
 import ProjectDetails from "./ProjectDetails";
 import endpoints from "../../../services/api";
+import {Link} from "react-router-dom";
+
+// https://www.pluralsight.com/guides/using-multiple-fetch-statements-with-componentwillmount-in-react
 
 class WeeklyStatus extends Component {
     constructor() {
@@ -13,13 +16,20 @@ class WeeklyStatus extends Component {
             projectNotClicked: true,
             projectClickedId: null,
             projectClickedData: null,
+            activeTasks: null
         }
     }
 
     async componentDidMount() {
-        const allClientsWithProjectsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
-        // To fetch the tasks in order to show how many tasks are there for the week?
-        this.setState({weeklyData: allClientsWithProjectsInDB});
+        Promise.all([
+            fetch(endpoints.CLIENTS).then(response => response.json()),
+            fetch(endpoints.TASKS).then(response => response.json())
+        ]).then(([allClientsWithProjectsInDB, allTasksInDB]) => {
+            this.setState({
+                weeklyData: allClientsWithProjectsInDB,
+                activeTasks: allTasksInDB.length,
+            });
+        })
     }
 
     handleAccordionClick(e) {
@@ -59,7 +69,7 @@ class WeeklyStatus extends Component {
                         {client.projects.map(project => (
                             <li key={project._id} value={project._id}
                                 onClick={(e) => this.handlePanelClick(e, project._id)}>
-                                {project.projectName}
+                                <Link>{project.projectName}</Link>
                             </li>
                         ))}
                     </ul>
@@ -81,8 +91,7 @@ class WeeklyStatus extends Component {
 
                         {this.state.projectNotClicked && (
                             <div className="message">
-                                {/*Just a placeholder for now.*/}
-                                <p>Тази седмица ни очакват 107 задачи.</p>
+                                <p>Тази седмица ни очакват <span>{this.state.activeTasks}</span> задачи.</p>
                                 <p>Да започваме :)</p>
                             </div>
                         )}
