@@ -1,10 +1,8 @@
 import {Component} from "react";
 import "./WeeklyStatus.css";
 import Header from "../../common/Header";
-import {Link} from "react-router-dom";
 import ProjectDetails from "./ProjectDetails";
 import endpoints from "../../../services/api";
-import {projects} from "../../sampleData";
 
 class WeeklyStatus extends Component {
     constructor() {
@@ -12,7 +10,7 @@ class WeeklyStatus extends Component {
 
         this.state = {
             weeklyData: [],
-            projectNotShown: true,
+            projectNotClicked: true,
             projectClickedId: null,
             projectClickedData: null,
         }
@@ -36,20 +34,18 @@ class WeeklyStatus extends Component {
     }
 
     async handlePanelClick(e, id) {
-        const selectedProjectData = await fetch(endpoints.PROJECTS + `/${id}`).then(response => response.json());
-
-        console.log(selectedProjectData)
-
-        this.setState(() => ({
-            projectNotShown: false,
-            projectClickedId: id,
-            projectClickedData: selectedProjectData,
-        }));
+        await fetch(endpoints.PROJECTS + `/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState(() => ({
+                    projectNotClicked: false,
+                    projectClickedId: id,
+                    projectClickedData: data,
+                }));
+            })
     }
 
     render() {
-
-        console.log(this.state.projectClickedId)
 
         const sidebarData = this.state.weeklyData.map(client => (
             <article key={client._id}>
@@ -83,14 +79,15 @@ class WeeklyStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.projectNotShown && (
+                        {this.state.projectNotClicked && (
                             <div className="message">
+                                {/*Just a placeholder for now.*/}
                                 <p>Тази седмица ни очакват 107 задачи.</p>
                                 <p>Да започваме :)</p>
                             </div>
                         )}
 
-                        {this.state.projectClickedData && (
+                        {!this.state.projectNotClicked && (
                             <ProjectDetails clickedProjectData={this.state.projectClickedData}/>
                         )}
 

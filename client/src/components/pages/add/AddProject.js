@@ -9,7 +9,6 @@ const AddProject = () => {
     const [clientsOptions, setClientsOptions] = useState("");
 
     useEffect(() => {
-        console.log(endpoints.CLIENTS)
         fetch(endpoints.CLIENTS)
             .then(response => response.json())
             .then(data => setClientsOptions(data));

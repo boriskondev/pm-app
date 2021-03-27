@@ -5,8 +5,8 @@ const User = require("../models/user");
 const taskController = {
 
     create: async (req, res) => {
-        const {taskName, createdBy, projectId, startDate, endDate, responsible} = req.body;
-        const newTask = new Task({taskName, createdBy, projectId, startDate, endDate, responsible});
+        const {taskName, createdBy, clientId, projectId, startDate, endDate, responsible} = req.body;
+        const newTask = new Task({taskName, createdBy, clientId, projectId, startDate, endDate, responsible});
 
         try {
             await Project.findByIdAndUpdate(projectId, {

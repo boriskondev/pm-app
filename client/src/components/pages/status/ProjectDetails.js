@@ -1,26 +1,22 @@
 import {Component} from "react";
 import "./ProjectDetails.css";
-import endpoints from "../../../services/api";
+
+// https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
 
 class ProjectDetails extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            projectData: this.props.clickedProjectData
-        }
     }
-
 
     render() {
         return (
             <>
-                {!this.state.projectData && (
-                    <p>Момент :)</p>
+                {!this.props.clickedProjectData && (
+                    <p>Момент, информацията се зарежда :)</p>
                 )}
-                {this.state.projectData && (
+                {this.props.clickedProjectData && (
                     <>
-                        <h2><a href="#">{this.state.projectData.projectName}</a></h2>
+                        <h2>{this.props.clickedProjectData.projectName}</h2>
                         <table>
                             <thead>
                             <tr>
@@ -32,13 +28,15 @@ class ProjectDetails extends Component {
                             </thead>
                             <tbody>
 
-                            {this.state.projectData.tasks.map(task => (
+                            {this.props.clickedProjectData.tasks.map(task => (
                                 <tr key={task._id}>
-                                    <td><a href="#">{task.taskName}</a></td>
+                                    <td>{task.taskName}</td>
                                     <td>
                                         <ul>
                                             {task.responsible.map(person => (
-                                                <li key={person._id}>{person.username}</li>
+                                                <li key={person._id}>
+                                                    {person.username}
+                                                </li>
                                             ))}
                                         </ul>
                                     </td>
