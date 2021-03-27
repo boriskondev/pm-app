@@ -34,7 +34,15 @@ const projectController = {
     findOne: async (req, res) => {
         try {
             const id = req.params.id;
-            const foundProject = await Project.findById(id);
+            const foundProject = await Project
+                .findById(id)
+                .populate({
+                    path: "tasks",
+                    select: { "taskName": 1, "startDate": 1, "endDate": 1,  "responsible": 1, "_id": 0 },
+                    populate: {
+                        path: "responsible",
+                        select: { "username": 1, "_id": 0 }
+                }});
             res.status(200).json(foundProject);
 
         } catch (error) {

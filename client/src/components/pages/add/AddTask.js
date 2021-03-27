@@ -20,8 +20,8 @@ const AddTask = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json())
-            const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json())
+            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
+            const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json());
 
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);

@@ -17,8 +17,6 @@ import AddClient from "./components/pages/add/AddClient";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
-// import Data from "./components/Data";
-
 function App() {
     return (
         <div className="App">
@@ -37,8 +35,6 @@ function App() {
                     <Route render={() => <p>Page not found!</p>}/>
                 </Switch>
             </Main>
-
-            {/*<Data />*/}
 
             <Footer/>
 

@@ -3,17 +3,25 @@ import "./WeeklyStatus.css";
 import Header from "../../common/Header";
 import {Link} from "react-router-dom";
 import ProjectDetails from "./ProjectDetails";
-import {weeklyData} from "../../sampleData";
+import endpoints from "../../../services/api";
+import {projects} from "../../sampleData";
 
 class WeeklyStatus extends Component {
     constructor() {
         super();
 
         this.state = {
-            weeklyData,
+            weeklyData: [],
             projectNotShown: true,
-            projectClickedId: null
+            projectClickedId: null,
+            projectClickedData: null,
         }
+    }
+
+    async componentDidMount() {
+        const allClientsWithProjectsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
+        // To fetch the tasks in order to show how many tasks are there for the week?
+        this.setState({weeklyData: allClientsWithProjectsInDB});
     }
 
     handleAccordionClick(e) {
@@ -27,27 +35,35 @@ class WeeklyStatus extends Component {
         }
     }
 
-    handlePanelClick(e, id) {
-        this.setState(() => ({projectNotShown: false}));
-        this.setState(() => ({projectClickedId: id}));
+    async handlePanelClick(e, id) {
+        const selectedProjectData = await fetch(endpoints.PROJECTS + `/${id}`).then(response => response.json());
+
+        console.log(selectedProjectData)
+
+        this.setState(() => ({
+            projectNotShown: false,
+            projectClickedId: id,
+            projectClickedData: selectedProjectData,
+        }));
     }
 
     render() {
 
+        console.log(this.state.projectClickedId)
+
         const sidebarData = this.state.weeklyData.map(client => (
-            <article>
+            <article key={client._id}>
                 <button className="project-accordion"
                         onClick={(e) => this.handleAccordionClick(e)}
-                        key={client.id}>
+                        >
                     {client.clientName}
                 </button>
                 <div className="project-panel">
                     <ul>
                         {client.projects.map(project => (
-                            <li key={project.id}>
-                                <Link onClick={(e) => this.handlePanelClick(e, project.id)}>
-                                    {project.projectName}
-                                </Link>
+                            <li key={project._id} value={project._id}
+                                onClick={(e) => this.handlePanelClick(e, project._id)}>
+                                {project.projectName}
                             </li>
                         ))}
                     </ul>
@@ -74,8 +90,8 @@ class WeeklyStatus extends Component {
                             </div>
                         )}
 
-                        {!this.state.projectNotShown && (
-                            <ProjectDetails projectToDisplay={this.state.projectClickedId}/>
+                        {this.state.projectClickedData && (
+                            <ProjectDetails clickedProjectData={this.state.projectClickedData}/>
                         )}
 
                     </section>

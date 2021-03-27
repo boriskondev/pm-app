@@ -1,55 +1,58 @@
 import {Component} from "react";
 import "./ProjectDetails.css";
-import {projects} from "../../sampleData";
+import endpoints from "../../../services/api";
 
 class ProjectDetails extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            projects
+            projectData: this.props.clickedProjectData
         }
     }
 
+
     render() {
-
-        // This should fetch the project data by ID, not take it from state.
-        let projectToDisplay = this.state.projects.filter(project => project.id === this.props.projectToDisplay);
-        projectToDisplay = projectToDisplay[0]
-
         return (
             <>
-                <h2><a href="#">{projectToDisplay.projectName}</a></h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Задача</th>
-                        <th>Отговорни</th>
-                        <th>Срок</th>
-                        <th>Статус</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                {!this.state.projectData && (
+                    <p>Момент :)</p>
+                )}
+                {this.state.projectData && (
+                    <>
+                        <h2><a href="#">{this.state.projectData.projectName}</a></h2>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Задача</th>
+                                <th>Отговорни</th>
+                                <th>Срок</th>
+                                <th>Статус</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                    {projectToDisplay.tasks.map(task => (
-                        <tr key={task.id}>
-                            <td><a href="#">{task.taskName}</a></td>
-                            <td>
-                                <ul>
-                                    {task.responsible.map(person => (
-                                        <li>{person}</li>
-                                    ))}
-                                </ul>
-                            </td>
-                            <td>{task.term}</td>
-                            <td>{task.status}</td>
-                        </tr>
-                    ))}
+                            {this.state.projectData.tasks.map(task => (
+                                <tr key={task._id}>
+                                    <td><a href="#">{task.taskName}</a></td>
+                                    <td>
+                                        <ul>
+                                            {task.responsible.map(person => (
+                                                <li key={person._id}>{person.username}</li>
+                                            ))}
+                                        </ul>
+                                    </td>
+                                    <td>{task.startDate.slice(0, 10)} - {task.endDate.slice(0, 10)}</td>
+                                    <td>{task.status}</td>
+                                </tr>
+                            ))}
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </>
+
+                )}
             </>
-
         )
     }
 }
