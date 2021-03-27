@@ -36,7 +36,12 @@ const taskController = {
     findAll: async (req, res) => {
 
         try {
-            const allTasks = await Task.find();
+            const allTasks = await Task
+                .find()
+                .populate({
+                    path: "responsible",
+                    select: {"username": 1, "_id": 1}
+                });
             res.status(200).json(allTasks);
 
         } catch (error) {

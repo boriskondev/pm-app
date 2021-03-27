@@ -25,10 +25,6 @@ class Homepage extends Component {
 
     render() {
 
-        // console.log(this.props.match)
-        // console.log(this.props.location)
-        // console.log(this.props.history)
-
         const icons = {
             management: <Assessment size={25}/>,
             creative: <Palette size={25}/>,

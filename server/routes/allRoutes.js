@@ -14,9 +14,9 @@ const router = express.Router();
 // https://chunkofcode.net/how-to-deep-populate-using-mongodb-and-mongoose/
 
 // Users
-router.post("/users", userController.createUser);
-router.get("/users", userController.findAllUsers);
-router.get("/users/:id", userController.findUser);
+router.post("/users", userController.create);
+router.get("/users", userController.findAll);
+router.get("/users/:id", userController.findOne);
 router.put("/users/:id", userController.updateUser);
 router.delete("/users/:id", userController.deleteUser);
 router.get("/users/:id/tasks", userController.getAllTasks);

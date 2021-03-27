@@ -2,27 +2,34 @@ const User = require("../models/user");
 
 const userController = {
 
-    findAllUsers: async (req, res) => {
-        const allUsers = await User.find();
-        // const allUsers = await User.find().select("_id");
-        res.json(allUsers);
+    create: async (req, res) => {
+        const {username, department, email, password} = req.body;
+        const newUser = new User({username, department, email, password});
+
+        try {
+            await newUser.save();
+            res.status(200).json(newUser);
+        } catch (error) {
+            res.status(409).json({message: error.message});
+        }
     },
 
-    createUser: async (req, res) => {
-        const {username, password} = req.body;
-        const newUser = new User({username, password});
-        const savedUser = await newUser.save();
-        const message = `User ${username} successfully created!`
-        res.json(message);
+    findAll: async (req, res) => {
+        try {
+            const allUsers = await User.find();
+            res.status(200).json(allUsers);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
     },
 
-    findUser: async (req, res) => {
+    findOne: async (req, res) => {
         try {
             const id = req.params.id;
             const foundUser = await User.findById(id);
-            res.json(foundUser);
+            res.status(200).json(foundUser);
         } catch (err) {
-            res.json("User does not exist. Try again.");
+            res.status(404).json({message: error.message});
         }
 
     },
