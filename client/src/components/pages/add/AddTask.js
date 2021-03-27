@@ -47,10 +47,10 @@ const AddTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Client ID not added here!
         const newTaskToAdd = {
             taskName,
             createdBy: "605a5456b97d5f24dc7c1b38",
+            clientId,
             projectId,
             startDate,
             endDate,

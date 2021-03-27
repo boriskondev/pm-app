@@ -11,6 +11,11 @@ const taskSchema = new Schema({
         ref: "User",
         required: true,
     },
+    clientId: {
+        type: Schema.Types.ObjectID,
+        ref: "Client",
+        required: true
+    },
     projectId: {
         type: Schema.Types.ObjectID,
         ref: "Project",

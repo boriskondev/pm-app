@@ -1,5 +1,6 @@
 const Task = require("../models/task");
 const Project = require("../models/project");
+const User = require("../models/user");
 
 const taskController = {
 
@@ -14,6 +15,14 @@ const taskController = {
                 }
             });
 
+            await Promise.all(responsible.map(async (id) => {
+                await User.findByIdAndUpdate(id, {
+                    $push: {
+                        tasks: newTask
+                    }
+                });
+            }));
+
             await newTask.save();
             res.status(200).json(newTask);
 
@@ -21,13 +30,7 @@ const taskController = {
             res.status(409).json({message: error.message});
         }
 
-        // await Promise.all(responsible.map(async (id) => {
-        //     await User.findByIdAndUpdate(id, {
-        //         $push: {
-        //             tasks: newTask
-        //         }
-        //     });
-        // }));
+
     },
 
     findAll: async (req, res) => {
