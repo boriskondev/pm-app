@@ -1,6 +1,6 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 
 const AddProject = () => {
@@ -17,17 +17,19 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let newProjectToAdd = { projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38" }
+        let newProjectToAdd = {projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38"}
 
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newProjectToAdd)
         };
 
         fetch(endpoints.PROJECTS, requestOptions)
             .then(res => res.json())
-            .then(data => {console.log(data)});
+            .then(data => {
+                console.log(data)
+            });
 
         setProjectName("");
         setClientId("");

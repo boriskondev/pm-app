@@ -1,6 +1,6 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import { useState } from "react";
+import {useState} from "react";
 import endpoints from "../../../services/api";
 // import { useHistory } from "react-router-dom";
 
@@ -20,12 +20,12 @@ const AddClient = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newClientToAdd = { clientName, createdBy: "605a5456b97d5f24dc7c1b38" };
+        const newClientToAdd = {clientName, createdBy: "605a5456b97d5f24dc7c1b38"};
 
         const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
 
-        for (let client of allClientsInDB){
-            if (client.clientName === clientName){
+        for (let client of allClientsInDB) {
+            if (client.clientName === clientName) {
                 console.log("This client is already registered.");
                 setClientName("");
                 return;
@@ -34,13 +34,15 @@ const AddClient = () => {
 
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newClientToAdd)
         };
 
         fetch(endpoints.CLIENTS, requestOptions)
             .then(res => res.json())
-            .then(data => {console.log(data)});
+            .then(data => {
+                console.log(data)
+            });
 
         setClientName("");
     }

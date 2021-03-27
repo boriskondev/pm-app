@@ -1,21 +1,21 @@
 import Header from "../../common/Header";
-import { useState } from "react";
+import {useState} from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 // https://medium.com/technoetics/create-basic-login-forms-using-react-js-hooks-and-bootstrap-2ae36c15e551
 // https://www.w3schools.com/react/react_forms.asp
 
 const Login = () => {
-    const [state , setState] = useState({
+    const [state, setState] = useState({
         email: "",
         password: ""
     })
 
 
     const handleFieldChange = (e) => {
-        const {id , value} = e.target
-        setState(prevState => ({...prevState, [id] : value}))
+        const {id, value} = e.target
+        setState(prevState => ({...prevState, [id]: value}))
     }
 
     console.log(state);

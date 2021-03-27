@@ -4,8 +4,8 @@ const Project = require("../models/project");
 const taskController = {
 
     create: async (req, res) => {
-        const { taskName, createdBy, projectId, startDate, endDate, responsible } = req.body;
-        const newTask = new Task({ taskName, createdBy, projectId, startDate, endDate, responsible });
+        const {taskName, createdBy, projectId, startDate, endDate, responsible} = req.body;
+        const newTask = new Task({taskName, createdBy, projectId, startDate, endDate, responsible});
 
         try {
             await Project.findByIdAndUpdate(projectId, {
@@ -18,7 +18,7 @@ const taskController = {
             res.status(200).json(newTask);
 
         } catch (error) {
-            res.status(409).json({ message: error.message });
+            res.status(409).json({message: error.message});
         }
 
         // await Promise.all(responsible.map(async (id) => {
@@ -37,7 +37,7 @@ const taskController = {
             res.status(200).json(allTasks);
 
         } catch (error) {
-            res.status(404).json({ message: error.message });
+            res.status(404).json({message: error.message});
         }
 
         // const allTasks = await Task.find({ responsible: { "$in" : ["604d20cdc4beba262c820772"]} })
@@ -56,7 +56,7 @@ const taskController = {
             res.status(200).json(foundTask);
 
         } catch (error) {
-            res.status(404).json({ message: error.message });
+            res.status(404).json({message: error.message});
         }
     }
 }

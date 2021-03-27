@@ -12,7 +12,7 @@ const database = process.env.DB_URI;
 
 const allRoutes = require("./routes/allRoutes");
 
-mongoose.connect(database, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect(database, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
     .then(() => console.log("MongoDB Atlas connected."))
     .then(() => app.listen(port, () => {
         console.log(`The server is ready and listening on port ${port}.`)
@@ -20,8 +20,8 @@ mongoose.connect(database, { useNewUrlParser: true, useUnifiedTopology: true, us
     .catch((err) => console.log("Could not connect to MongoDB Atlas: " + err));
 
 const app = express();
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan("dev"));
 

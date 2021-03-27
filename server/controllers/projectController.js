@@ -4,7 +4,7 @@ const Client = require("../models/client");
 const projectController = {
 
     create: async (req, res) => {
-        const { projectName, createdBy, clientId } = req.body;
+        const {projectName, createdBy, clientId} = req.body;
         const newProject = new Project({projectName, createdBy, clientId});
 
         try {
@@ -18,7 +18,7 @@ const projectController = {
             res.status(200).json(newProject);
 
         } catch (error) {
-            res.status(409).json({ message: error.message });
+            res.status(409).json({message: error.message});
         }
     },
 
@@ -26,8 +26,8 @@ const projectController = {
         try {
             const allProjects = await Project.find();
             res.status(200).json(allProjects);
-        } catch(error) {
-            res.status(404).json({ message: error.message });
+        } catch (error) {
+            res.status(404).json({message: error.message});
         }
     },
 
@@ -38,7 +38,7 @@ const projectController = {
             res.status(200).json(foundProject);
 
         } catch (error) {
-            res.status(404).json({ message: error.message });
+            res.status(404).json({message: error.message});
         }
     }
 }

@@ -1,9 +1,9 @@
-import { Component } from "react";
+import {Component} from "react";
 import "./WeeklyStatus.css";
 import Header from "../../common/Header";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import ProjectDetails from "./ProjectDetails";
-import { weeklyData } from "../../sampleData";
+import {weeklyData} from "../../sampleData";
 
 class WeeklyStatus extends Component {
     constructor() {

@@ -9,14 +9,14 @@ const userController = {
     },
 
     createUser: async (req, res) => {
-        const { username, password } = req.body;
-        const newUser = new User({ username, password });
+        const {username, password} = req.body;
+        const newUser = new User({username, password});
         const savedUser = await newUser.save();
         const message = `User ${username} successfully created!`
         res.json(message);
     },
 
-    findUser: async  (req, res) => {
+    findUser: async (req, res) => {
         try {
             const id = req.params.id;
             const foundUser = await User.findById(id);
@@ -30,20 +30,20 @@ const userController = {
     deleteUser: async (req, res) => {
         const id = req.params.id;
         const deletedUser = await User.findByIdAndDelete(id);
-        const message = `User ${ deletedUser.username } successfully deleted!`
+        const message = `User ${deletedUser.username} successfully deleted!`
         res.json(message);
     },
 
     updateUser: async (req, res) => {
         const id = req.params.id;
-        const { username, password } = req.body;
+        const {username, password} = req.body;
         const updatedUser = await User.findByIdAndUpdate(id, {
             "$set": {
                 username,
                 password
             }
         });
-        const message = `User ${ username } successfully edited!`
+        const message = `User ${username} successfully edited!`
         res.json(message);
     },
 

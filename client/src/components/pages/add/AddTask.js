@@ -1,8 +1,8 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 // https://daveceddia.com/usestate-hook-examples/
 
@@ -48,24 +48,40 @@ const AddTask = () => {
         e.preventDefault();
 
         // Client ID not added here!
-        const newTaskToAdd = {taskName, createdBy: "605a5456b97d5f24dc7c1b38", projectId, startDate, endDate, responsible: peopleResponsible};
+        const newTaskToAdd = {
+            taskName,
+            createdBy: "605a5456b97d5f24dc7c1b38",
+            projectId,
+            startDate,
+            endDate,
+            responsible: peopleResponsible
+        };
 
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newTaskToAdd)
         };
 
         fetch(endpoints.TASKS, requestOptions)
             .then(res => res.json())
-            .then(data => {console.log(data)})
+            .then(data => {
+                console.log(data)
+            })
             .then(() => {
                 history.push("/")
             })
 
         //Some stuff to be set after submitting the new task.
     }
-    const newTaskToAdd = {taskName, createdBy: "605a5456b97d5f24dc7c1b38", projectId, startDate, endDate, responsible: peopleResponsible};
+    const newTaskToAdd = {
+        taskName,
+        createdBy: "605a5456b97d5f24dc7c1b38",
+        projectId,
+        startDate,
+        endDate,
+        responsible: peopleResponsible
+    };
     console.log(newTaskToAdd)
 
     return (
