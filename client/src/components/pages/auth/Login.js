@@ -18,8 +18,6 @@ const Login = () => {
         setState(prevState => ({...prevState, [id]: value}))
     }
 
-    console.log(state);
-
     return (
         <>
             <Header title="Вход"/>

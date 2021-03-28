@@ -21,7 +21,7 @@ class Homepage extends Component {
         ]).then(([allUsersInDB, allTasksInDB]) => {
             this.setState({
                 usersData: allUsersInDB.filter(user => user.tasks.length > 0),
-                activeTasks: allTasksInDB.length,
+                activeTasks: allTasksInDB,
             });
         })
     }
@@ -55,7 +55,7 @@ class Homepage extends Component {
                         {this.state.usersData && (
                             this.state.usersData.map(person => (
                                 <tr key={person._id}>
-                                    <td><a href={person._id}>{person.username}</a></td>
+                                    <td><Link to={`weekly-status/${person._id}`}>{person.username}</Link></td>
                                     <td>{person.tasks.length}</td>
                                     <td className="icon">{icons[person.department]}</td>
                                 </tr>
@@ -64,9 +64,9 @@ class Homepage extends Component {
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td></td>
+                            <td>1</td>
                             <td>{this.state.activeTasks.length}</td>
-                            <td></td>
+                            <td>1</td>
                         </tr>
                         </tfoot>
                     </table>

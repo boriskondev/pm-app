@@ -89,14 +89,14 @@ class WeeklyStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.projectNotClicked && (
+                        {this.state.projectNotClicked && this.state.weeklyData && (
                             <div className="message">
                                 <p>Тази седмица ни очакват <span>{this.state.activeTasks}</span> задачи.</p>
                                 <p>Да започваме :)</p>
                             </div>
                         )}
 
-                        {!this.state.projectNotClicked && (
+                        {!this.state.projectNotClicked && this.state.weeklyData && (
                             <ProjectDetails clickedProjectData={this.state.projectClickedData}/>
                         )}
 

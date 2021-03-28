@@ -1,6 +1,9 @@
 const Task = require("../models/task");
 const Project = require("../models/project");
 const User = require("../models/user");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 
 const taskController = {
 
@@ -61,6 +64,31 @@ const taskController = {
         try {
             const id = req.params.id;
             const foundTask = await Task.findById(id);
+            res.status(200).json(foundTask);
+
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
+    findTasksOfUser: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const foundTask = await Task
+                .find({ responsible : { $all : [id] }})
+                .populate([
+                    {
+                        path: "clientId",
+                        select: { "clientName": 1, "_id": 0 }
+                    },
+                    {
+                        path: "projectId",
+                        select: { "projectName": 1, "_id": 0 }
+                    },
+                    {
+                    path: "responsible",
+                    select: { "username": 1, "_id": 1 }
+                    }]);
             res.status(200).json(foundTask);
 
         } catch (error) {
