@@ -55,7 +55,7 @@ class Homepage extends Component {
                         {this.state.usersData && (
                             this.state.usersData.map(person => (
                                 <tr key={person._id}>
-                                    <td><Link to={`weekly-status/${person._id}`}>{person.username}</Link></td>
+                                    <td><Link to={`weekly-status/${person._id}/${person.username}`}>{person.username}</Link></td>
                                     <td>{person.tasks.length}</td>
                                     <td className="icon">{icons[person.department]}</td>
                                 </tr>
@@ -64,9 +64,9 @@ class Homepage extends Component {
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td>1</td>
+                            <td></td>
                             <td>{this.state.activeTasks.length}</td>
-                            <td>1</td>
+                            <td></td>
                         </tr>
                         </tfoot>
                     </table>

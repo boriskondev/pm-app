@@ -28,7 +28,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={Homepage}/>
                     <Route path="/weekly-status" exact component={WeeklyStatus}/>
-                    <Route path="/weekly-status/:id" exact component={WeeklyStatusUser}/>
+                    <Route path="/weekly-status/:id/:name" exact component={WeeklyStatusUser}/>
                     <Route path="/add-task" exact component={AddTask}/>
                     <Route path="/add-project" exact component={AddProject}/>
                     <Route path="/add-client" exact component={AddClient}/>

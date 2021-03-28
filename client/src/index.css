@@ -135,3 +135,7 @@ form .edit-form-buttons button:nth-child(3) {
 ::-webkit-scrollbar {
     width: 0;
 }
+
+fieldset {
+    border: none;
+}

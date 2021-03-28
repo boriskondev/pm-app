@@ -126,11 +126,19 @@ const filteredInTasks = [{
 console.log("BEFORE SORT:")
 filteredInTasks.forEach(task => console.log(task.clientId, task.projectId))
 
-const filteredTasks = filteredInTasks.sort((a, b) =>
-    (a.clientId.clientName > b.clientId.clientName)
-        ? 1 : (a.clientId.clientName === b.clientId.clientName)
-        ? ((a.projectId.projectName > b.projectId.projectName)
-            ? 1 : -1) : -1)
+// const filtered = filteredInTasks.sort((a, b) =>
+//     (a.clientId.clientName > b.clientId.clientName)
+//         ? 1 : (a.clientId.clientName === b.clientId.clientName)
+//         ? ((a.projectId.projectName > b.projectId.projectName)
+//             ? 1 : -1) : -1)
 
+const sortUserTasks = (data) => {
+    data.sort((a, b) =>
+        (a.clientId.clientName > b.clientId.clientName)
+            ? 1 : (a.clientId.clientName === b.clientId.clientName)
+            ? ((a.projectId.projectName > b.projectId.projectName)
+                ? 1 : -1) : -1)
+    return data;
+}
 console.log("AFTER SORT:")
-filtered.forEach(task => console.log(task.clientId, task.projectId))
+sortUserTasks(filteredInTasks).forEach(task => console.log(task.clientId, task.projectId))
