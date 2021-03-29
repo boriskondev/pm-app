@@ -36,5 +36,6 @@ router.post("/tasks", taskController.create);
 router.get("/tasks", taskController.findAll);
 router.get("/tasks/:id", taskController.findOne);
 router.get("/tasks/responsible/:id", taskController.findTasksOfUser);
+router.delete("/tasks/:id", taskController.delete);
 
 module.exports = router;

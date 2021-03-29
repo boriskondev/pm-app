@@ -5,11 +5,13 @@ import {Link} from "react-router-dom";
 import {MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort} from "react-icons/md";
 import endpoints from "../../../services/api";
 
+// https://www.geeksforgeeks.org/how-to-filter-nested-objects-in-javascript/
+
 class Homepage extends Component {
     constructor() {
         super();
         this.state = {
-            usersData: "",
+            users: "",
             activeTasks: ""
         }
     }
@@ -20,11 +22,18 @@ class Homepage extends Component {
             fetch(endpoints.TASKS).then(response => response.json())
         ]).then(([allUsersInDB, allTasksInDB]) => {
             this.setState({
-                usersData: allUsersInDB.filter(user => user.tasks.length > 0),
+                users: allUsersInDB,
                 activeTasks: allTasksInDB,
             });
         })
     }
+
+    countTasksOfUser(id, tasks) {
+        const result = tasks.filter(task => {
+            return task.responsible.some(({_id}) => _id === id);
+        });
+        return result.length;
+        }
 
     render() {
 
@@ -36,6 +45,7 @@ class Homepage extends Component {
         }
 
         return (
+
             <>
                 <Link to="/weekly-status"><Header title="Обща информация"/></Link>
 
@@ -52,12 +62,12 @@ class Homepage extends Component {
                         {/*{!this.state.usersData && (*/}
                         {/*    <p>Малко търпение :)</p>*/}
                         {/*)}*/}
-                        {this.state.usersData && (
-                            this.state.usersData.map(person => (
-                                <tr key={person._id}>
-                                    <td><Link to={`weekly-status/${person._id}/${person.username}`}>{person.username}</Link></td>
-                                    <td>{person.tasks.length}</td>
-                                    <td className="icon">{icons[person.department]}</td>
+                        {this.state.users && this.state.activeTasks.length > 0 && (
+                            this.state.users.map(user => (
+                                <tr key={user._id}>
+                                    <td><Link to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link></td>
+                                    <td>{ this.countTasksOfUser(user._id, this.state.activeTasks) }</td>
+                                    <td className="icon">{icons[user.department]}</td>
                                 </tr>
                             ))
                         )}

@@ -57,7 +57,9 @@ class WeeklyStatus extends Component {
 
     render() {
 
-        const sidebarData = this.state.weeklyData.map(client => (
+        console.log(this.state.weeklyData)
+
+        const sidebarData = this.state.weeklyData.filter(client => client.projects).map(client => (
             <article key={client._id}>
                 <button className="project-accordion"
                         onClick={(e) => this.handleAccordionClick(e)}
@@ -84,19 +86,25 @@ class WeeklyStatus extends Component {
 
                 <section className="content-wrapper">
                     <section className="projects-list">
-                        {sidebarData}
+                        { sidebarData }
                     </section>
 
                     <section className="project-info">
 
-                        {this.state.projectNotClicked && this.state.weeklyData && (
+                        {/*{!this.state.activeTasks && (*/}
+                        {/*    <div className="message">*/}
+                        {/*        <p>Все още няма създадени задачи :/</p>*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
+
+                        {this.state.projectNotClicked && this.state.activeTasks && (
                             <div className="message">
                                 <p>Тази седмица ни очакват <span>{this.state.activeTasks}</span> задачи.</p>
                                 <p>Да започваме :)</p>
                             </div>
                         )}
 
-                        {!this.state.projectNotClicked && this.state.weeklyData && (
+                        {!this.state.projectNotClicked && this.state.activeTasks && (
                             <ProjectDetails clickedProjectData={this.state.projectClickedData}/>
                         )}
 

@@ -176,12 +176,6 @@ const AddTask = () => {
 
                 <button className="add" type="submit">Добави</button>
 
-                {/*<div className="edit-form-buttons">*/}
-                {/*    <button name="edit">Приключи</button>*/}
-                {/*    <button name="complete">Редактирай</button>*/}
-                {/*    <button name="delete">Изтрий</button>*/}
-                {/*</div>*/}
-
             </form>
         </>
     )

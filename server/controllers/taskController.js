@@ -1,9 +1,5 @@
 const Task = require("../models/task");
 const Project = require("../models/project");
-const User = require("../models/user");
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
 
 const taskController = {
 
@@ -18,13 +14,13 @@ const taskController = {
                 }
             });
 
-            await Promise.all(responsible.map(async (id) => {
-                await User.findByIdAndUpdate(id, {
-                    $push: {
-                        tasks: newTask
-                    }
-                });
-            }));
+            // await Promise.all(responsible.map(async (id) => {
+            //     await User.findByIdAndUpdate(id, {
+            //         $push: {
+            //             tasks: newTask
+            //         }
+            //     });
+            // }));
 
             await newTask.save();
             res.status(200).json(newTask);
@@ -50,14 +46,6 @@ const taskController = {
         } catch (error) {
             res.status(404).json({message: error.message});
         }
-
-        // const allTasks = await Task.find({ responsible: { "$in" : ["604d20cdc4beba262c820772"]} })
-        //     .select("projectId taskName startDate endDate clientId")
-        //     .populate("projectId", { projectName: 1, clientId: 1 })
-        //     .populate({
-        //         path: "projectId",
-        //         populate: { path: "clientId" }
-        //     });
     },
 
     findOne: async (req, res) => {
@@ -94,7 +82,17 @@ const taskController = {
         } catch (error) {
             res.status(404).json({message: error.message});
         }
-    }
+    },
+
+    delete: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const deletedTask = await Task.findByIdAndDelete(id);
+            res.status(200).json(deletedTask);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
 }
 
 module.exports = taskController;
