@@ -4,6 +4,7 @@ import {useState} from "react";
 import endpoints from "../../../services/api";
 // import { useHistory } from "react-router-dom";
 
+// https://www.codementor.io/@blizzerand/building-forms-using-react-everything-you-need-to-know-iz3eyoq4y
 // https://www.positronx.io/react-mern-stack-crud-app-tutorial/
 // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
 // https://jasonwatmore.com/post/2020/10/09/react-crud-example-with-react-hook-form

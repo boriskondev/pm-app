@@ -3,14 +3,13 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /*margin: 20px;*/
     background-color: white;
 }
 
 .user-weekly-info table {
     width: 95%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin: 20px 0 40px 0;
 }
 
 .user-weekly-info table th,
@@ -20,9 +19,14 @@
     text-align: left;
 }
 
-/*.user-weekly-info table tr td:nth-child(1) {*/
-/*    width: 40%;*/
-/*}*/
+.user-weekly-info table th {
+    text-align: center;
+}
+
+.user-weekly-info table tr td:nth-child(4) {
+    width: 45%;
+    margin: 0 auto;
+}
 
 .user-weekly-info table thead tr th {
     color: black;
@@ -53,3 +57,7 @@
 .user-weekly-info tr:hover td a {
     color: rgb(255, 255, 255);
 }
+
+/*.user-weekly-info th {*/
+/*    width: calc(100%/4)*/
+/*}*/

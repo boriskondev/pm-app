@@ -86,41 +86,38 @@ form .form-field input:hover {
     cursor: text;
 }
 
-form button.add {
+button {
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: auto 10px;
+    width: 150px;
+    font-weight: bold;
+}
+
+button.add {
     font-size: 20px;
     color: white;
-    padding: 10px 20px;
     border-style: none;
     background: #D51F2F;
     margin: 20px;
-    font-weight: bold;
-    width: 150px;
 }
 
-form .edit-form-buttons {
-    text-align: center;
-}
-
-form .edit-form-buttons button {
-    font-size: 20px;
+button.complete {
     color: white;
-    padding: 10px 20px;
     border-style: none;
     background: #D51F2F;
-    margin: 0 10px 20px 10px;
-    width: 150px;
-    font-weight: bold;
 }
 
-form .edit-form-buttons button:nth-child(2) {
+button.edit {
     color: #D51F2F;
     background: white;
     border: 1px solid #D62130;
 }
 
-form .edit-form-buttons button:nth-child(3) {
+button.delete {
     color: white;
     background: #303030;
+    border-style: none
 }
 
 /*::placeholder {*/
