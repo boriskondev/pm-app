@@ -7,7 +7,7 @@ const WeeklyStatusUser = ({match}) => {
     const {id, name} = match.params;
 
     const [tasksOfUser, setTasksOfUser] = useState("");
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(true);
 
     useEffect(() => {
         fetch(endpoints.TASKS_RESPONSIBLE + `/${id}`)
@@ -42,8 +42,6 @@ const WeeklyStatusUser = ({match}) => {
                             <th>Клиент</th>
                             <th>Задача</th>
                             <th>Действия</th>
-                            {/*<th>Срок</th>*/}
-                            {/*<th>Статус</th>*/}
                         </tr>
                         </thead>
                         <tbody>
@@ -54,30 +52,12 @@ const WeeklyStatusUser = ({match}) => {
                                 <td>{task.projectId.projectName}</td>
                                 <td>{task.taskName}</td>
                                 <td>
-                                    <div className="edit-form-buttons" style={{textAlign: "left"}}>
-                                        <button className="complete">Приключи</button>
+                                    <div className="buttons-div">
                                         <button className="edit">Редактирай</button>
+                                        <button className="complete">Приключи</button>
                                         <button className="delete">Изтрий</button>
                                     </div>
-
-                                    {/*{ !isAuth && (*/}
-                                    {/*    <div className="edit-form-buttons" style={{textAlign: "left"}}>*/}
-                                    {/*        <button name="complete">Детайли</button>*/}
-                                    {/*    </div>*/}
-                                    {/*) }*/}
-
                                 </td>
-                                {/*<td>*/}
-                                {/*    <ul>*/}
-                                {/*        {task.responsible.map(person => (*/}
-                                {/*            <li key={person._id}>*/}
-                                {/*                {person.username}*/}
-                                {/*            </li>*/}
-                                {/*        ))}*/}
-                                {/*    </ul>*/}
-                                {/*</td>*/}
-                                {/*<td>{task.startDate.slice(0, 10)} - {task.endDate.slice(0, 10)}</td>*/}
-                                {/*<td>{task.status}</td>*/}
                             </tr>
                         ))}
 

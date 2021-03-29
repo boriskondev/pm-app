@@ -23,10 +23,10 @@
     text-align: center;
 }
 
-.user-weekly-info table tr td:nth-child(4) {
-    width: 45%;
-    margin: 0 auto;
-}
+/*.user-weekly-info table tr td:nth-child(4) {*/
+/*    width: 40%;*/
+/*    margin: 0 auto;*/
+/*}*/
 
 .user-weekly-info table thead tr th {
     color: black;
@@ -56,6 +56,10 @@
 
 .user-weekly-info tr:hover td a {
     color: rgb(255, 255, 255);
+}
+
+.buttons-div {
+    text-align: center;
 }
 
 /*.user-weekly-info th {*/

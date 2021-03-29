@@ -87,10 +87,10 @@ form .form-field input:hover {
 }
 
 button {
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px 20px;
     margin: auto 10px;
-    width: 150px;
+    width: 120px;
     font-weight: bold;
 }
 
@@ -100,6 +100,7 @@ button.add {
     border-style: none;
     background: #D51F2F;
     margin: 20px;
+    padding: 10px 20px;
 }
 
 button.complete {
