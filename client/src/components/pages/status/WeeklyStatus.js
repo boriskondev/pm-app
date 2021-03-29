@@ -15,8 +15,8 @@ class WeeklyStatus extends Component {
             weeklyData: [],
             projectNotClicked: true,
             projectClickedId: null,
-            projectClickedData: null,
-            activeTasks: null
+            projectClickedData: [],
+            activeTasks: []
         }
     }
 
@@ -26,10 +26,20 @@ class WeeklyStatus extends Component {
             fetch(endpoints.TASKS).then(response => response.json())
         ]).then(([allClientsWithProjectsInDB, allTasksInDB]) => {
             this.setState({
-                weeklyData: allClientsWithProjectsInDB,
+                weeklyData: this.filterProjectsWithNoTasks(allClientsWithProjectsInDB),
                 activeTasks: allTasksInDB.length,
             });
         })
+    }
+
+    filterProjectsWithNoTasks(clients) {
+        const result = clients.filter(client => {
+                let projects = client.projects.some(project =>
+                    project.tasks.length > 0)
+                return projects
+            }
+        )
+        return result;
     }
 
     handleAccordionClick(e) {
@@ -91,13 +101,13 @@ class WeeklyStatus extends Component {
 
                     <section className="project-info">
 
-                        {/*{!this.state.activeTasks && (*/}
-                        {/*    <div className="message">*/}
-                        {/*        <p>Все още няма създадени задачи :/</p>*/}
-                        {/*    </div>*/}
-                        {/*)}*/}
+                        {!this.state.activeTasks && (
+                            <div className="message">
+                                <p>Все още няма създадени задачи :/</p>
+                            </div>
+                        )}
 
-                        {this.state.projectNotClicked && this.state.activeTasks && (
+                        {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">
                                 <p>Тази седмица ни очакват <span>{this.state.activeTasks}</span> задачи.</p>
                                 <p>Да започваме :)</p>

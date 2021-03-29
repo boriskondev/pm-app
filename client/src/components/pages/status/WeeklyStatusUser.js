@@ -15,7 +15,7 @@ const WeeklyStatusUser = ({match}) => {
         fetch(endpoints.TASKS_RESPONSIBLE + `/${id}`)
             .then(response => response.json())
             .then(data => setTasksOfUser(sortUserTasks(data)));
-    }, []);
+    }, [tasksOfUser]);
 
     const sortUserTasks = (data) => {
         data.sort((a, b) =>
@@ -32,10 +32,7 @@ const WeeklyStatusUser = ({match}) => {
         };
 
         fetch(endpoints.TASKS + `/${id}`, requestOptions)
-            .then(res => res.json())
-            .then(data => {
-                history.push(`weekly-status/${id}`)
-            });
+            .then(res => res.json());
     }
 
     return (
