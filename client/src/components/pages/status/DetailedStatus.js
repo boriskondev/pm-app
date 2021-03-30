@@ -33,12 +33,14 @@ class DetailedStatus extends Component {
     }
 
     filterProjectsWithNoTasks(clients) {
-        const result = clients.filter(client => {
-                let projects = client.projects.some(project =>
-                    project.tasks.length > 0)
-                return projects
+        let result = clients.filter(({projects}) => {
+                return projects.filter(({tasks}) => {
+                        return tasks.filter(task => task.status === "active")
+                    }
+                )
             }
         )
+        console.log(result)
         return result;
     }
 
@@ -71,7 +73,7 @@ class DetailedStatus extends Component {
             <article key={client._id}>
                 <button className="project-accordion"
                         onClick={(e) => this.handleAccordionClick(e)}
-                        >
+                >
                     {client.clientName}
                 </button>
                 <div className="project-panel">
@@ -94,7 +96,7 @@ class DetailedStatus extends Component {
 
                 <section className="content-wrapper">
                     <section className="projects-list">
-                        { sidebarData }
+                        {sidebarData}
                     </section>
 
                     <section className="project-info">

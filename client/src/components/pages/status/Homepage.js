@@ -37,6 +37,8 @@ class Homepage extends Component {
 
     render() {
 
+        console.log(this.state.activeTasks)
+
         const icons = {
             management: <Assessment size={25}/>,
             creative: <Palette size={25}/>,

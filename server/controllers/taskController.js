@@ -32,10 +32,27 @@ const taskController = {
 
     },
 
-    findAll: async (req, res) => {
+    findAllActive: async (req, res) => {
 
         try {
-            const filter = { status: "active" };
+            const filter = {status: "active"};
+            const allTasks = await Task
+                .find(filter)
+                .populate({
+                    path: "responsible",
+                    select: {"username": 1, "_id": 1}
+                });
+            res.status(200).json(allTasks);
+
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
+    findAllComplete: async (req, res) => {
+
+        try {
+            const filter = {status: "complete"};
             const allTasks = await Task
                 .find(filter)
                 .populate({
@@ -64,19 +81,19 @@ const taskController = {
         try {
             const id = req.params.id;
             const foundTask = await Task
-                .find({ status: "active", responsible : { $all : [id] } })
+                .find({status: "active", responsible: {$all: [id]}})
                 .populate([
                     {
                         path: "clientId",
-                        select: { "clientName": 1, "_id": 0 }
+                        select: {"clientName": 1, "_id": 0}
                     },
                     {
                         path: "projectId",
-                        select: { "projectName": 1, "_id": 0 }
+                        select: {"projectName": 1, "_id": 0}
                     },
                     {
-                    path: "responsible",
-                    select: { "username": 1, "_id": 1 }
+                        path: "responsible",
+                        select: {"username": 1, "_id": 1}
                     }]);
             res.status(200).json(foundTask);
 
@@ -94,6 +111,17 @@ const taskController = {
             res.status(404).json({message: error.message});
         }
     },
+
+    complete: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const completedTask = await Task.findByIdAndUpdate(id,
+                {$set: {status: "complete"}});
+            res.status(200).json(completedTask);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    }
 }
 
 module.exports = taskController;
