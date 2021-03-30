@@ -82,7 +82,8 @@ const AddTask = () => {
         endDate,
         responsible: peopleResponsible
     };
-    console.log(newTaskToAdd)
+
+    // console.log(newTaskToAdd)
 
     return (
         <>

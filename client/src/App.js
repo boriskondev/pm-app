@@ -8,8 +8,8 @@ import Main from "./components/common/Main";
 import Footer from "./components/common/Footer";
 
 import Homepage from "./components/pages/status/Homepage";
-import WeeklyStatus from "./components/pages/status/WeeklyStatus";
-import WeeklyStatusUser from "./components/pages/status/WeeklyStatusUser";
+import DetailedStatus from "./components/pages/status/DetailedStatus";
+import DetailedStatusUser from "./components/pages/status/DetailedStatusUser";
 
 import AddTask from "./components/pages/add/AddTask";
 import AddProject from "./components/pages/add/AddProject";
@@ -27,8 +27,8 @@ function App() {
             <Main>
                 <Switch>
                     <Route path="/" exact component={Homepage}/>
-                    <Route path="/weekly-status" exact component={WeeklyStatus}/>
-                    <Route path="/weekly-status/:id/:name" exact component={WeeklyStatusUser}/>
+                    <Route path="/weekly-status" exact component={DetailedStatus}/>
+                    <Route path="/weekly-status/:id/:name" exact component={DetailedStatusUser}/>
                     <Route path="/add-task" exact component={AddTask}/>
                     <Route path="/add-project" exact component={AddProject}/>
                     <Route path="/add-client" exact component={AddClient}/>

@@ -35,8 +35,9 @@ const taskController = {
     findAll: async (req, res) => {
 
         try {
+            const filter = { status: "active" };
             const allTasks = await Task
-                .find()
+                .find(filter)
                 .populate({
                     path: "responsible",
                     select: {"username": 1, "_id": 1}
@@ -63,7 +64,7 @@ const taskController = {
         try {
             const id = req.params.id;
             const foundTask = await Task
-                .find({ responsible : { $all : [id] }})
+                .find({ status: "active", responsible : { $all : [id] } })
                 .populate([
                     {
                         path: "clientId",

@@ -1,11 +1,11 @@
 import Header from "../../common/Header";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
-import "./WeeklyStatusUser.css";
+import "./DetailedStatusUser.css";
 import {Link} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const WeeklyStatusUser = ({match}) => {
+const DetailedStatusUser = ({match}) => {
     const history = useHistory();
     const {id, name} = match.params;
 
@@ -41,13 +41,13 @@ const WeeklyStatusUser = ({match}) => {
 
             <section className="user-weekly-info">
 
-                {!tasksOfUser && (
-                    <p>The info is loading...</p>
-                )}
-
                 {tasksOfUser.length === 0 && (
                     <p>This user has 0 tasks for now.</p>
                 )}
+
+                {/*{!tasksOfUser && (*/}
+                {/*    <p>The information is loading...</p>*/}
+                {/*)}*/}
 
                 {tasksOfUser.length > 0 && (
                     <table>
@@ -85,4 +85,4 @@ const WeeklyStatusUser = ({match}) => {
     )
 }
 
-export default WeeklyStatusUser;
+export default DetailedStatusUser;

@@ -33,7 +33,7 @@ class Homepage extends Component {
             return task.responsible.some(({_id}) => _id === id);
         });
         return result.length;
-        }
+    }
 
     render() {
 
@@ -64,13 +64,18 @@ class Homepage extends Component {
                         {/*)}*/}
                         {this.state.users && this.state.activeTasks.length > 0 && (
                             this.state.users.map(user => (
-                                <tr key={user._id}>
-                                    <td><Link to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link></td>
-                                    <td>{ this.countTasksOfUser(user._id, this.state.activeTasks) }</td>
-                                    <td className="icon">{icons[user.department]}</td>
-                                </tr>
-                            ))
-                        )}
+                                this.countTasksOfUser(user._id, this.state.activeTasks) > 0
+                                    ? (
+                                        <tr key={user._id}>
+                                            <td><Link
+                                                to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
+                                            </td>
+                                            <td>{this.countTasksOfUser(user._id, this.state.activeTasks)}</td>
+                                            <td className="icon">{icons[user.department]}</td>
+                                        </tr>
+                                    )
+                                    : null
+                            )))}
                         </tbody>
                         <tfoot>
                         <tr>

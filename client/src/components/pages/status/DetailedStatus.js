@@ -1,5 +1,5 @@
 import {Component} from "react";
-import "./WeeklyStatus.css";
+import "./DetailedStatus.css";
 import Header from "../../common/Header";
 import ProjectDetails from "./ProjectDetails";
 import endpoints from "../../../services/api";
@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 // https://www.pluralsight.com/guides/using-multiple-fetch-statements-with-componentwillmount-in-react
 
-class WeeklyStatus extends Component {
+class DetailedStatus extends Component {
     constructor() {
         super();
 
@@ -67,8 +67,6 @@ class WeeklyStatus extends Component {
 
     render() {
 
-        console.log(this.state.weeklyData)
-
         const sidebarData = this.state.weeklyData.filter(client => client.projects).map(client => (
             <article key={client._id}>
                 <button className="project-accordion"
@@ -92,7 +90,7 @@ class WeeklyStatus extends Component {
 
         return (
             <>
-                <Header title="Седмичен обзор"/>
+                <Header title="Детайлна информация"/>
 
                 <section className="content-wrapper">
                     <section className="projects-list">
@@ -126,4 +124,4 @@ class WeeklyStatus extends Component {
     }
 }
 
-export default WeeklyStatus;
+export default DetailedStatus;

@@ -8,6 +8,11 @@ class ProjectDetails extends Component {
         super(props);
     }
 
+    editDate(date) {
+        let [ year, month, day ] = date.slice(0, 10).split("-");
+        return `${day}.${month}.${year}`
+    }
+
     render() {
         return (
             <>
@@ -24,7 +29,6 @@ class ProjectDetails extends Component {
                                 <th>Задача</th>
                                 <th>Отговорни</th>
                                 <th>Срок</th>
-                                <th>Статус</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -41,8 +45,7 @@ class ProjectDetails extends Component {
                                             ))}
                                         </ul>
                                     </td>
-                                    <td>{task.startDate.slice(0, 10)} - {task.endDate.slice(0, 10)}</td>
-                                    <td>{task.status}</td>
+                                    <td>{this.editDate(task.startDate)} - {this.editDate(task.endDate)}</td>
                                 </tr>
                             ))}
 
