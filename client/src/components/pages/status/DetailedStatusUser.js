@@ -43,7 +43,7 @@ const DetailedStatusUser = ({match}) => {
 
         fetch(endpoints.TASKS + `/${id}`, requestOptions)
             .then(res => res.json())
-            .then(() => history.push(history.location.pathname));
+            .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
 
     return (
