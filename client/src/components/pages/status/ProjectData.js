@@ -1,9 +1,9 @@
 import {Component} from "react";
-import "./ProjectDetails.css";
+import "./ProjectData.css";
 
 // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
 
-class ProjectDetails extends Component {
+class ProjectData extends Component {
     constructor(props) {
         super(props);
     }
@@ -13,9 +13,11 @@ class ProjectDetails extends Component {
         return `${day}.${month}.${year}`
     }
 
-    render() {
+    filterProjects(data) {
+        return data.tasks.filter(task => task.status === "active");
+    }
 
-        console.log(this.props.clickedProjectData)
+    render() {
         return (
             <>
                 {!this.props.clickedProjectData && (
@@ -36,7 +38,7 @@ class ProjectDetails extends Component {
                             </thead>
                             <tbody>
 
-                            {this.props.clickedProjectData.tasks.map(task => (
+                            {this.filterProjects(this.props.clickedProjectData).map(task => (
                                 <tr key={task._id}>
                                     <td>{task.taskName}</td>
                                     <td>
@@ -63,4 +65,4 @@ class ProjectDetails extends Component {
     }
 }
 
-export default ProjectDetails;
+export default ProjectData;

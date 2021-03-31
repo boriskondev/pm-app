@@ -1,7 +1,7 @@
 import {Component} from "react";
 import "./DetailedStatus.css";
 import Header from "../../common/Header";
-import ProjectDetails from "./ProjectDetails";
+import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 
@@ -16,7 +16,7 @@ class DetailedStatus extends Component {
             projectNotClicked: true,
             projectClickedId: null,
             projectClickedData: [],
-            activeTasks: []
+            activeTasks: ""
         }
     }
 
@@ -27,7 +27,7 @@ class DetailedStatus extends Component {
         ]).then(([allClientsWithProjectsInDB, allTasksInDB]) => {
             this.setState({
                 weeklyData: this.filterProjectsWithNoTasks(allClientsWithProjectsInDB),
-                activeTasks: allTasksInDB.length,
+                activeTasks: allTasksInDB,
             });
         })
     }
@@ -67,7 +67,6 @@ class DetailedStatus extends Component {
                 filteredDb.splice(i, 1);
             }
         }
-        console.log(filteredDb)
         return filteredDb;
     };
 
@@ -95,7 +94,7 @@ class DetailedStatus extends Component {
     }
 
     render() {
-
+        console.log(this.state.activeTasks)
         const sidebarData = this.state.weeklyData.filter(client => client.projects).map(client => (
             <article key={client._id}>
                 <button className="project-accordion"
@@ -128,21 +127,21 @@ class DetailedStatus extends Component {
 
                     <section className="project-info">
 
-                        {!this.state.activeTasks && (
-                            <div className="message">
-                                <p>Все още няма създадени задачи :/</p>
-                            </div>
-                        )}
+                        {/*{!this.state.activeTasks && (*/}
+                        {/*    <div className="message">*/}
+                        {/*        <p>Все още няма създадени задачи :/</p>*/}
+                        {/*    </div>*/}
+                        {/*)}*/}
 
                         {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">
-                                <p>Тази седмица ни очакват <span>{this.state.activeTasks}</span> задачи.</p>
+                                <p>Тази седмица ни очакват <span>{this.state.activeTasks.length}</span> задачи.</p>
                                 <p>Да започваме :)</p>
                             </div>
                         )}
 
                         {!this.state.projectNotClicked && this.state.activeTasks && (
-                            <ProjectDetails clickedProjectData={this.state.projectClickedData}/>
+                            <ProjectData clickedProjectData={this.state.projectClickedData}/>
                         )}
 
                     </section>
