@@ -38,6 +38,7 @@ router.get("/tasks/completed", taskController.findAllComplete);
 router.get("/tasks/:id", taskController.findOne);
 router.get("/tasks/responsible/:id", taskController.findTasksOfUser);
 router.delete("/tasks/:id", taskController.delete);
-router.put("/tasks/:id", taskController.complete);
+router.patch("/tasks/:id", taskController.complete);
+router.put("/tasks/:id", taskController.edit);
 
 module.exports = router;

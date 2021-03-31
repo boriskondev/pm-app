@@ -69,7 +69,21 @@ const taskController = {
     findOne: async (req, res) => {
         try {
             const id = req.params.id;
-            const foundTask = await Task.findById(id);
+            const foundTask = await Task
+                .findById(id)
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    },
+                    {
+                        path: "projectId",
+                        select: {"projectName": 1, "_id": 1}
+                    },
+                    {
+                        path: "responsible",
+                        select: {"username": 1, "_id": 1}
+                    }]);;
             res.status(200).json(foundTask);
 
         } catch (error) {
@@ -118,6 +132,26 @@ const taskController = {
             const completedTask = await Task.findByIdAndUpdate(id,
                 {$set: {status: "complete"}});
             res.status(200).json(completedTask);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
+    edit: async (req, res) => {
+        const {taskName, clientId, projectId, startDate, endDate, responsible} = req.body;
+        try {
+            const id = req.params.id;
+            const updatedTask = await Task.findByIdAndUpdate(id, {
+                "$set": {
+                    taskName,
+                    clientId,
+                    projectId,
+                    startDate,
+                    endDate,
+                    responsible
+                }
+            });
+            res.status(200).json(updatedTask);
         } catch (error) {
             res.status(404).json({message: error.message});
         }

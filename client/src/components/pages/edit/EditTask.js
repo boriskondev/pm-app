@@ -1,30 +1,43 @@
 import Header from "../../common/Header";
-import "./AddTask.css";
+import "../add/AddTask.css";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
-// https://daveceddia.com/usestate-hook-examples/
-
-const AddTask = () => {
+const EditTask = ({match}) => {
     const history = useHistory();
-    const [taskName, setTaskName] = useState("");
+
+    const {id} = match.params;
+
     const [clientsOptions, setClientsOptions] = useState("");
-    const [clientId, setClientId] = useState("");
     const [projectsOptions, setProjectsOptions] = useState("");
+    const [responsibleOptions, setResponsibleOptions] = useState("");
+
+    const [taskName, setTaskName] = useState("");
+    const [clientName, setClientName] = useState("");
+    const [clientId, setClientId] = useState("");
+    const [projectName, setProjectName] = useState("");
     const [projectId, setProjectId] = useState("");
+
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [responsibleOptions, setResponsibleOptions] = useState("");
+
     const [peopleResponsible, setPeopleResponsible] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
             const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json());
+            const taskData = await fetch(endpoints.TASKS + `/${id}`).then(response => response.json());
 
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
+            setTaskName(taskData.taskName);
+            setClientName(taskData.clientId.clientName);
+            setClientId(taskData.clientId._id);
+            setProjectName(taskData.projectId.projectName);
+            setProjectId(taskData.projectId._id);
+            // setProjectsOptions(clientsOptions.filter(client => client._id === projectId)[0].projects)
         };
 
         fetchData();
@@ -47,9 +60,8 @@ const AddTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newTaskToAdd = {
+        const newTaskToUpdate = {
             taskName,
-            createdBy: "605a5456b97d5f24dc7c1b38",
             clientId,
             projectId,
             startDate,
@@ -58,40 +70,23 @@ const AddTask = () => {
         };
 
         const requestOptions = {
-            method: "POST",
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newTaskToAdd)
+            body: JSON.stringify(newTaskToUpdate)
         };
 
-        fetch(endpoints.TASKS, requestOptions)
+        fetch(endpoints.TASKS + `/${id}`, requestOptions)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-            .then(() => {
-                history.push("/")
-            })
-
-        //Some stuff to be set after submitting the new task.
+            .then(data => console.log(data))
     }
-    const newTaskToAdd = {
-        taskName,
-        createdBy: "605a5456b97d5f24dc7c1b38",
-        projectId,
-        startDate,
-        endDate,
-        responsible: peopleResponsible
-    };
-
-    console.log(newTaskToAdd)
 
     return (
         <>
-            <Header title="Добави задача"/>
+            <Header title="Редактирай задача"/>
 
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit}>
                 <fieldset disabled={false}>
-                {/*<fieldset disabled={false}>*/}
+                    {/*<fieldset disabled={false}>*/}
                     <div className="form-field">
                         <label>Име</label>
                         <input
@@ -110,7 +105,7 @@ const AddTask = () => {
                             onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
                             required
                         >
-                            <option hidden>Избери клиент</option>
+                            <option hidden>{clientName}</option>
 
                             {clientsOptions && clientsOptions.map(client => (
                                 <option key={client._id} value={client._id}>{client.clientName}</option>
@@ -126,7 +121,7 @@ const AddTask = () => {
                             required
                         >
 
-                            <option hidden="hidden">Избери проект</option>
+                            <option hidden="hidden">{projectName}</option>
 
                             {projectsOptions && projectsOptions.map(project => (
                                 <option key={project._id} value={project._id}>{project.projectName}</option>
@@ -182,4 +177,4 @@ const AddTask = () => {
     )
 }
 
-export default AddTask;
+export default EditTask;

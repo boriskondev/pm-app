@@ -37,7 +37,7 @@ const DetailedStatusUser = ({match}) => {
 
     const handleComplete = async (id) => {
         const requestOptions = {
-            method: "PUT",
+            method: "PATCH",
             headers: {"Content-type": "application/json"}
         };
 
@@ -80,7 +80,7 @@ const DetailedStatusUser = ({match}) => {
                                 <td>{task.taskName}</td>
                                 <td>
                                     <div className="buttons-div">
-                                        <Link to="/">
+                                        <Link to={`/edit-task/${task._id}`}>
                                             <button className="edit">Редактирай</button>
                                         </Link>
                                         <button className="complete" onClick={(e) => handleComplete(task._id)}>Приключи</button>
