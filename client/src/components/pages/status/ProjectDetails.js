@@ -14,6 +14,8 @@ class ProjectDetails extends Component {
     }
 
     render() {
+
+        console.log(this.props.clickedProjectData)
         return (
             <>
                 {!this.props.clickedProjectData && (
@@ -29,6 +31,7 @@ class ProjectDetails extends Component {
                                 <th>Задача</th>
                                 <th>Отговорни</th>
                                 <th>Срок</th>
+                                <th>Статус</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,6 +49,7 @@ class ProjectDetails extends Component {
                                         </ul>
                                     </td>
                                     <td>{this.editDate(task.startDate)} - {this.editDate(task.endDate)}</td>
+                                    <td>{task.status}</td>
                                 </tr>
                             ))}
 

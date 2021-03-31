@@ -32,17 +32,44 @@ class DetailedStatus extends Component {
         })
     }
 
-    filterProjectsWithNoTasks(clients) {
-        let result = clients.filter(({projects}) => {
-                return projects.filter(({tasks}) => {
-                        return tasks.filter(task => task.status === "active")
-                    }
-                )
+    filterProjectsWithNoTasks(db) {
+        const filteredDb = db.slice(0);
+
+        const digInProjects = (projects, index, currProject) => {
+            if (projects.length === 0) return;
+
+            const tasks = projects[0].tasks;
+
+            if (tasks.length > 0) {
+                const filteredTasks = tasks.filter((task) => task.status !== "complete");
+
+                filteredDb[index].projects[currProject].tasks = filteredTasks;
+            } else {
+                filteredDb[index].projects.splice(currProject, 1);
             }
-        )
-        console.log(result)
-        return result;
-    }
+
+            digInProjects(projects.slice(1), index, currProject + 1);
+        };
+
+        const checkIfClientDone = (projects) => {
+            if (projects.length === 0) return true;
+
+            if (projects[0].tasks.length > 0) return false;
+
+            return checkIfClientDone(projects.slice(1));
+        };
+
+        for (let i = 0; i < filteredDb.length; i++) {
+            const currObj = filteredDb[i];
+            digInProjects(currObj.projects, i, 0);
+
+            if (checkIfClientDone(currObj.projects)) {
+                filteredDb.splice(i, 1);
+            }
+        }
+        console.log(filteredDb)
+        return filteredDb;
+    };
 
     handleAccordionClick(e) {
         let accordion = e.target;

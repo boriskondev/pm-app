@@ -19,7 +19,7 @@ const clientController = {
     findAll: async (req, res) => {
         try {
             // const filter = { clientName: { $eq: "Visa" } }; This shit works!
-            const filter = {status: "active"};
+            // const filter = {status: "active"};
             // const filter = {status: "active", projects: {$exists: true, $not: {$size: 0}}};
             // const allClients = await Client
             //     .find(filter)
@@ -32,7 +32,7 @@ const clientController = {
 
             // const filter = { status: "active" };
             const allClients = await Client
-                .find(filter)
+                .find()
                 .lean()
                 .populate({
                     path: "projects",
