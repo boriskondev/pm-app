@@ -21,54 +21,39 @@ class DetailedStatus extends Component {
     }
 
     async componentDidMount() {
-        Promise.all([
-            fetch(endpoints.CLIENTS).then(response => response.json()),
-            fetch(endpoints.TASKS).then(response => response.json())
-        ]).then(([allClientsWithProjectsInDB, allTasksInDB]) => {
-            this.setState({
-                weeklyData: this.filterProjectsWithNoTasks(allClientsWithProjectsInDB),
-                activeTasks: allTasksInDB,
-            });
-        })
+        await fetch(endpoints.TASKS)
+            .then(response => response.json())
+            .then(data => {
+                this.setState(() => ({
+                    weeklyData: this.filterClientsAndProjects(data),
+                    activeTasks: data,
+                }));
+            })
     }
 
-    filterProjectsWithNoTasks(db) {
-        const filteredDb = db.slice(0);
+    filterClientsAndProjects(data) {
+        let newArr = []
+        for (let task of data) {
+            let client = task.clientId.clientName;
+            let clientId = task.clientId._id;
+            let project = task.projectId.projectName;
+            let projectId = task.projectId._id;
 
-        const digInProjects = (projects, index, currProject) => {
-            if (projects.length === 0) return;
+            let clientFound = newArr.filter(client => client._id === clientId)[0];
 
-            const tasks = projects[0].tasks;
+            if (!clientFound) {
+                newArr.push({ clientName: client,  _id: clientId,
+                    projects: [{ projectName: project,  _id: projectId }] })
 
-            if (tasks.length > 0) {
-                const filteredTasks = tasks.filter((task) => task.status !== "complete");
-
-                filteredDb[index].projects[currProject].tasks = filteredTasks;
             } else {
-                filteredDb[index].projects.splice(currProject, 1);
-            }
-
-            digInProjects(projects.slice(1), index, currProject + 1);
-        };
-
-        const checkIfClientDone = (projects) => {
-            if (projects.length === 0) return true;
-
-            if (projects[0].tasks.length > 0) return false;
-
-            return checkIfClientDone(projects.slice(1));
-        };
-
-        for (let i = 0; i < filteredDb.length; i++) {
-            const currObj = filteredDb[i];
-            digInProjects(currObj.projects, i, 0);
-
-            if (checkIfClientDone(currObj.projects)) {
-                filteredDb.splice(i, 1);
+                let projectFound = clientFound.projects.filter(project => project._id === projectId)[0];
+                if (!projectFound) {
+                    clientFound.projects.push({ projectName: project,  _id: projectId })
+                }
             }
         }
-        return filteredDb;
-    };
+        return newArr;
+    }
 
     handleAccordionClick(e) {
         let accordion = e.target;
@@ -94,8 +79,7 @@ class DetailedStatus extends Component {
     }
 
     render() {
-        console.log(this.state.activeTasks)
-        const sidebarData = this.state.weeklyData.filter(client => client.projects).map(client => (
+        const sidebarData = this.state.weeklyData.map(client => (
             <article key={client._id}>
                 <button className="project-accordion"
                         onClick={(e) => this.handleAccordionClick(e)}
@@ -121,17 +105,18 @@ class DetailedStatus extends Component {
                 <Header title="Детайлна информация"/>
 
                 <section className="content-wrapper">
+
                     <section className="projects-list">
                         {sidebarData}
                     </section>
 
                     <section className="project-info">
 
-                        {/*{!this.state.activeTasks && (*/}
-                        {/*    <div className="message">*/}
-                        {/*        <p>Все още няма създадени задачи :/</p>*/}
-                        {/*    </div>*/}
-                        {/*)}*/}
+                        {this.state.activeTasks.length === 0 && (
+                            <div className="message">
+                                <p>Все още няма създадени задачи :/</p>
+                            </div>
+                        )}
 
                         {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">

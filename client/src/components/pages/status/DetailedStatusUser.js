@@ -14,10 +14,10 @@ const DetailedStatusUser = ({match}) => {
     useEffect(() => {
         fetch(endpoints.TASKS_RESPONSIBLE + `/${id}`)
             .then(response => response.json())
-            .then(data => setTasksOfUser(sortUserTasks(data)));
+            .then(data => setTasksOfUser(sortUserTasksByClientAndProject(data)));
     }, []);
 
-    const sortUserTasks = (data) => {
+    const sortUserTasksByClientAndProject = (data) => {
         data.sort((a, b) =>
             (a.clientId.clientName > b.clientId.clientName)
                 ? 1 : (a.clientId.clientName === b.clientId.clientName)
@@ -25,6 +25,7 @@ const DetailedStatusUser = ({match}) => {
                     ? 1 : -1) : -1)
         return data;
     }
+
 
     const handleDelete = async (id) => {
         const requestOptions = {

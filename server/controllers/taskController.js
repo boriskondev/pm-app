@@ -38,10 +38,19 @@ const taskController = {
             const filter = {status: "active"};
             const allTasks = await Task
                 .find(filter)
-                .populate({
-                    path: "responsible",
-                    select: {"username": 1, "_id": 1}
-                });
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    },
+                    {
+                        path: "projectId",
+                        select: {"projectName": 1, "_id": 1}
+                    },
+                    {
+                        path: "responsible",
+                        select: {"username": 1, "_id": 1}
+                    }]);
             res.status(200).json(allTasks);
 
         } catch (error) {
@@ -55,10 +64,19 @@ const taskController = {
             const filter = {status: "complete"};
             const allTasks = await Task
                 .find(filter)
-                .populate({
-                    path: "responsible",
-                    select: {"username": 1, "_id": 1}
-                });
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    },
+                    {
+                        path: "projectId",
+                        select: {"projectName": 1, "_id": 1}
+                    },
+                    {
+                        path: "responsible",
+                        select: {"username": 1, "_id": 1}
+                    }]);
             res.status(200).json(allTasks);
 
         } catch (error) {
@@ -83,7 +101,7 @@ const taskController = {
                     {
                         path: "responsible",
                         select: {"username": 1, "_id": 1}
-                    }]);;
+                    }]);
             res.status(200).json(foundTask);
 
         } catch (error) {
