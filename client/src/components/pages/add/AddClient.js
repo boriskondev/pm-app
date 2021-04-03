@@ -1,9 +1,11 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
+import "./AddClient.css";
 import {useState} from "react";
 import endpoints from "../../../services/api";
-// import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
+// https://www.freecodecamp.org/news/beginner-react-project-build-basic-forms-using-react-hooks/
 // https://www.codementor.io/@blizzerand/building-forms-using-react-everything-you-need-to-know-iz3eyoq4y
 // https://www.positronx.io/react-mern-stack-crud-app-tutorial/
 // https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
@@ -15,20 +17,23 @@ import endpoints from "../../../services/api";
 // Нотификации за успешно добавяне и грешки!
 
 const AddClient = () => {
+    const history = useHistory();
     const [clientName, setClientName] = useState("");
-    // const history = useHistory();
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newClientToAdd = {clientName, createdBy: "605a5456b97d5f24dc7c1b38"};
-
         const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
-                console.log("This client is already registered.");
-                setClientName("");
+                setError(true);
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1500)
                 return;
             }
         }
@@ -42,10 +47,11 @@ const AddClient = () => {
         fetch(endpoints.CLIENTS, requestOptions)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                setSubmitted(true);
+                setTimeout(() => {
+                    history.push("/")
+                }, 1500)
             });
-
-        setClientName("");
     }
 
     return (
@@ -64,6 +70,8 @@ const AddClient = () => {
                         autoFocus
                         required
                     />
+                    {submitted && (<span className="success">{clientName} added successfully.</span>)}
+                    {error && (<span className="error">{clientName} is already registered.</span>)}
                 </div>
 
                 <button className="add">Добави</button>
