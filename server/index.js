@@ -7,8 +7,11 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 require("dotenv").config();
 
-const port = process.env.PORT || 5000;
-const database = process.env.DB_URI;
+const port = 4000;
+const database = "mongodb+srv://boriskondev:boriskondev123@cluster0.d5skl.mongodb.net/pm-app?retryWrites=true&w=majority";
+
+// const port = process.env.PORT || 5000;
+// const database = process.env.DB_URI;
 
 const allRoutes = require("./routes/allRoutes");
 
