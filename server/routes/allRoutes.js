@@ -1,5 +1,6 @@
 const express = require("express");
 
+const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const clientController = require("../controllers/clientController");
 const projectController = require("../controllers/projectController");
@@ -13,8 +14,12 @@ const router = express.Router();
 // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose
 // https://chunkofcode.net/how-to-deep-populate-using-mongodb-and-mongoose/
 
+// Auth
+router.post("/register", authController.register);
+
+
 // Users
-router.post("/users", userController.create);
+// router.post("/users", userController.create);
 router.get("/users", userController.findAll);
 router.get("/users/:id", userController.findOne);
 router.put("/users/:id", userController.updateUser);

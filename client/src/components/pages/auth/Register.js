@@ -6,6 +6,9 @@ import endpoints from "../../../services/api";
 import { useHistory } from "react-router-dom";
 
 // https://medium.com/technoetics/create-basic-login-forms-using-react-js-hooks-and-bootstrap-2ae36c15e551
+// https://github.com/boriskondev/softuni-js-web/tree/master/04-validation-and-error-handling-ws/routes
+// https://github.com/boriskondev/softuni-js-web/blob/master/00-the-net-ninja/02-nodejs-auth/views/signup.ejs
+// https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applicationshttps://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
 
 const Register = () => {
     const [state, setState] = useState({
@@ -40,7 +43,7 @@ const Register = () => {
             body: JSON.stringify(newUserToAdd)
         };
 
-        fetch(endpoints.USERS, requestOptions)
+        fetch(endpoints.REGISTER, requestOptions)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
