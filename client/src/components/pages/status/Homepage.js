@@ -4,6 +4,7 @@ import Header from "../../common/Header";
 import {Link} from "react-router-dom";
 import {MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort} from "react-icons/md";
 import endpoints from "../../../services/api";
+import Main from "../../common/Main";
 
 // https://www.geeksforgeeks.org/how-to-filter-nested-objects-in-javascript/
 
@@ -11,6 +12,7 @@ class Homepage extends Component {
     constructor() {
         super();
         this.state = {
+            user: JSON.parse(localStorage.getItem("user")),
             users: "",
             activeTasks: ""
         }
@@ -48,7 +50,7 @@ class Homepage extends Component {
 
             <>
                 <Link to="/weekly-status"><Header title="Обща информация"/></Link>
-
+                { this.state.user && (<h1>{this.state.user.username}</h1>) }
                 <section className="weekly-overview">
                     <table>
                         <thead>

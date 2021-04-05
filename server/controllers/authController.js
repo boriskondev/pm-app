@@ -2,7 +2,6 @@ const User = require("../models/user");
 // const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const {saltRounds} = require("../config/config");
-// const {secret, saltRounds} = require("../config/config");
 
 // https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 // https://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
@@ -40,6 +39,7 @@ const handleErrors = (err) => {
     return errors;
 }
 
+// const maxAge = 3 * 24 * 60 * 60;
 // const createToken = (data) => {
 //     return jwt.sign(data, secret, {
 //         expiresIn: maxAge
@@ -81,13 +81,13 @@ const login = async (req, res) => {
         const user = await User.findOne({email});
 
         if (!user) {
-            return Promise.reject(Error("Incorrect email."));
+            throw new Error("Incorrect email.");
         }
 
         const auth = await bcrypt.compare(password, user.password);
 
         if (!auth) {
-            return Promise.reject(Error("Incorrect password."));
+            throw new Error("Incorrect password.");
         }
 
         // const token = createToken({

@@ -50,7 +50,7 @@ const AddClient = () => {
                 setSubmitted(true);
                 setTimeout(() => {
                     history.push("/")
-                }, 1500)
+                }, 1500);
             });
     }
 

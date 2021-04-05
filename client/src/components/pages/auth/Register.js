@@ -46,8 +46,7 @@ const Register = () => {
         fetch(endpoints.REGISTER, requestOptions)
             .then(res => res.json())
             .then(data => {
-                localStorage.setItem("username", data.username);
-                localStorage.setItem("userId", data.userId);
+                localStorage.setItem("user", JSON.stringify(data));
             })
             .then(() => {
                 history.push("/")

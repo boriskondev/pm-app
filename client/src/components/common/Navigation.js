@@ -5,6 +5,7 @@ function Navigation() {
 
     const exitHandler = () => {
         localStorage.clear();
+        window.location.reload()
     }
 
     return (
