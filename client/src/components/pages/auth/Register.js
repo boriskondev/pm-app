@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 // https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applicationshttps://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
 
 const Register = () => {
+    const history = useHistory();
     const [state, setState] = useState({
         username: "",
         department: "",
@@ -18,7 +19,6 @@ const Register = () => {
         password: "",
         repeatPassword: "",
     })
-    const history = useHistory();
 
     const handleFieldChange = (e) => {
         const {id, value} = e.target
@@ -46,13 +46,13 @@ const Register = () => {
         fetch(endpoints.REGISTER, requestOptions)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                localStorage.setItem("username", data.username);
+                localStorage.setItem("userId", data.userId);
             })
             .then(() => {
                 history.push("/")
             })
-
-        //Some stuff to be set after submitting the new task.
+            .catch(err => console.log("In catch" + err))
     }
 
     return (

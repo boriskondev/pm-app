@@ -3,6 +3,10 @@ import {Link} from "react-router-dom";
 
 function Navigation() {
 
+    const exitHandler = () => {
+        localStorage.clear();
+    }
+
     return (
         <nav>
             <ul>
@@ -19,7 +23,7 @@ function Navigation() {
                 <li><Link to="/register">Регистрация</Link></li>
                 <li><Link to="/login">Вход</Link></li>
                 <li><Link to="/profile">Профил</Link></li>
-                <li><Link to="/exit">Изход</Link></li>
+                <li><Link to="/" onClick={exitHandler}>Изход</Link></li>
             </ul>
         </nav>
     )

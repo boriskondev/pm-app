@@ -1,7 +1,8 @@
 const User = require("../models/user");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {secret, saltRounds} = require("../config/config");
+const {saltRounds} = require("../config/config");
+// const {secret, saltRounds} = require("../config/config");
 
 // https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 // https://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
@@ -39,13 +40,11 @@ const handleErrors = (err) => {
     return errors;
 }
 
-const maxAge = 3 * 24 * 60 * 60;
-
-const createToken = (data) => {
-    return jwt.sign(data, secret, {
-        expiresIn: maxAge
-    });
-};
+// const createToken = (data) => {
+//     return jwt.sign(data, secret, {
+//         expiresIn: maxAge
+//     });
+// };
 
 const register = async (req, res) => {
     const {username, department, email, password} = req.body;
@@ -63,32 +62,45 @@ const register = async (req, res) => {
 
         const userObject = await user.save();
 
-        const token = createToken({
-            userID: userObject._id,
-            username: userObject.username
-        });
+        // const token = createToken({
+        //     userId: userObject._id,
+        //     username: userObject.username
+        // });
 
-        // res.cookie("jwt", token, {httpOnly: true, maxAge: maxAge * 1000})
-        res.status(201).json("The token is: " + token);
+        res.status(201).json({userId: userObject._id, username: userObject.username});
     } catch (err) {
         const errors = handleErrors(err);
         res.status(400).json({errors});
     }
 }
 
-// const login_post = async (req, res) => {
-//     const {email, password} = req.body;
-//
-//     try {
-//         const user = await User.login(email, password);
-//         const token = createToken(user._id);
-//         res.cookie("jwt", token, {httpOnly: true, maxAge: maxAge * 1000});
-//         res.status(200).json({user: user._id});
-//     } catch (err) {
-//         const errors = handleErrors(err);
-//         res.status(400).json({errors});
-//     }
-// }
+const login = async (req, res) => {
+    const {email, password} = req.body;
+
+    try {
+        const user = await User.findOne({email});
+
+        if (!user) {
+            return Promise.reject(Error("Incorrect email."));
+        }
+
+        const auth = await bcrypt.compare(password, user.password);
+
+        if (!auth) {
+            return Promise.reject(Error("Incorrect password."));
+        }
+
+        // const token = createToken({
+        //     userId: user._id,
+        //     username: user.username
+        // });
+
+        res.status(200).json({userId: user._id, username: user.username});
+    } catch (err) {
+        const errors = handleErrors(err);
+        res.status(400).json({errors});
+    }
+}
 //
 // const logout_get = (req, res) => {
 //     res.cookie("jwt", "", {maxAge: 1});
@@ -97,4 +109,5 @@ const register = async (req, res) => {
 
 module.exports = {
     register,
+    login
 }

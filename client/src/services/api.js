@@ -2,6 +2,7 @@ const baseURL = "http://localhost:4000";
 
 const endpoints = {
     REGISTER: `${baseURL}/register`,
+    LOGIN: `${baseURL}/login`,
     USERS: `${baseURL}/users`,
     CLIENTS: `${baseURL}/clients`,
     PROJECTS: `${baseURL}/projects`,
