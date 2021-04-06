@@ -56,7 +56,10 @@ const clientController = {
             const id = req.params.id;
             const foundClient = await Client
                 .findById(id)
-                .select("_id");
+                .populate({
+                    path: "projects",
+                    select: {"projectName": 1, "_id": 1}
+                });
             // .select("-_id");
             res.status(200).json(foundClient);
         } catch (error) {

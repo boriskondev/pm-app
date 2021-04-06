@@ -4,10 +4,13 @@ import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
-// https://daveceddia.com/usestate-hook-examples/
+
 
 const AddTask = () => {
     const history = useHistory();
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
     const [taskName, setTaskName] = useState("");
     const [clientsOptions, setClientsOptions] = useState("");
     const [clientId, setClientId] = useState("");
@@ -69,10 +72,11 @@ const AddTask = () => {
                 console.log(data)
             })
             .then(() => {
-                history.push("/")
-            })
-
-        //Some stuff to be set after submitting the new task.
+                setSubmitted(true);
+                setTimeout(() => {
+                    history.push("/")
+                }, 1500);
+            });
     }
     const newTaskToAdd = {
         taskName,
@@ -171,6 +175,8 @@ const AddTask = () => {
                             ))}
 
                         </select>
+                        {/*{submitted && (<span className="success">{clientName} added successfully.</span>)}*/}
+                        {/*{error && (<span className="error">{clientName} is already registered.</span>)}*/}
                     </div>
 
                 </fieldset>

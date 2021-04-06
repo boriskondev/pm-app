@@ -153,3 +153,17 @@ button.delete {
 fieldset {
     border: none;
 }
+
+.success {
+    display: block;
+    color: #4BB543;
+    position: relative;
+    top: 10px
+}
+
+.error {
+    display: block;
+    color: #D62130;
+    position: relative;
+    top: 10px
+}

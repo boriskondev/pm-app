@@ -2,8 +2,13 @@ import Header from "../../common/Header";
 import "./AddTask.css";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
+import {useHistory} from "react-router-dom";
 
 const AddProject = () => {
+    const history = useHistory();
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
     const [projectName, setProjectName] = useState("");
     const [clientId, setClientId] = useState("");
     const [clientsOptions, setClientsOptions] = useState("");
@@ -17,7 +22,20 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let newProjectToAdd = {projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38"}
+        const newProjectToAdd = {projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38"};
+
+        const selectedClient = await fetch(endpoints.CLIENTS + `/${clientId}`)
+            .then(response => response.json());
+
+        for (let project of selectedClient.projects) {
+            if (project.projectName === projectName) {
+                setError(true);
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1500)
+                return;
+            }
+        }
 
         const requestOptions = {
             method: "POST",
@@ -27,12 +45,12 @@ const AddProject = () => {
 
         fetch(endpoints.PROJECTS, requestOptions)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(() => {
+                setSubmitted(true);
+                setTimeout(() => {
+                    history.push("/")
+                }, 1500);
             });
-
-        setProjectName("");
-        setClientId("");
     }
 
     return (
@@ -63,8 +81,9 @@ const AddProject = () => {
                         {clientsOptions && clientsOptions.map(option => (
                             <option key={option._id} value={option._id}>{option.clientName}</option>
                         ))}
-
                     </select>
+                    {submitted && (<span className="success">{projectName} added successfully.</span>)}
+                    {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
                 <button className="add" type="submit">Добави</button>
