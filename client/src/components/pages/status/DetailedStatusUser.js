@@ -26,7 +26,6 @@ const DetailedStatusUser = ({match}) => {
         return data;
     }
 
-
     const handleDelete = async (id) => {
         const requestOptions = {
             method: "DELETE"
@@ -46,6 +45,8 @@ const DetailedStatusUser = ({match}) => {
             .then(res => res.json())
             .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
+
+    console.log(tasksOfUser)
 
     return (
 
@@ -76,7 +77,7 @@ const DetailedStatusUser = ({match}) => {
 
                         {tasksOfUser.map(task => (
                             <tr key={task._id}>
-                                <td>{task.clientId.clientName}</td>
+                                <td><Link to={`/edit-client/${task.clientId._id}`}>{task.clientId.clientName}</Link></td>
                                 <td>{task.projectId.projectName}</td>
                                 <td>{task.taskName}</td>
                                 <td>

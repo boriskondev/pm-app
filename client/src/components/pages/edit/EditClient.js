@@ -1,19 +1,28 @@
 import Header from "../../common/Header";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
-const AddClient = () => {
+const AddClient = ({match}) => {
+    const {id} = match.params;
+
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
     const [clientName, setClientName] = useState("");
 
+    useEffect(() => {
+        fetch(endpoints.CLIENTS + `/${id}`)
+            .then(response => response.json())
+            .then(data => setClientName(data.clientName));
+    }, []);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newClientToAdd = {clientName, createdBy: "605a5456b97d5f24dc7c1b38"};
+        const clientToUpdate = {clientName};
 
         const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
 
@@ -28,24 +37,24 @@ const AddClient = () => {
         }
 
         const requestOptions = {
-            method: "POST",
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newClientToAdd)
+            body: JSON.stringify(clientToUpdate)
         };
 
-        fetch(endpoints.CLIENTS, requestOptions)
+        fetch(endpoints.CLIENTS + `/${id}`, requestOptions)
             .then(res => res.json())
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
-                    history.push("/")
+                    history.goBack();
                 }, 1500);
             })
     }
 
     return (
         <>
-            <Header title="Добави клиент"/>
+            <Header title="Редактирай клиент"/>
 
             <form onSubmit={handleSubmit}>
 
@@ -59,7 +68,7 @@ const AddClient = () => {
                         autoFocus
                         required
                     />
-                    {submitted && (<span className="success">{clientName} added successfully.</span>)}
+                    {submitted && (<span className="success">Client edited successfully.</span>)}
                     {error && (<span className="error">{clientName} is already registered.</span>)}
                 </div>
 

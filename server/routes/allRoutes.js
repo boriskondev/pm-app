@@ -31,6 +31,7 @@ router.get("/users/:id/tasks", userController.getAllTasks);
 router.post("/clients", clientController.create);
 router.get("/clients", clientController.findAll);
 router.get("/clients/:id", clientController.findOne);
+router.put("/clients/:id", clientController.edit);
 
 // Project
 router.post("/projects", projectController.create);

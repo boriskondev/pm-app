@@ -18,6 +18,7 @@ import AddProject from "./components/pages/add/AddProject";
 import AddClient from "./components/pages/add/AddClient";
 
 import EditTask from "./components/pages/edit/EditTask";
+import EditClient from "./components/pages/edit/EditClient";
 
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/weekly-status/:id/:name" exact component={DetailedStatusUser}/>
                     <Route path="/add-task" exact component={AddTask}/>
                     <Route path="/edit-task/:id" exact component={EditTask}/>
+                    <Route path="/edit-client/:id" exact component={EditClient}/>
                     <Route path="/add-project" exact component={AddProject}/>
                     <Route path="/add-client" exact component={AddClient}/>
                     <Route path="/register" exact component={Register}/>

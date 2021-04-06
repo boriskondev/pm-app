@@ -62,7 +62,7 @@ const EditTask = ({match}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newTaskToUpdate = {
+        const taskToUpdate = {
             taskName,
             clientId,
             projectId,
@@ -74,7 +74,7 @@ const EditTask = ({match}) => {
         const requestOptions = {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newTaskToUpdate)
+            body: JSON.stringify(taskToUpdate)
         };
 
         fetch(endpoints.TASKS + `/${id}`, requestOptions)
@@ -82,7 +82,7 @@ const EditTask = ({match}) => {
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
-                    history.goBack()
+                    history.goBack();
                 }, 1500);
             })
     }

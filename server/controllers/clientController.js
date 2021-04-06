@@ -42,17 +42,33 @@ const clientController = {
             const id = req.params.id;
             const foundClient = await Client
                 .findById(id)
-                .populate({
-                    path: "projects",
-                    populate: {
-                        path: "tasks",
-                        populate: {
-                            path: "responsible",
-                        }
-                    }
-                });
+                .select({"clientName": 1, "_id": 1})
+                // .populate({
+                //     path: "projects",
+                //     populate: {
+                //         path: "tasks",
+                //         populate: {
+                //             path: "responsible",
+                //         }
+                //     }
+                // });
             // .select("-_id");
             res.status(200).json(foundClient);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
+    edit: async (req, res) => {
+        const {clientName} = req.body;
+        try {
+            const id = req.params.id;
+            const updatedClient = await Client.findByIdAndUpdate(id, {
+                "$set": {
+                    clientName
+                }
+            });
+            res.status(200).json(updatedClient);
         } catch (error) {
             res.status(404).json({message: error.message});
         }

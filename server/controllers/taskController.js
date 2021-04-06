@@ -117,11 +117,11 @@ const taskController = {
                 .populate([
                     {
                         path: "clientId",
-                        select: {"clientName": 1, "_id": 0}
+                        select: {"clientName": 1, "_id": 1}
                     },
                     {
                         path: "projectId",
-                        select: {"projectName": 1, "_id": 0}
+                        select: {"projectName": 1, "_id": 1}
                     },
                     {
                         path: "responsible",
