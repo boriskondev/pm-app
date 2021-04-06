@@ -4,8 +4,6 @@ import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
-
-
 const AddTask = () => {
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
@@ -68,9 +66,6 @@ const AddTask = () => {
 
         fetch(endpoints.TASKS, requestOptions)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
@@ -175,7 +170,7 @@ const AddTask = () => {
                             ))}
 
                         </select>
-                        {/*{submitted && (<span className="success">{clientName} added successfully.</span>)}*/}
+                        {submitted && (<span className="success">{taskName} added successfully.</span>)}
                         {/*{error && (<span className="error">{clientName} is already registered.</span>)}*/}
                     </div>
 

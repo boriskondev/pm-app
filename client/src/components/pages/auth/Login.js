@@ -5,9 +5,6 @@ import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
 import { useHistory } from "react-router-dom";
 
-// https://medium.com/technoetics/create-basic-login-forms-using-react-js-hooks-and-bootstrap-2ae36c15e551
-// https://www.w3schools.com/react/react_forms.asp
-
 const Login = () => {
     const history = useHistory();
     const [state, setState] = useState({

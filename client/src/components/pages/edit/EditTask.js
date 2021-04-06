@@ -5,9 +5,11 @@ import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
 const EditTask = ({match}) => {
-    const history = useHistory();
-
     const {id} = match.params;
+
+    const history = useHistory();
+    const [submitted, setSubmitted] = useState(false);
+    // const [error, setError] = useState(false);
 
     const [clientsOptions, setClientsOptions] = useState("");
     const [projectsOptions, setProjectsOptions] = useState("");
@@ -77,7 +79,12 @@ const EditTask = ({match}) => {
 
         fetch(endpoints.TASKS + `/${id}`, requestOptions)
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(() => {
+                setSubmitted(true);
+                setTimeout(() => {
+                    history.goBack()
+                }, 1500);
+            })
     }
 
     return (
@@ -166,6 +173,7 @@ const EditTask = ({match}) => {
                             ))}
 
                         </select>
+                        {submitted && (<span className="success">Task edited successfully.</span>)}
                     </div>
 
                 </fieldset>

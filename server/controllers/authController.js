@@ -3,9 +3,6 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const {saltRounds} = require("../config/config");
 
-// https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
-// https://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
-
 const handleErrors = (err) => {
     console.log(err.message, err.code);
     let errors = {email: "", password: ""};

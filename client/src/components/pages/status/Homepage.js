@@ -4,9 +4,6 @@ import Header from "../../common/Header";
 import {Link} from "react-router-dom";
 import {MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort} from "react-icons/md";
 import endpoints from "../../../services/api";
-import Main from "../../common/Main";
-
-// https://www.geeksforgeeks.org/how-to-filter-nested-objects-in-javascript/
 
 class Homepage extends Component {
     constructor() {

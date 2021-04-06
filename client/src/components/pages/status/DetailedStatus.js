@@ -5,8 +5,6 @@ import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 
-// https://www.pluralsight.com/guides/using-multiple-fetch-statements-with-componentwillmount-in-react
-
 class DetailedStatus extends Component {
     constructor() {
         super();

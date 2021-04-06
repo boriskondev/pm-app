@@ -1,8 +1,6 @@
 import {Component} from "react";
 import "./ProjectData.css";
 
-// https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-
 class ProjectData extends Component {
     constructor(props) {
         super(props);

@@ -38,7 +38,7 @@ const projectController = {
                 .findById(id)
                 .populate({
                     path: "tasks",
-                    // select: { "taskName": 1, "startDate": 1, "endDate": 1,  "responsible": 1, "_id": 1 },
+                    select: { "taskName": 1, "startDate": 1, "endDate": 1,  "responsible": 1, "_id": 1, "status": 1 },
                     populate: {
                         path: "responsible",
                         select: { "username": 1, "_id": 1 }

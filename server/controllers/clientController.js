@@ -1,7 +1,5 @@
 const Client = require("../models/client");
 
-// https://www.restapitutorial.com/httpstatuscodes.html
-
 const clientController = {
 
     create: async (req, res) => {
@@ -18,18 +16,6 @@ const clientController = {
 
     findAll: async (req, res) => {
         try {
-            // const filter = { clientName: { $eq: "Visa" } }; This shit works!
-            // const filter = {status: "active"};
-            // const filter = {status: "active", projects: {$exists: true, $not: {$size: 0}}};
-            // const allClients = await Client
-            //     .find(filter)
-            //     .lean()
-            //     .select("_id clientName")
-            //     .populate({
-            //         path: "projects",
-            //         select: {"projectName": 1, "_id": 1}
-            //     });
-
             // const filter = { status: "active" };
             const allClients = await Client
                 .find()
@@ -58,7 +44,12 @@ const clientController = {
                 .findById(id)
                 .populate({
                     path: "projects",
-                    select: {"projectName": 1, "_id": 1}
+                    populate: {
+                        path: "tasks",
+                        populate: {
+                            path: "responsible",
+                        }
+                    }
                 });
             // .select("-_id");
             res.status(200).json(foundClient);
