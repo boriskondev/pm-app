@@ -69,7 +69,7 @@ form .form-field select {
     width: 100%;
     font-size: 20px;
     border-style: none;
-    border-bottom: 2px solid #D51F2F;
+    border-bottom: 2px solid #D62130;
     overflow: hidden;
     padding: 10px;
     color: #303030;
@@ -98,7 +98,7 @@ button.add {
     font-size: 20px;
     color: white;
     border-style: none;
-    background: #D51F2F;
+    background: #D62130;
     margin: 20px;
     padding: 10px 20px;
 }
@@ -106,7 +106,7 @@ button.add {
 button.complete {
     color: white;
     border-style: none;
-    background: #D51F2F;
+    background: #D62130;
     font-size: 12px;
     padding: 10px 20px;
     margin: auto 10px;

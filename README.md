@@ -49,10 +49,9 @@ The application allows you to:
 * See overall status of active tasks
 * See overall status of active tasks per user and complete, edit or delete task
 
-## Status (04.04.2021)
+## Status (07.04.2021)
 The project is currently under development with many important features to be implemented:
 * Authentication
-* Form submission messages
 * Code refactoring and improvements
 * Transforming the class components into functional components (after project defence)
 * Miscellaneous UX tweaks

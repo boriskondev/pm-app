@@ -1,10 +1,11 @@
 nav {
-    flex-wrap: wrap;
-    /*flex-basis: 100%;*/
+    position: sticky;
+    top: 0;
     height: 90px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    /*border-bottom: 1px solid #D62130;*/
+    background-color: white;
 }
 
 nav ul:nth-child(1) {

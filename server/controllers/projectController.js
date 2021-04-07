@@ -36,15 +36,37 @@ const projectController = {
             const id = req.params.id;
             const foundProject = await Project
                 .findById(id)
-                .populate({
-                    path: "tasks",
-                    select: { "taskName": 1, "startDate": 1, "endDate": 1,  "responsible": 1, "_id": 1, "status": 1 },
-                    populate: {
-                        path: "responsible",
-                        select: { "username": 1, "_id": 1 }
-                }});
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    },
+                    {
+                        path: "tasks",
+                        select: {"taskName": 1, "startDate": 1, "endDate": 1, "responsible": 1, "_id": 1, "status": 1},
+                        populate: {
+                            path: "responsible",
+                            select: {"username": 1, "_id": 1}
+                        }
+                    }
+                ]);
             res.status(200).json(foundProject);
 
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
+    edit: async (req, res) => {
+        const {projectName} = req.body;
+        try {
+            const id = req.params.id;
+            const updatedProject = await Project.findByIdAndUpdate(id, {
+                "$set": {
+                    projectName
+                }
+            });
+            res.status(200).json(updatedProject);
         } catch (error) {
             res.status(404).json({message: error.message});
         }

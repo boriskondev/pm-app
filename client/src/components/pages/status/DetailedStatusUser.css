@@ -20,6 +20,10 @@
 }
 
 .user-weekly-info table th {
+    text-align: left;
+}
+
+.user-weekly-info table th:nth-child(4) {
     text-align: center;
 }
 
@@ -33,16 +37,16 @@
     font-size: 20px;
     font-weight: normal;
     padding: 18px;
-    border-bottom: 2px solid #D51F2F;
+    border-bottom: 2px solid #D62130;
 }
 
 .user-weekly-info thead tr:hover th {
-    background-color: #D51F2F;
+    background-color: #D62130;
     color: rgb(255, 255, 255);
 }
 
 .user-weekly-info tbody tr:last-child {
-    border-bottom: 2px solid #D51F2F;
+    border-bottom: 2px solid #D62130;
 }
 
 .user-weekly-info table tbody tr:nth-child(even) {
@@ -50,7 +54,7 @@
 }
 
 .user-weekly-info tr:hover td {
-    background-color: #D51F2F;
+    background-color: #D62130;
     color: rgb(255, 255, 255);
 }
 

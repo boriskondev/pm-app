@@ -36,16 +36,16 @@
     font-size: 20px;
     font-weight: normal;
     padding: 18px;
-    border-bottom: 2px solid #D51F2F;
+    border-bottom: 2px solid #D62130;
 }
 
 .project-info thead tr:hover th {
-    background-color: #D51F2F;
+    background-color: #D62130;
     color: rgb(255, 255, 255);
 }
 
 .project-info tbody tr:last-child {
-    border-bottom: 2px solid #D51F2F;
+    border-bottom: 2px solid #D62130;
 }
 
 .project-info table tbody tr:nth-child(even) {
@@ -53,7 +53,7 @@
 }
 
 .project-info tr:hover td {
-    background-color: #D51F2F;
+    background-color: #D62130;
     color: rgb(255, 255, 255);
 }
 

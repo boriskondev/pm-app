@@ -43,15 +43,9 @@ const clientController = {
             const foundClient = await Client
                 .findById(id)
                 .select({"clientName": 1, "_id": 1})
-                // .populate({
-                //     path: "projects",
-                //     populate: {
-                //         path: "tasks",
-                //         populate: {
-                //             path: "responsible",
-                //         }
-                //     }
-                // });
+                .populate({
+                    path: "projects"
+                });
             // .select("-_id");
             res.status(200).json(foundClient);
         } catch (error) {

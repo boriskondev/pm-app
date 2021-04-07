@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 
-const AddClient = ({match}) => {
+const EditClient = ({match}) => {
     const {id} = match.params;
 
     const history = useHistory();
@@ -17,7 +17,6 @@ const AddClient = ({match}) => {
             .then(response => response.json())
             .then(data => setClientName(data.clientName));
     }, []);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,11 +71,11 @@ const AddClient = ({match}) => {
                     {error && (<span className="error">{clientName} is already registered.</span>)}
                 </div>
 
-                <button className="add">Добави</button>
+                <button className="add">Редактирай</button>
 
             </form>
         </>
     )
 }
 
-export default AddClient;
+export default EditClient;

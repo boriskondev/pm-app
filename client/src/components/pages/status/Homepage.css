@@ -55,11 +55,11 @@
 .weekly-overview tfoot td {
     font-size: 32px;
     padding: 18px;
-    border-top: 2px solid #D51F2F;
+    border-top: 2px solid #D62130;
 }
 
 .weekly-overview tr:hover td {
-    background-color: #D51F2F;
+    background-color: #D62130;
     color: rgb(255, 255, 255);
 }
 

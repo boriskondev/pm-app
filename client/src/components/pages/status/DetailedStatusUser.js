@@ -67,8 +67,8 @@ const DetailedStatusUser = ({match}) => {
                     <table>
                         <thead>
                         <tr>
-                            <th>Проект</th>
                             <th>Клиент</th>
+                            <th>Проект</th>
                             <th>Задача</th>
                             <th>Действия</th>
                         </tr>
@@ -78,7 +78,7 @@ const DetailedStatusUser = ({match}) => {
                         {tasksOfUser.map(task => (
                             <tr key={task._id}>
                                 <td><Link to={`/edit-client/${task.clientId._id}`}>{task.clientId.clientName}</Link></td>
-                                <td>{task.projectId.projectName}</td>
+                                <td><Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link></td>
                                 <td>{task.taskName}</td>
                                 <td>
                                     <div className="buttons-div">

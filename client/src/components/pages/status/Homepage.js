@@ -46,7 +46,7 @@ class Homepage extends Component {
         return (
 
             <>
-                <Link to="/weekly-status"><Header title="Обща информация"/></Link>
+                <Link to="/weekly-status"><Header title="Обща информация (всичко на английски)"/></Link>
                 { this.state.user && (<h1>{this.state.user.username}</h1>) }
                 <section className="weekly-overview">
                     <table>

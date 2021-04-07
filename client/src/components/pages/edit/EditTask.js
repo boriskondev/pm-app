@@ -67,8 +67,7 @@ const EditTask = ({match}) => {
             clientId,
             projectId,
             startDate,
-            endDate,
-            responsible: peopleResponsible
+            endDate
         };
 
         const requestOptions = {
@@ -84,7 +83,7 @@ const EditTask = ({match}) => {
                 setTimeout(() => {
                     history.goBack();
                 }, 1500);
-            })
+            });
     }
 
     return (
@@ -178,7 +177,7 @@ const EditTask = ({match}) => {
 
                 </fieldset>
 
-                <button className="add" type="submit">Добави</button>
+                <button className="add" type="submit">Редактирай</button>
 
             </form>
         </>

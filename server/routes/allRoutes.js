@@ -37,6 +37,7 @@ router.put("/clients/:id", clientController.edit);
 router.post("/projects", projectController.create);
 router.get("/projects", projectController.findAll);
 router.get("/projects/:id", projectController.findOne);
+router.put("/projects/:id", projectController.edit);
 
 // Tasks
 router.post("/tasks", taskController.create);
