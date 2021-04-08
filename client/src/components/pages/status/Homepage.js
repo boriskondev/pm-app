@@ -9,7 +9,7 @@ class Homepage extends Component {
     constructor() {
         super();
         this.state = {
-            user: JSON.parse(localStorage.getItem("user")),
+            // user: JSON.parse(localStorage.getItem("user")),
             users: "",
             activeTasks: ""
         }
@@ -47,7 +47,7 @@ class Homepage extends Component {
 
             <>
                 <Link to="/weekly-status"><Header title="Обща информация (всичко на английски)"/></Link>
-                { this.state.user && (<h1>{this.state.user.username}</h1>) }
+                {/*{ this.state.user && (<h1>{this.state.user.username}</h1>) }*/}
                 <section className="weekly-overview">
                     <table>
                         <thead>

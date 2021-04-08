@@ -23,13 +23,14 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { username, department, email, password } = state;
+        const { username, department, email, password, repeatPassword } = state;
 
         const newUserToAdd = {
             username,
             department,
             email,
-            password
+            password,
+            repeatPassword
         };
 
         const requestOptions = {
@@ -39,9 +40,9 @@ const Register = () => {
         };
 
         fetch(endpoints.REGISTER, requestOptions)
-            .then(res => res.json())
+            .then(res => res)
             .then(data => {
-                localStorage.setItem("user", JSON.stringify(data));
+                console.log(data);
             })
             .then(() => {
                 history.push("/")

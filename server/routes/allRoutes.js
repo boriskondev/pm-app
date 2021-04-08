@@ -1,12 +1,11 @@
 const express = require("express");
+const router = express.Router();
 
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const clientController = require("../controllers/clientController");
 const projectController = require("../controllers/projectController");
 const taskController = require("../controllers/taskController");
-
-const router = express.Router();
 
 // https://dev.to/itz_giddy/how-to-build-dynamic-mongoose-queries-2ka8
 // https://masteringjs.io/tutorials/mongoose/aggregate
@@ -17,7 +16,7 @@ const router = express.Router();
 // Auth
 router.post("/register", authController.register);
 router.post("/login", authController.login);
-
+router.get("/logout", authController.logout);
 
 // Users
 // router.post("/users", userController.create);

@@ -1,6 +1,5 @@
 import "./App.css";
 
-import {useState, useEffect} from "react";
 import {Route, Switch} from "react-router-dom";
 
 import Navigation from "./components/common/Navigation";
@@ -24,6 +23,8 @@ import Login from "./components/pages/auth/Login";
 
 
 function App() {
+    // const [user, setUser] = useState(false)
+    // const [user, setUser] = useState(import {Link} from "react-router-dom";)
 
     return (
         <div className="App">
@@ -31,6 +32,14 @@ function App() {
             <Navigation/>
 
             <Main>
+
+                {/*{ !user && (*/}
+                {/*    <Switch>*/}
+                {/*        <Route path="/register" exact component={Register}/>*/}
+                {/*        <Route path="/login" exact component={Login}/>*/}
+                {/*    </Switch>*/}
+                {/*) }*/}
+
                 <Switch>
                     <Route path="/" exact component={Homepage}/>
                     <Route path="/weekly-status" exact component={DetailedStatus}/>
@@ -45,6 +54,7 @@ function App() {
                     <Route path="/login" exact component={Login}/>
                     <Route render={() => <p>Page not found!</p>}/>
                 </Switch>
+
             </Main>
 
             <Footer/>

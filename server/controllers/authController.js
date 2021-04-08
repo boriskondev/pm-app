@@ -1,110 +1,108 @@
 const User = require("../models/user");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {saltRounds} = require("../config/config");
-
-const handleErrors = (err) => {
-    console.log(err.message, err.code);
-    let errors = {email: "", password: ""};
-
-    // Incorrect email
-    if (err.message === "Incorrect email.") {
-        errors.email = "That email is not registered.";
-    }
-
-    // Incorrect password
-    if (err.message === "Incorrect password.") {
-        errors.password = "That password is incorrect.";
-    }
-
-    // Duplicate email error
-    if (err.code === 11000) {
-        errors.email = "That email is already registered.";
-        return errors;
-    }
-
-    // Validation errors
-    if (err.message.includes("user validation failed")) {
-        // console.log(err);
-        Object.values(err.errors).forEach(({properties}) => {
-            // console.log(val);
-            // console.log(properties);
-            errors[properties.path] = properties.message;
-        });
-    }
-
-    return errors;
-}
-
-// const maxAge = 3 * 24 * 60 * 60;
-// const createToken = (data) => {
-//     return jwt.sign(data, secret, {
-//         expiresIn: maxAge
-//     });
-// };
+const {saltRounds, secret} = require("../config/config");
 
 const register = async (req, res) => {
-    const {username, department, email, password} = req.body;
-
     try {
+        const {username, department, email, password, repeatPassword} = req.body;
+
+        // Validation
+        if (!username || !department || !email || !password) {
+            return res.status(400).json({errorMessage: "Please enter all required fields."});
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({errorMessage: "Please enter a password of at least 6 characters."});
+        }
+
+        if (password !== repeatPassword) {
+            return res.status(400).json({errorMessage: "Please enter the same password twice."});
+        }
+
+        const existingUser = await User.findOne({email: email});
+
+        if (existingUser) {
+            return res.status(400).json({errorMessage: "An account with this email already exists."});
+        }
+
+        // Hashing
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const user = new User({
+        const newUser = new User({
             username,
             department,
             email,
             password: hashedPassword
         });
 
-        const userObject = await user.save();
+        const savedUser = await newUser.save();
 
-        // const token = createToken({
-        //     userId: userObject._id,
-        //     username: userObject.username
-        // });
+        // Sign the token
+        const token = jwt.sign({
+            userId: savedUser._id,
+            username: savedUser.username
+        }, secret);
 
-        res.status(201).json({userId: userObject._id, username: userObject.username});
+        // Send to token in HTTP-only cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+        }).send();
+
     } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).json({errors});
+        console.log(err)
+        res.status(500).send();
     }
 }
 
 const login = async (req, res) => {
-    const {email, password} = req.body;
 
     try {
-        const user = await User.findOne({email});
+        const {email, password} = req.body;
 
-        if (!user) {
-            throw new Error("Incorrect email.");
+        if (!email || !password) {
+            return res.status(400).json({errorMessage: "Please enter all required fields."});
         }
 
-        const auth = await bcrypt.compare(password, user.password);
+        const existingUser = await User.findOne({email: email});
 
-        if (!auth) {
-            throw new Error("Incorrect password.");
+        if (!existingUser) {
+            return res.status(401).json({errorMessage: "Wrong email or password."});
         }
 
-        // const token = createToken({
-        //     userId: user._id,
-        //     username: user.username
-        // });
+        const passwordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        res.status(200).json({userId: user._id, username: user.username});
+        if (!passwordCorrect) {
+            return res.status(401).json({errorMessage: "Wrong email or password."});
+        }
+
+        // Sign the token
+        const token = jwt.sign({
+            userId: existingUser._id,
+            username: existingUser.username
+        }, secret);
+
+        // Send to token in HTTP-only cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+        }).send();
+
     } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).json({errors});
+        console.log(err)
+        res.status(500).send();
     }
 }
-//
-// const logout_get = (req, res) => {
-//     res.cookie("jwt", "", {maxAge: 1});
-//     res.redirect("/");
-// }
+
+const logout = (req, res) => {
+    res.cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(0),
+    }).send();
+}
 
 module.exports = {
     register,
-    login
+    login,
+    logout
 }

@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 const AddTask = () => {
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
+    // const [error, setError] = useState(false);
 
     const [taskName, setTaskName] = useState("");
     const [clientsOptions, setClientsOptions] = useState("");
