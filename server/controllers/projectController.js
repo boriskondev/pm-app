@@ -4,10 +4,9 @@ const Client = require("../models/client");
 const projectController = {
 
     create: async (req, res) => {
-        const {projectName, createdBy, clientId} = req.body;
-        const newProject = new Project({projectName, createdBy, clientId});
-
         try {
+            const {projectName, createdBy, clientId} = req.body;
+            const newProject = new Project({projectName, createdBy, clientId});
             await Client.findByIdAndUpdate(clientId, {
                 "$push": {
                     projects: newProject
@@ -58,8 +57,8 @@ const projectController = {
     },
 
     edit: async (req, res) => {
-        const {projectName} = req.body;
         try {
+            const {projectName} = req.body;
             const id = req.params.id;
             const updatedProject = await Project.findByIdAndUpdate(id, {
                 "$set": {

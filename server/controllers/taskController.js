@@ -2,12 +2,10 @@ const Task = require("../models/task");
 const Project = require("../models/project");
 
 const taskController = {
-
     create: async (req, res) => {
-        const {taskName, createdBy, clientId, projectId, startDate, endDate, responsible} = req.body;
-        const newTask = new Task({taskName, createdBy, clientId, projectId, startDate, endDate, responsible});
-
         try {
+            const {taskName, createdBy, clientId, projectId, startDate, endDate, responsible} = req.body;
+            const newTask = new Task({taskName, createdBy, clientId, projectId, startDate, endDate, responsible});
             await Project.findByIdAndUpdate(projectId, {
                 "$push": {
                     tasks: newTask
@@ -33,7 +31,6 @@ const taskController = {
     },
 
     findAllActive: async (req, res) => {
-
         try {
             const filter = {status: "active"};
             const allTasks = await Task
@@ -59,7 +56,6 @@ const taskController = {
     },
 
     findAllComplete: async (req, res) => {
-
         try {
             const filter = {status: "complete"};
             const allTasks = await Task
@@ -156,8 +152,8 @@ const taskController = {
     },
 
     edit: async (req, res) => {
-        const {taskName, clientId, projectId, startDate, endDate} = req.body;
         try {
+            const {taskName, clientId, projectId, startDate, endDate} = req.body;
             const id = req.params.id;
             const updatedTask = await Task.findByIdAndUpdate(id, {
                 "$set": {

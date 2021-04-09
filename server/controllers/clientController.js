@@ -1,12 +1,10 @@
 const Client = require("../models/client");
 
 const clientController = {
-
     create: async (req, res) => {
-        const {clientName, createdBy} = req.body;
-        const newClient = new Client({clientName, createdBy});
-
         try {
+            const {clientName, createdBy} = req.body;
+            const newClient = new Client({clientName, createdBy});
             await newClient.save();
             res.status(200).json(newClient);
         } catch (error) {
@@ -54,8 +52,8 @@ const clientController = {
     },
 
     edit: async (req, res) => {
-        const {clientName} = req.body;
         try {
+            const {clientName} = req.body;
             const id = req.params.id;
             const updatedClient = await Client.findByIdAndUpdate(id, {
                 "$set": {
