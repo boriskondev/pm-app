@@ -1,11 +1,27 @@
 import "./Navigation.css";
 import {Link} from "react-router-dom";
+import endpoints from "../../services/api";
+import { useHistory } from "react-router-dom";
 
 function Navigation() {
+    const history = useHistory();
 
-    const exitHandler = () => {
-        localStorage.clear();
-        window.location.reload()
+    const requestOptions = {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include"
+    };
+
+    const logoutHandler = () => {
+        fetch(endpoints.LOGOUT, requestOptions)
+            .then(res => res)
+            .then(data => {
+                console.log(data);
+            })
+            .then(() => {
+                history.push("/")
+            })
+            .catch(err => console.log("In catch" + err))
     }
 
     return (
@@ -24,7 +40,7 @@ function Navigation() {
                 <li><Link to="/register">Регистрация</Link></li>
                 <li><Link to="/login">Вход</Link></li>
                 <li><Link to="/profile">Профил</Link></li>
-                <li><Link to="/" onClick={exitHandler}>Изход</Link></li>
+                <li><Link to="/" onClick={logoutHandler}>Изход</Link></li>
             </ul>
         </nav>
     )

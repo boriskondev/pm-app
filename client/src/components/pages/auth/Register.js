@@ -36,7 +36,8 @@ const Register = () => {
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newUserToAdd)
+            body: JSON.stringify(newUserToAdd),
+            credentials: "include"
         };
 
         fetch(endpoints.REGISTER, requestOptions)
@@ -47,7 +48,7 @@ const Register = () => {
             .then(() => {
                 history.push("/")
             })
-            .catch(err => console.log("In catch" + err))
+            .catch(err => console.log("In catch" + err));
     }
 
     return (

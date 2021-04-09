@@ -30,13 +30,14 @@ const Login = () => {
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(userToLogin)
+            body: JSON.stringify(userToLogin),
+            credentials: "include"
         };
 
         fetch(endpoints.LOGIN, requestOptions)
-            .then(res => res.json())
+            .then(res => res)
             .then(data => {
-                localStorage.setItem("user", JSON.stringify(data));
+                console.log(data);
             })
             .then(() => {
                 history.push("/")
