@@ -14,7 +14,7 @@ const EditTask = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     // const [error, setError] = useState(false);
 
-    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
+    const [isNotCreator, setIsNotCreator] = useState(false);
 
     const [clientsOptions, setClientsOptions] = useState("");
     const [projectsOptions, setProjectsOptions] = useState("");
@@ -40,7 +40,7 @@ const EditTask = ({match}) => {
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
             setTaskName(taskData.taskName);
-            setFieldsetDisplay(taskData.createdBy !== loggedUser.userId);
+            setIsNotCreator(taskData.createdBy !== loggedUser.userId);
             setClientName(taskData.clientId.clientName);
             setClientId(taskData.clientId._id);
             setProjectName(taskData.projectId.projectName);
@@ -98,7 +98,7 @@ const EditTask = ({match}) => {
             <Header title="Edit task"/>
 
             <form onSubmit={handleSubmit}>
-                <fieldset disabled={fieldsetDisplay}>
+                <fieldset disabled={isNotCreator}>
                     <div className="form-field">
                         <label>Name</label>
                         <input
@@ -183,7 +183,7 @@ const EditTask = ({match}) => {
 
                 </fieldset>
 
-                { fieldsetDisplay === false && (
+                { isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
                 ) }
 

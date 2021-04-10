@@ -1,8 +1,8 @@
-import "./Main.css";
+import styles from "./Main.module.css"
 
 const Main = (props) => {
     return (
-        <main>
+        <main className={styles.main}>
             {props.children}
         </main>
     )

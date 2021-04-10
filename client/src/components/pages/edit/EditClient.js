@@ -13,7 +13,8 @@ const EditClient = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
-    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
+    const [isNotCreator, setIsNotCreator] = useState(true);
+
     const [clientName, setClientName] = useState("");
 
     useEffect(() => {
@@ -21,9 +22,7 @@ const EditClient = ({match}) => {
             .then(response => response.json())
             .then(data => {
                 setClientName(data.clientName)
-                console.log(data)
-                console.log(loggedUser)
-                setFieldsetDisplay(data.createdBy !== loggedUser.userId);
+                setIsNotCreator(data.createdBy !== loggedUser.userId);
             });
     }, []);
 
@@ -65,7 +64,7 @@ const EditClient = ({match}) => {
             <Header title="Edit client"/>
 
             <form onSubmit={handleSubmit}>
-                <fieldset disabled={fieldsetDisplay}>
+                <fieldset disabled={isNotCreator}>
                     <div className="form-field">
                         <label>Name</label>
                         <input
@@ -81,7 +80,7 @@ const EditClient = ({match}) => {
                     </div>
                 </fieldset>
 
-                { fieldsetDisplay === false && (
+                { isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
                 ) }
 

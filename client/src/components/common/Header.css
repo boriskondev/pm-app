@@ -3,8 +3,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*background-image: url("../images/background.png");*/
-    /*background-color: #FAFAFA;*/
     background-size: cover;
     padding: 20px;
 }

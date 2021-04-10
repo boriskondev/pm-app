@@ -13,7 +13,7 @@ const AddProject = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
-    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
+    const [isNotCreator, setIsNotCreator] = useState(true);
 
     const [projectName, setProjectName] = useState("");
     const [clientName, setClientName] = useState("");
@@ -27,6 +27,7 @@ const AddProject = ({match}) => {
 
             setProjectName(currentProjectData.projectName);
             setClientName(currentProjectData.clientId.clientName);
+            setIsNotCreator(currentProjectData.createdBy !== loggedUser.userId);
             setClientId(currentProjectData.clientId._id);
             setClientsOptions(allClientsInDB);
         };
@@ -74,7 +75,7 @@ const AddProject = ({match}) => {
             <Header title="Edit project"/>
 
             <form onSubmit={handleSubmit}>
-                <fieldset disabled={fieldsetDisplay}>
+                <fieldset disabled={isNotCreator}>
                     <div className="form-field">
                         <label>Name</label>
                         <input
@@ -104,7 +105,7 @@ const AddProject = ({match}) => {
                     {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
-                { fieldsetDisplay === false && (
+                { isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
                 ) }
 

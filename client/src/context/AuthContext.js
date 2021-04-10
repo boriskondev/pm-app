@@ -20,7 +20,7 @@ const AuthContextProvider = (props) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ loggedIn, getLoggedIn, loggedUser }}>
+        <AuthContext.Provider value={{loggedIn, getLoggedIn, loggedUser}}>
             {props.children}
         </AuthContext.Provider>
     );
