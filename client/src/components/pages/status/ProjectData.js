@@ -2,9 +2,6 @@ import {Component} from "react";
 import "./ProjectData.css";
 
 class ProjectData extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     editDate(date) {
         let [ year, month, day ] = date.slice(0, 10).split("-");

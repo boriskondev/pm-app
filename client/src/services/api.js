@@ -5,6 +5,7 @@ const endpoints = {
     LOGIN: `${baseURL}/login`,
     LOGOUT: `${baseURL}/logout`,
     LOGGED_IN: `${baseURL}/loggedIn`,
+    LOGGED_USER: `${baseURL}/loggedUser`,
     USERS: `${baseURL}/users`,
     CLIENTS: `${baseURL}/clients`,
     PROJECTS: `${baseURL}/projects`,

@@ -3,13 +3,18 @@ import "../add/AddTask.css";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
+import {useContext} from "react";
 
 const EditTask = ({match}) => {
     const {id} = match.params;
+    const { loggedUser } = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     // const [error, setError] = useState(false);
+
+    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
 
     const [clientsOptions, setClientsOptions] = useState("");
     const [projectsOptions, setProjectsOptions] = useState("");
@@ -35,6 +40,7 @@ const EditTask = ({match}) => {
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
             setTaskName(taskData.taskName);
+            setFieldsetDisplay(taskData.createdBy !== loggedUser.userId);
             setClientName(taskData.clientId.clientName);
             setClientId(taskData.clientId._id);
             setProjectName(taskData.projectId.projectName);
@@ -91,8 +97,7 @@ const EditTask = ({match}) => {
             <Header title="Edit task"/>
 
             <form onSubmit={handleSubmit}>
-                <fieldset disabled={false}>
-                    {/*<fieldset disabled={false}>*/}
+                <fieldset disabled={fieldsetDisplay}>
                     <div className="form-field">
                         <label>Name</label>
                         <input
@@ -177,7 +182,9 @@ const EditTask = ({match}) => {
 
                 </fieldset>
 
-                <button className="add" type="submit">Edit</button>
+                { fieldsetDisplay === false && (
+                    <button className="add" type="submit">Edit</button>
+                ) }
 
             </form>
         </>

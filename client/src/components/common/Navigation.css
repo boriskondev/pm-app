@@ -36,6 +36,11 @@ nav a {
     font-weight: 500;
 }
 
-.right {
+.user-welcome {
+    font-size: 18px;
+}
 
+.user-welcome span {
+    color: #D62130;
+    font-weight: bold;
 }

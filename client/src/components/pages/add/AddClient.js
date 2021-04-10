@@ -2,9 +2,13 @@ import Header from "../../common/Header";
 import {useState} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const AddClient = () => {
     const history = useHistory();
+    const { loggedUser } = useContext(AuthContext);
+
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
@@ -13,7 +17,7 @@ const AddClient = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newClientToAdd = {clientName, createdBy: "605a5456b97d5f24dc7c1b38"};
+        const newClientToAdd = {clientName, createdBy: loggedUser.userId};
 
         const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
 

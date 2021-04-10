@@ -3,11 +3,12 @@ import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import "./UserStatus.css";
 import {Link} from "react-router-dom";
-import {useHistory} from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const UserStatus = ({match}) => {
-    const history = useHistory();
     const {id, name} = match.params;
+    const { loggedUser } = useContext(AuthContext);
 
     const [tasksOfUser, setTasksOfUser] = useState([]);
 
@@ -46,8 +47,6 @@ const UserStatus = ({match}) => {
             .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
 
-    console.log(tasksOfUser)
-
     return (
 
         <>
@@ -81,13 +80,24 @@ const UserStatus = ({match}) => {
                                 <td><Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link></td>
                                 <td>{task.taskName}</td>
                                 <td>
-                                    <div className="buttons-div">
-                                        <Link to={`/edit-task/${task._id}`}>
-                                            <button className="edit">Edit</button>
-                                        </Link>
-                                        <button className="complete" onClick={(e) => handleComplete(task._id)}>Complete</button>
-                                        <button className="delete" onClick={(e) => handleDelete(task._id)}>Delete</button>
-                                    </div>
+                                    { task.createdBy === loggedUser.userId && (
+                                        <div className="buttons-div">
+                                            <Link to={`/edit-task/${task._id}`}>
+                                                <button className="edit">Edit</button>
+                                            </Link>
+                                            <button className="complete" onClick={(e) => handleComplete(task._id)}>Complete</button>
+                                            <button className="delete" onClick={(e) => handleDelete(task._id)}>Delete</button>
+                                        </div>
+                                    ) }
+
+                                    { task.createdBy !== loggedUser.userId && (
+                                        <div className="buttons-div">
+                                            <Link to={`/edit-task/${task._id}`}>
+                                                <button className="edit">Details</button>
+                                            </Link>
+                                        </div>
+                                    ) }
+
                                 </td>
                             </tr>
                         ))}

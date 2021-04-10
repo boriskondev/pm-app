@@ -13,6 +13,7 @@ router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/logout", authController.logout);
 router.get("/loggedIn", authController.loggedIn);
+router.get("/loggedUser", authController.getLoggedUserInfo);
 
 // Users
 router.get("/users", userController.findAll);
@@ -22,7 +23,7 @@ router.delete("/users/:id", userController.deleteUser);
 router.get("/users/:id/tasks", userController.getAllTasks);
 
 // Clients
-router.post("/clients", auth, clientController.create);
+router.post("/clients", clientController.create);
 router.get("/clients", clientController.findAll);
 router.get("/clients/:id", clientController.findOne);
 router.put("/clients/:id", clientController.edit);

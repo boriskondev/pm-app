@@ -2,13 +2,18 @@ import Header from "../../common/Header";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
+import {useContext} from "react";
 
 const AddProject = ({match}) => {
     const {id} = match.params;
+    const { loggedUser } = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+
+    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
 
     const [projectName, setProjectName] = useState("");
     const [clientName, setClientName] = useState("");
@@ -69,18 +74,20 @@ const AddProject = ({match}) => {
             <Header title="Edit project"/>
 
             <form onSubmit={handleSubmit}>
+                <fieldset disabled={fieldsetDisplay}>
+                    <div className="form-field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={projectName}
+                            onChange={(e) => setProjectName(e.target.value)}
+                            autoComplete="off"
+                            autoFocus
+                            required
+                        />
+                    </div>
+                </fieldset>
 
-                <div className="form-field">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
-                        autoComplete="off"
-                        autoFocus
-                        required
-                    />
-                </div>
 
                 <div className="form-field">
                     <label>Client</label>
@@ -97,7 +104,9 @@ const AddProject = ({match}) => {
                     {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
-                <button className="add" type="submit">Edit</button>
+                { fieldsetDisplay === false && (
+                    <button className="add" type="submit">Edit</button>
+                ) }
 
             </form>
         </>

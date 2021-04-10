@@ -118,9 +118,27 @@ const loggedIn = (req, res) => {
     }
 }
 
+const getLoggedUserInfo = (req, res) => {
+    try {
+        const token = req.cookies.token;
+
+        if (!token) {
+            return res.json(false);
+        }
+
+        const verified = jwt.verify(token, secret);
+
+        res.json(verified);
+
+    } catch (err) {
+        res.json(false);
+    }
+}
+
 module.exports = {
     register,
     login,
     logout,
-    loggedIn
+    loggedIn,
+    getLoggedUserInfo
 }

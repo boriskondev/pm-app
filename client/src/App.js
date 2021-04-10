@@ -27,7 +27,7 @@ import {useContext} from "react";
 import AuthContext from "./context/AuthContext";
 
 function App() {
-    const {loggedIn, getLoggedIn} = useContext(AuthContext);
+    const {loggedIn} = useContext(AuthContext);
 
     return (
         <div className="App">

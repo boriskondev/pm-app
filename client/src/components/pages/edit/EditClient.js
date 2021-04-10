@@ -2,14 +2,18 @@ import Header from "../../common/Header";
 import {useEffect, useState} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
+import {useContext} from "react";
 
 const EditClient = ({match}) => {
     const {id} = match.params;
+    const { loggedUser } = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
+    const [fieldsetDisplay, setFieldsetDisplay] = useState(false);
     const [clientName, setClientName] = useState("");
 
     useEffect(() => {
@@ -56,22 +60,25 @@ const EditClient = ({match}) => {
             <Header title="Edit client"/>
 
             <form onSubmit={handleSubmit}>
+                <fieldset disabled={fieldsetDisplay}>
+                    <div className="form-field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={clientName}
+                            onChange={(e) => setClientName(e.target.value)}
+                            autoComplete="off"
+                            autoFocus
+                            required
+                        />
+                        {submitted && (<span className="success">Client edited successfully.</span>)}
+                        {error && (<span className="error">{clientName} is already registered.</span>)}
+                    </div>
+                </fieldset>
 
-                <div className="form-field">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                        autoComplete="off"
-                        autoFocus
-                        required
-                    />
-                    {submitted && (<span className="success">Client edited successfully.</span>)}
-                    {error && (<span className="error">{clientName} is already registered.</span>)}
-                </div>
-
-                <button className="add">Edit</button>
+                { fieldsetDisplay === false && (
+                    <button className="add" type="submit">Edit</button>
+                ) }
 
             </form>
         </>

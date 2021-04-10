@@ -3,9 +3,13 @@ import "./AddTask.css";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const AddTask = () => {
     const history = useHistory();
+    const { loggedUser } = useContext(AuthContext);
+
     const [submitted, setSubmitted] = useState(false);
     // const [error, setError] = useState(false);
 
@@ -50,7 +54,7 @@ const AddTask = () => {
 
         const newTaskToAdd = {
             taskName,
-            createdBy: "605a5456b97d5f24dc7c1b38",
+            createdBy: loggedUser.userId,
             clientId,
             projectId,
             startDate,
@@ -73,14 +77,6 @@ const AddTask = () => {
                 }, 1500);
             });
     }
-    const newTaskToAdd = {
-        taskName,
-        createdBy: "605a5456b97d5f24dc7c1b38",
-        projectId,
-        startDate,
-        endDate,
-        responsible: peopleResponsible
-    };
 
     return (
         <>

@@ -3,9 +3,13 @@ import "./AddTask.css";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const AddProject = () => {
     const history = useHistory();
+    const { loggedUser } = useContext(AuthContext);
+
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
@@ -22,7 +26,7 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newProjectToAdd = {projectName, clientId, createdBy: "605a5456b97d5f24dc7c1b38"};
+        const newProjectToAdd = {projectName, clientId, createdBy: loggedUser.userId};
 
         const selectedClient = await fetch(endpoints.CLIENTS + `/${clientId}`)
             .then(response => response.json());

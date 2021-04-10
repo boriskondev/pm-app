@@ -8,7 +8,7 @@ import axios from "axios";
 
 function Navigation() {
     const history = useHistory();
-    const { loggedIn, getLoggedIn } = useContext(AuthContext);
+    const { loggedIn, getLoggedIn, loggedUser } = useContext(AuthContext);
 
     async function logoutHandler() {
         await axios.get(endpoints.LOGOUT);
@@ -47,7 +47,9 @@ function Navigation() {
                         <li><Link to="/add-client">Add client</Link></li>
                     </ul>
                     <ul>
-                        <li><Link to="/profile">Profile</Link></li>
+                        { loggedUser && (
+                            <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
+                        ) }
                         <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
                     </ul>
                 </>
