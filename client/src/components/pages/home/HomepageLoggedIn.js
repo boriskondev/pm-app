@@ -1,11 +1,11 @@
 import {Component} from "react";
-import "./Homepage.css";
+import "./HomepageLoggedIn.css";
 import Header from "../../common/Header";
 import {Link} from "react-router-dom";
 import {MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort} from "react-icons/md";
 import endpoints from "../../../services/api";
 
-class Homepage extends Component {
+class HomepageLoggedIn extends Component {
     constructor() {
         super();
         this.state = {
@@ -89,5 +89,5 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+export default HomepageLoggedIn;
 

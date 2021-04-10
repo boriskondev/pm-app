@@ -1,11 +1,11 @@
 import Header from "../../common/Header";
 import {useState, useEffect} from "react";
 import endpoints from "../../../services/api";
-import "./DetailedStatusUser.css";
+import "./UserStatus.css";
 import {Link} from "react-router-dom";
 import {useHistory} from "react-router-dom";
 
-const DetailedStatusUser = ({match}) => {
+const UserStatus = ({match}) => {
     const history = useHistory();
     const {id, name} = match.params;
 
@@ -102,4 +102,4 @@ const DetailedStatusUser = ({match}) => {
     )
 }
 
-export default DetailedStatusUser;
+export default UserStatus;

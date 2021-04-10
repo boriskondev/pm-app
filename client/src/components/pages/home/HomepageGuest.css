@@ -1,0 +1,13 @@
+.guest-home {
+    background-color: white;
+    text-align: center;
+    padding: 100px;
+}
+
+.guest-home p {
+    margin: 20px;
+}
+
+.guest-home p span {
+    font-weight: bold;
+}

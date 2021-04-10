@@ -6,9 +6,11 @@ import Navigation from "./components/common/Navigation";
 import Main from "./components/common/Main";
 import Footer from "./components/common/Footer";
 
-import Homepage from "./components/pages/status/Homepage";
-import DetailedStatus from "./components/pages/status/DetailedStatus";
-import DetailedStatusUser from "./components/pages/status/DetailedStatusUser";
+import HomepageGuest from "./components/pages/home/HomepageGuest";
+import HomepageLoggedIn from "./components/pages/home/HomepageLoggedIn";
+
+import ProjectsStatus from "./components/pages/status/ProjectsStatus";
+import UserStatus from "./components/pages/status/UserStatus";
 
 import AddClient from "./components/pages/add/AddClient";
 import AddProject from "./components/pages/add/AddProject";
@@ -21,21 +23,34 @@ import EditTask from "./components/pages/edit/EditTask";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
-import {AuthContextProvider} from "./context/AuthContext"
+import {useContext} from "react";
+import AuthContext from "./context/AuthContext";
 
 function App() {
+    const {loggedIn, getLoggedIn} = useContext(AuthContext);
 
     return (
-        <AuthContextProvider>
-            <div className="App">
+        <div className="App">
 
-                <Navigation/>
+            <Navigation/>
 
+            { loggedIn === false && (
                 <Main>
                     <Switch>
-                        <Route path="/" exact component={Homepage}/>
-                        <Route path="/weekly-status" exact component={DetailedStatus}/>
-                        <Route path="/weekly-status/:id/:name" exact component={DetailedStatusUser}/>
+                        <Route path="/" exact component={HomepageGuest}/>
+                        <Route path="/register" exact component={Register}/>
+                        <Route path="/login" exact component={Login}/>
+                    </Switch>
+                </Main>
+            )
+            }
+
+            { loggedIn === true && (
+                <Main>
+                    <Switch>
+                        <Route path="/" exact component={HomepageLoggedIn}/>
+                        <Route path="/weekly-status" exact component={ProjectsStatus}/>
+                        <Route path="/weekly-status/:id/:name" exact component={UserStatus}/>
                         <Route path="/edit-client/:id" exact component={EditClient}/>
                         <Route path="/edit-project/:id" exact component={EditProject}/>
                         <Route path="/edit-task/:id" exact component={EditTask}/>
@@ -46,13 +61,13 @@ function App() {
                         <Route path="/login" exact component={Login}/>
                         <Route render={() => <p>Page not found!</p>}/>
                     </Switch>
-
                 </Main>
+            ) }
 
-                <Footer/>
 
-            </div>
-        </ AuthContextProvider>
+            <Footer/>
+
+        </div>
 
     );
 }

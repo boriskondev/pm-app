@@ -104,21 +104,16 @@ const logout = (req, res) => {
 const loggedIn = (req, res) => {
     try {
         const token = req.cookies.token;
-        console.log("cookie")
-        console.log(token)
 
         if (!token) {
-            console.log("not token")
             return res.json(false);
         }
 
         jwt.verify(token, secret);
 
-        console.log("true")
         res.send(true);
 
     } catch (err) {
-        console.log("catch")
         res.json(false);
     }
 }

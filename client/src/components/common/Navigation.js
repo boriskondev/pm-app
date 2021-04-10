@@ -1,8 +1,8 @@
 import "./Navigation.css";
 import {Link} from "react-router-dom";
 import endpoints from "../../services/api";
-import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import {useHistory} from "react-router-dom";
+import {useContext} from "react";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 
@@ -11,9 +11,9 @@ function Navigation() {
     const { loggedIn, getLoggedIn } = useContext(AuthContext);
 
     async function logoutHandler() {
-        const res = await axios.get(endpoints.LOGOUT);
-        console.log(res)
+        await axios.get(endpoints.LOGOUT);
         await getLoggedIn();
+        history.push("/")
     }
 
     return (

@@ -1,11 +1,11 @@
 import {Component} from "react";
-import "./DetailedStatus.css";
+import "./ProjectsStatus.css";
 import Header from "../../common/Header";
 import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 
-class DetailedStatus extends Component {
+class ProjectsStatus extends Component {
     constructor() {
         super();
 
@@ -135,4 +135,4 @@ class DetailedStatus extends Component {
     }
 }
 
-export default DetailedStatus;
+export default ProjectsStatus;
