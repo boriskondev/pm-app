@@ -42,17 +42,18 @@ npm start
 
 ## Features
 The application allows you to:
-* Register (only registration form and information submission is implemented until now)
-* Create client
-* Create project
-* Create task
+* Register
+* Log in
+* Create/edit client
+* Create/edit project
+* Create/edit/complete/delete task
 * See overall status of active tasks
-* See overall status of active tasks per user and complete, edit or delete task
+* See overall status of active tasks per user
 
-## Status (07.04.2021)
+## Status (10.04.2021)
 The project is currently under development with many important features to be implemented:
-* Authentication
-* Code refactoring and improvements
+* Authentication (almost done)
+* Considerable code refactoring and improvements
 * Transforming the class components into functional components (after project defence)
 * Miscellaneous UX tweaks
 
