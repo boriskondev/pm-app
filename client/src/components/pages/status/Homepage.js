@@ -9,7 +9,6 @@ class Homepage extends Component {
     constructor() {
         super();
         this.state = {
-            // user: JSON.parse(localStorage.getItem("user")),
             users: "",
             activeTasks: ""
         }
@@ -86,7 +85,6 @@ class Homepage extends Component {
                     </table>
                 </section>
             </>
-
         )
     }
 }

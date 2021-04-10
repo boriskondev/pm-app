@@ -61,7 +61,4 @@ const userController = {
     }
 }
 
-// https://medium.com/@brandon.lau86/one-to-many-relationships-with-mongodb-and-mongoose-in-node-express-d5c9d23d93c2
-// https://medium.com/@brandon.lau86/node-js-express-and-mongodb-get-started-fast-e3a0a09dd41f
-
 module.exports = userController;

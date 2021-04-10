@@ -21,45 +21,39 @@ import EditTask from "./components/pages/edit/EditTask";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
+import {AuthContextProvider} from "./context/AuthContext"
 
 function App() {
-    // const [user, setUser] = useState(false)
-    // const [user, setUser] = useState(import {Link} from "react-router-dom";)
 
     return (
-        <div className="App">
+        <AuthContextProvider>
+            <div className="App">
 
-            <Navigation/>
+                <Navigation/>
 
-            <Main>
+                <Main>
+                    <Switch>
+                        <Route path="/" exact component={Homepage}/>
+                        <Route path="/weekly-status" exact component={DetailedStatus}/>
+                        <Route path="/weekly-status/:id/:name" exact component={DetailedStatusUser}/>
+                        <Route path="/edit-client/:id" exact component={EditClient}/>
+                        <Route path="/edit-project/:id" exact component={EditProject}/>
+                        <Route path="/edit-task/:id" exact component={EditTask}/>
+                        <Route path="/add-client" exact component={AddClient}/>
+                        <Route path="/add-project" exact component={AddProject}/>
+                        <Route path="/add-task" exact component={AddTask}/>
+                        <Route path="/register" exact component={Register}/>
+                        <Route path="/login" exact component={Login}/>
+                        <Route render={() => <p>Page not found!</p>}/>
+                    </Switch>
 
-                {/*{ !user && (*/}
-                {/*    <Switch>*/}
-                {/*        <Route path="/register" exact component={Register}/>*/}
-                {/*        <Route path="/login" exact component={Login}/>*/}
-                {/*    </Switch>*/}
-                {/*) }*/}
+                </Main>
 
-                <Switch>
-                    <Route path="/" exact component={Homepage}/>
-                    <Route path="/weekly-status" exact component={DetailedStatus}/>
-                    <Route path="/weekly-status/:id/:name" exact component={DetailedStatusUser}/>
-                    <Route path="/edit-client/:id" exact component={EditClient}/>
-                    <Route path="/edit-project/:id" exact component={EditProject}/>
-                    <Route path="/edit-task/:id" exact component={EditTask}/>
-                    <Route path="/add-client" exact component={AddClient}/>
-                    <Route path="/add-project" exact component={AddProject}/>
-                    <Route path="/add-task" exact component={AddTask}/>
-                    <Route path="/register" exact component={Register}/>
-                    <Route path="/login" exact component={Login}/>
-                    <Route render={() => <p>Page not found!</p>}/>
-                </Switch>
+                <Footer/>
 
-            </Main>
+            </div>
+        </ AuthContextProvider>
 
-            <Footer/>
-
-        </div>
     );
 }
 

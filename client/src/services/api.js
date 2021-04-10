@@ -4,6 +4,7 @@ const endpoints = {
     REGISTER: `${baseURL}/register`,
     LOGIN: `${baseURL}/login`,
     LOGOUT: `${baseURL}/logout`,
+    LOGGED_IN: `${baseURL}/loggedIn`,
     USERS: `${baseURL}/users`,
     CLIENTS: `${baseURL}/clients`,
     PROJECTS: `${baseURL}/projects`,

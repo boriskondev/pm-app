@@ -12,9 +12,9 @@ const taskController = require("../controllers/taskController");
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.get("/logout", authController.logout);
+router.get("/loggedIn", authController.loggedIn);
 
 // Users
-// router.post("/users", userController.create);
 router.get("/users", userController.findAll);
 router.get("/users/:id", userController.findOne);
 router.put("/users/:id", userController.updateUser);

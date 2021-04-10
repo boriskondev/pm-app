@@ -4,9 +4,12 @@ import "./Register.css";
 import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const Login = () => {
     const history = useHistory();
+    const { getLoggedIn } = useContext(AuthContext);
     const [state, setState] = useState({
         email: "",
         password: ""
@@ -36,9 +39,7 @@ const Login = () => {
 
         fetch(endpoints.LOGIN, requestOptions)
             .then(res => res)
-            .then(data => {
-                console.log(data);
-            })
+            .then(() => getLoggedIn())
             .then(() => {
                 history.push("/")
             })

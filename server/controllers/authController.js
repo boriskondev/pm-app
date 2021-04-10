@@ -12,9 +12,9 @@ const register = async (req, res) => {
             return res.status(400).json({errorMessage: "Please enter all required fields."});
         }
 
-        if (password.length < 6) {
-            return res.status(400).json({errorMessage: "Please enter a password of at least 6 characters."});
-        }
+        // if (password.length < 6) {
+        //     return res.status(400).json({errorMessage: "Please enter a password of at least 6 characters."});
+        // }
 
         if (password !== repeatPassword) {
             return res.status(400).json({errorMessage: "Please enter the same password twice."});
@@ -101,8 +101,31 @@ const logout = (req, res) => {
     }).send();
 }
 
+const loggedIn = (req, res) => {
+    try {
+        const token = req.cookies.token;
+        console.log("cookie")
+        console.log(token)
+
+        if (!token) {
+            console.log("not token")
+            return res.json(false);
+        }
+
+        jwt.verify(token, secret);
+
+        console.log("true")
+        res.send(true);
+
+    } catch (err) {
+        console.log("catch")
+        res.json(false);
+    }
+}
+
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    loggedIn
 }
