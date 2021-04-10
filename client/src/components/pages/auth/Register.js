@@ -54,12 +54,12 @@ const Register = () => {
 
     return (
         <>
-            <Header title="Регистрация"/>
+            <Header title="Registration"/>
 
             <form className="register" onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Име</label>
+                    <label>Name</label>
                     <input
                         type="text"
                         id="username"
@@ -72,7 +72,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-field">
-                    <label>Отдел</label>
+                    <label>Department</label>
                     <select
                         id="department"
                         value={state.department}
@@ -80,15 +80,15 @@ const Register = () => {
                         autoComplete="off"
                         required
                     >
-                        <option hidden>Избери</option>
-                        <option value="clientService">Акаунт отдел</option>
-                        <option value="creative">Творчески отдел</option>
-                        <option value="management">Мениджмънт</option>
+                        <option hidden>Choose department</option>
+                        <option value="clientService">Client service department</option>
+                        <option value="creative">Creative department</option>
+                        <option value="management">Management department</option>
                     </select>
                 </div>
 
                 <div className="form-field">
-                    <label>Имейл</label>
+                    <label>Email</label>
                     <input
                         type="email"
                         id="email"
@@ -100,7 +100,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-field">
-                    <label>Парола</label>
+                    <label>Password</label>
                     <input
                         type="password"
                         id="password"
@@ -112,7 +112,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-field">
-                    <label>Повтори парола</label>
+                    <label>Repeat password</label>
                     <input
                         type="password"
                         id="repeatPassword"
@@ -124,9 +124,9 @@ const Register = () => {
                 </div>
 
 
-                <button className="add" type="submit">Добави</button>
+                <button className="add" type="submit">Submit</button>
 
-                <p>Вече имаш акаунт? Влез в системата от <Link to="/login">тук.</Link></p>
+                <p>You already have an account? Enter <Link to="/login">here.</Link></p>
 
             </form>
         </>

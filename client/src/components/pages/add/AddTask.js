@@ -82,11 +82,9 @@ const AddTask = () => {
         responsible: peopleResponsible
     };
 
-    console.log(newTaskToAdd)
-
     return (
         <>
-            <Header title="Добави задача"/>
+            <Header title="Add task"/>
 
             <form onSubmit={handleSubmit} >
                 <fieldset disabled={false}>
@@ -104,12 +102,12 @@ const AddTask = () => {
                     </div>
 
                     <div className="form-field">
-                        <label>Клиент</label>
+                        <label>Client</label>
                         <select
                             onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
                             required
                         >
-                            <option hidden>Избери клиент</option>
+                            <option hidden>Choose client</option>
 
                             {clientsOptions && clientsOptions.map(client => (
                                 <option key={client._id} value={client._id}>{client.clientName}</option>
@@ -119,13 +117,13 @@ const AddTask = () => {
                     </div>
 
                     <div className="form-field">
-                        <label>Проект</label>
+                        <label>Project</label>
                         <select
                             onChange={(e) => setProjectId(e.target.value)}
                             required
                         >
 
-                            <option hidden="hidden">Избери проект</option>
+                            <option hidden="hidden">Choose project</option>
 
                             {projectsOptions && projectsOptions.map(project => (
                                 <option key={project._id} value={project._id}>{project.projectName}</option>
@@ -135,7 +133,7 @@ const AddTask = () => {
                     </div>
 
                     <div className="form-field dates">
-                        <label>Срок</label>
+                        <label>Term</label>
                         <div id="task-term">
                             <input
                                 type="date"
@@ -152,7 +150,7 @@ const AddTask = () => {
                     </div>
 
                     <div className="form-field">
-                        <label>Отговорни</label>
+                        <label>People responsible</label>
                         <select
                             onClick={(e) => handleResponsibleOptionsClick(e)}
                             size={responsibleOptions.length}
@@ -176,7 +174,7 @@ const AddTask = () => {
 
                 </fieldset>
 
-                <button className="add" type="submit">Добави</button>
+                <button className="add" type="submit">Add</button>
 
             </form>
         </>

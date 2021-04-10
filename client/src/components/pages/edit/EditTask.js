@@ -88,13 +88,13 @@ const EditTask = ({match}) => {
 
     return (
         <>
-            <Header title="Редактирай задача"/>
+            <Header title="Edit task"/>
 
             <form onSubmit={handleSubmit}>
                 <fieldset disabled={false}>
                     {/*<fieldset disabled={false}>*/}
                     <div className="form-field">
-                        <label>Име</label>
+                        <label>Name</label>
                         <input
                             type="text"
                             value={taskName}
@@ -106,7 +106,7 @@ const EditTask = ({match}) => {
                     </div>
 
                     <div className="form-field">
-                        <label>Клиент</label>
+                        <label>Client</label>
                         <select
                             onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
                             required
@@ -121,7 +121,7 @@ const EditTask = ({match}) => {
                     </div>
 
                     <div className="form-field">
-                        <label>Проект</label>
+                        <label>Project</label>
                         <select
                             onChange={(e) => setProjectId(e.target.value)}
                             required
@@ -137,7 +137,7 @@ const EditTask = ({match}) => {
                     </div>
 
                     <div className="form-field dates">
-                        <label>Срок</label>
+                        <label>Term</label>
                         <div id="task-term">
                             <input
                                 type="date"
@@ -154,7 +154,7 @@ const EditTask = ({match}) => {
                     </div>
 
                     <div className="form-field">
-                        <label>Отговорни</label>
+                        <label>People responsible</label>
                         <select
                             onClick={(e) => handleResponsibleOptionsClick(e)}
                             size={responsibleOptions.length}
@@ -177,7 +177,7 @@ const EditTask = ({match}) => {
 
                 </fieldset>
 
-                <button className="add" type="submit">Редактирай</button>
+                <button className="add" type="submit">Edit</button>
 
             </form>
         </>

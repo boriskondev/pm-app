@@ -19,7 +19,7 @@ class ProjectData extends Component {
         return (
             <>
                 {!this.props.clickedProjectData && (
-                    <p>Момент, информацията се зарежда :)</p>
+                    <p>One moment, please, the information is loading :)</p>
                 )}
 
                 {this.props.clickedProjectData && (
@@ -28,10 +28,10 @@ class ProjectData extends Component {
                         <table>
                             <thead>
                             <tr>
-                                <th>Задача</th>
-                                <th>Отговорни</th>
-                                <th>Срок</th>
-                                <th>Статус</th>
+                                <th>Task</th>
+                                <th>People responsible</th>
+                                <th>Term</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>

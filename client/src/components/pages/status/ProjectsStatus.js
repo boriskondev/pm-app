@@ -100,7 +100,7 @@ class ProjectsStatus extends Component {
 
         return (
             <>
-                <Header title="Детайлна информация"/>
+                <Header title="Detailed overview"/>
 
                 <section className="content-wrapper">
 
@@ -112,14 +112,14 @@ class ProjectsStatus extends Component {
 
                         {this.state.activeTasks.length === 0 && (
                             <div className="message">
-                                <p>Все още няма създадени задачи :/</p>
+                                <p>There are not task added yet :/</p>
                             </div>
                         )}
 
                         {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">
-                                <p>Тази седмица ни очакват <span>{this.state.activeTasks.length}</span> задачи.</p>
-                                <p>Да започваме :)</p>
+                                <p>This week <span>{this.state.activeTasks.length}</span> tasks are waiting for us.</p>
+                                <p>Let's begin :)</p>
                             </div>
                         )}
 

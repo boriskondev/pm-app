@@ -45,14 +45,14 @@ class HomepageLoggedIn extends Component {
         return (
 
             <>
-                <Link to="/weekly-status"><Header title="Обща информация (всичко на английски)"/></Link>
+                <Link to="/weekly-status"><Header title="Overview"/></Link>
                 {/*{ this.state.user && (<h1>{this.state.user.username}</h1>) }*/}
                 <section className="weekly-overview">
                     <table>
                         <thead>
                         <tr>
                             <th>{icons.sort}</th>
-                            <th>Задачи</th>
+                            <th>Tasks</th>
                             <th>{icons.sort}</th>
                         </tr>
                         </thead>

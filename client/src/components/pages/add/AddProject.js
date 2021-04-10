@@ -55,12 +55,12 @@ const AddProject = () => {
 
     return (
         <>
-            <Header title="Добави проект"/>
+            <Header title="Add project"/>
 
             <form onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Име</label>
+                    <label>Name</label>
                     <input
                         type="text"
                         value={projectName}
@@ -72,12 +72,12 @@ const AddProject = () => {
                 </div>
 
                 <div className="form-field">
-                    <label>Клиент</label>
+                    <label>Client</label>
                     <select
                         onChange={(e) => setClientId(e.target.value)}
                         required
                     >
-                        <option hidden>Избери</option>
+                        <option hidden>Choose client</option>
                         {clientsOptions && clientsOptions.map(option => (
                             <option key={option._id} value={option._id}>{option.clientName}</option>
                         ))}
@@ -86,7 +86,7 @@ const AddProject = () => {
                     {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
-                <button className="add" type="submit">Добави</button>
+                <button className="add" type="submit">Add</button>
 
             </form>
         </>

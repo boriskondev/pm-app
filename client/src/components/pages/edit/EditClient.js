@@ -53,12 +53,12 @@ const EditClient = ({match}) => {
 
     return (
         <>
-            <Header title="Редактирай клиент"/>
+            <Header title="Edit client"/>
 
             <form onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Име</label>
+                    <label>Name</label>
                     <input
                         type="text"
                         value={clientName}
@@ -71,7 +71,7 @@ const EditClient = ({match}) => {
                     {error && (<span className="error">{clientName} is already registered.</span>)}
                 </div>
 
-                <button className="add">Редактирай</button>
+                <button className="add">Edit</button>
 
             </form>
         </>

@@ -45,12 +45,12 @@ const AddClient = () => {
 
     return (
         <>
-            <Header title="Добави клиент"/>
+            <Header title="Add client"/>
 
             <form onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Име</label>
+                    <label>Name</label>
                     <input
                         type="text"
                         value={clientName}
@@ -63,7 +63,7 @@ const AddClient = () => {
                     {error && (<span className="error">{clientName} is already registered.</span>)}
                 </div>
 
-                <button className="add">Добави</button>
+                <button className="add">Add</button>
 
             </form>
         </>

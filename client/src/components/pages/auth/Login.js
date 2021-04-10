@@ -48,12 +48,12 @@ const Login = () => {
 
     return (
         <>
-            <Header title="Вход"/>
+            <Header title="Log in"/>
 
             <form className="login" onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Имейл</label>
+                    <label>Email</label>
                     <input
                         type="email"
                         id="email"
@@ -65,7 +65,7 @@ const Login = () => {
                 </div>
 
                 <div className="form-field">
-                    <label>Парола</label>
+                    <label>Password</label>
                     <input
                         type="password"
                         id="password"
@@ -76,9 +76,9 @@ const Login = () => {
                     />
                 </div>
 
-                <button className="add" type="submit">Добави</button>
+                <button className="add" type="submit">Submit</button>
 
-                <p>Още нямаш акаунт? Регистрирай се <Link to="/register">тук.</Link></p>
+                <p>You don't have an account? Register <Link to="/register">here.</Link></p>
 
             </form>
         </>

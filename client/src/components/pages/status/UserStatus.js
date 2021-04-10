@@ -67,10 +67,10 @@ const UserStatus = ({match}) => {
                     <table>
                         <thead>
                         <tr>
-                            <th>Клиент</th>
-                            <th>Проект</th>
-                            <th>Задача</th>
-                            <th>Действия</th>
+                            <th>Client</th>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,11 +83,10 @@ const UserStatus = ({match}) => {
                                 <td>
                                     <div className="buttons-div">
                                         <Link to={`/edit-task/${task._id}`}>
-                                            <button className="edit">Редактирай</button>
+                                            <button className="edit">Edit</button>
                                         </Link>
-                                        <button className="complete" onClick={(e) => handleComplete(task._id)}>Приключи</button>
-                                        <button className="delete" onClick={(e) => handleDelete(task._id)}>Изтрий
-                                        </button>
+                                        <button className="complete" onClick={(e) => handleComplete(task._id)}>Complete</button>
+                                        <button className="delete" onClick={(e) => handleDelete(task._id)}>Delete</button>
                                     </div>
                                 </td>
                             </tr>

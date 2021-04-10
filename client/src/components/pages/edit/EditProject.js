@@ -66,12 +66,12 @@ const AddProject = ({match}) => {
 
     return (
         <>
-            <Header title="Редактирай проект"/>
+            <Header title="Edit project"/>
 
             <form onSubmit={handleSubmit}>
 
                 <div className="form-field">
-                    <label>Име</label>
+                    <label>Name</label>
                     <input
                         type="text"
                         value={projectName}
@@ -83,7 +83,7 @@ const AddProject = ({match}) => {
                 </div>
 
                 <div className="form-field">
-                    <label>Клиент</label>
+                    <label>Client</label>
                     <select
                         onChange={(e) => setClientId(e.target.value)}
                         required
@@ -97,7 +97,7 @@ const AddProject = ({match}) => {
                     {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
-                <button className="add" type="submit">Редактирай</button>
+                <button className="add" type="submit">Edit</button>
 
             </form>
         </>
