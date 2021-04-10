@@ -73,7 +73,8 @@ const EditTask = ({match}) => {
             clientId,
             projectId,
             startDate,
-            endDate
+            endDate,
+            responsible: peopleResponsible
         };
 
         const requestOptions = {

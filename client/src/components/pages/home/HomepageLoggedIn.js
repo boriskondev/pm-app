@@ -46,7 +46,6 @@ class HomepageLoggedIn extends Component {
 
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
-                {/*{ this.state.user && (<h1>{this.state.user.username}</h1>) }*/}
                 <section className="weekly-overview">
                     <table>
                         <thead>
@@ -57,9 +56,6 @@ class HomepageLoggedIn extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {/*{!this.state.usersData && (*/}
-                        {/*    <p>Малко търпение :)</p>*/}
-                        {/*)}*/}
                         {this.state.users && this.state.activeTasks.length > 0 && (
                             this.state.users.map(user => (
                                 this.countTasksOfUser(user._id, this.state.activeTasks) > 0

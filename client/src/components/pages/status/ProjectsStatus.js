@@ -112,7 +112,7 @@ class ProjectsStatus extends Component {
 
                         {this.state.activeTasks.length === 0 && (
                             <div className="message">
-                                <p>There are not task added yet :/</p>
+                                <p>There are no tasks added yet :/</p>
                             </div>
                         )}
 

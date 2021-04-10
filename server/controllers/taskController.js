@@ -153,7 +153,7 @@ const taskController = {
 
     edit: async (req, res) => {
         try {
-            const {taskName, clientId, projectId, startDate, endDate} = req.body;
+            const {taskName, clientId, projectId, startDate, endDate, responsible} = req.body;
             const id = req.params.id;
             const updatedTask = await Task.findByIdAndUpdate(id, {
                 "$set": {
@@ -161,7 +161,8 @@ const taskController = {
                     clientId,
                     projectId,
                     startDate,
-                    endDate
+                    endDate,
+                    responsible
                 }
             });
             res.status(200).json(updatedTask);
