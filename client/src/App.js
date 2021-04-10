@@ -23,6 +23,8 @@ import EditTask from "./components/pages/edit/EditTask";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
+import PageNotFound from "./components/common/PageNotFound";
+
 import {useContext} from "react";
 import AuthContext from "./context/AuthContext";
 
@@ -34,7 +36,7 @@ function App() {
 
             <Navigation/>
 
-            { loggedIn === false && (
+            {loggedIn === false && (
                 <Main>
                     <Switch>
                         <Route path="/" exact component={HomepageGuest}/>
@@ -45,7 +47,7 @@ function App() {
             )
             }
 
-            { loggedIn === true && (
+            {loggedIn === true && (
                 <Main>
                     <Switch>
                         <Route path="/" exact component={HomepageLoggedIn}/>
@@ -59,10 +61,10 @@ function App() {
                         <Route path="/add-task" exact component={AddTask}/>
                         <Route path="/register" exact component={Register}/>
                         <Route path="/login" exact component={Login}/>
-                        <Route render={() => <p>Page not found!</p>}/>
+                        <Route component={PageNotFound}/>
                     </Switch>
                 </Main>
-            ) }
+            )}
 
 
             <Footer/>

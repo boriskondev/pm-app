@@ -2,7 +2,7 @@ import {createContext, useEffect, useState} from "react";
 import endpoints from "../services/api";
 import axios from "axios";
 
-const AuthContext = createContext(undefined);
+const AuthContext = createContext(false);
 
 const AuthContextProvider = (props) => {
     const [loggedIn, setLoggedIn] = useState();
