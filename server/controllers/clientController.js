@@ -40,7 +40,7 @@ const clientController = {
             const id = req.params.id;
             const foundClient = await Client
                 .findById(id)
-                .select({"clientName": 1, "_id": 1})
+                .select({"clientName": 1, "_id": 1, "createdBy": 1})
                 .populate({
                     path: "projects"
                 });

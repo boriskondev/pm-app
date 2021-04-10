@@ -19,7 +19,12 @@ const EditClient = ({match}) => {
     useEffect(() => {
         fetch(endpoints.CLIENTS + `/${id}`)
             .then(response => response.json())
-            .then(data => setClientName(data.clientName));
+            .then(data => {
+                setClientName(data.clientName)
+                console.log(data)
+                console.log(loggedUser)
+                setFieldsetDisplay(data.createdBy !== loggedUser.userId);
+            });
     }, []);
 
     const handleSubmit = async (e) => {
