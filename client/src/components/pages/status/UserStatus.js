@@ -55,12 +55,10 @@ const UserStatus = ({match}) => {
             <section className="user-weekly-info">
 
                 {tasksOfUser.length === 0 && (
-                    <p>This user has 0 tasks for now.</p>
+                    <p style={{padding: "120px", textAlign: "center", fontSize: "16px", backgroundColor: "white"}}>
+                        The user has 0 tasks. You can add tasks <Link><span style={{fontWeight: "bold"}}>here</span></Link>.
+                    </p>
                 )}
-
-                {/*{!tasksOfUser && (*/}
-                {/*    <p>The information is loading...</p>*/}
-                {/*)}*/}
 
                 {tasksOfUser.length > 0 && (
                     <table>
