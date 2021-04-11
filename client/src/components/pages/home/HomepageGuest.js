@@ -10,8 +10,9 @@ class HomepageGuest extends Component {
             <>
                 <Header title="Welcome to Mtest 3.0"/>
                 <section className="guest-home">
-                    <p>You need to <Link to="/register"><span>register</span></Link> first in order to use the platform
-                    or <Link to="/login"><span>log in </span></Link> to your account to proceed.</p>
+                    <p>You need to
+                        <Link to="/register">&nbsp;<span>register</span></Link>&nbsp;first in order to use the platform.</p>
+                    <p>Or <Link to="/login"><span>log in</span></Link>&nbsp;to your account to proceed.</p>
                 </section>
             </>
         )
