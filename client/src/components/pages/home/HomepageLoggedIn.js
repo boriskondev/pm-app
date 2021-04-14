@@ -5,13 +5,15 @@ import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
 import countTasksOfUser from "../../../utils/countTasksOfUser";
 import departmentsIcons from "../../../utils/departmentsIcons";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 class HomepageLoggedIn extends Component {
     constructor() {
         super();
         this.state = {
             users: "",
-            activeTasks: ""
+            activeTasks: "",
+            isLoading: true
         }
     }
 
@@ -23,14 +25,24 @@ class HomepageLoggedIn extends Component {
             this.setState({
                 users: allUsersInDB,
                 activeTasks: allTasksInDB,
+                isLoading: false
             });
         })
     }
 
     render() {
 
-        return (
+        if (this.state.isLoading) {
+            return (
+                <>
+                    <Link to="/weekly-status"><Header title="Overview"/></Link>
+                    <LoadingIndicator />
+                </>
 
+            )
+        }
+
+        return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
                 <section className="weekly-overview">

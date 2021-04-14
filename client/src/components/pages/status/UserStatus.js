@@ -5,18 +5,23 @@ import "./UserStatus.css";
 import {Link} from "react-router-dom";
 import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
-import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClientAndProject"
+import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClientAndProject";
+import LoadingIndicator from "../../common/LoadingIndicator"
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
     const { loggedUser } = useContext(AuthContext);
 
     const [tasksOfUser, setTasksOfUser] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch(endpoints.TASKS_RESPONSIBLE + `/${id}`)
             .then(response => response.json())
-            .then(data => setTasksOfUser(sortUserTasksByClientAndProject(data)));
+            .then(data => {
+                setTasksOfUser(sortUserTasksByClientAndProject(data));
+                setIsLoading(false)
+            });
     }, []);
 
     const handleDelete = async (id) => {
@@ -46,11 +51,11 @@ const UserStatus = ({match}) => {
 
             <section className="user-weekly-info">
 
-                {tasksOfUser.length === 0 && (
-                    <p style={{padding: "120px", textAlign: "center", fontSize: "16px", backgroundColor: "white"}}>
-                        The user has 0 tasks. You can add tasks <Link><span style={{fontWeight: "bold"}}>here</span></Link>.
-                    </p>
+                {isLoading && (
+                    <LoadingIndicator/>
                 )}
+
+
 
                 {tasksOfUser.length > 0 && (
                     <table>
@@ -94,6 +99,12 @@ const UserStatus = ({match}) => {
 
                         </tbody>
                     </table>
+                )}
+
+                {tasksOfUser.length === 0 && !isLoading && (
+                    <p style={{padding: "120px", textAlign: "center", fontSize: "16px", backgroundColor: "white"}}>
+                        The user has 0 tasks. You can add tasks <Link><span style={{fontWeight: "bold"}}>here</span></Link>.
+                    </p>
                 )}
             </section>
 
