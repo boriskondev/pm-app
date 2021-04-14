@@ -2,8 +2,9 @@ import {Component} from "react";
 import "./HomepageLoggedIn.css";
 import Header from "../../common/Header";
 import {Link} from "react-router-dom";
-import {MdEmail as Email, MdPalette as Palette, MdAssessment as Assessment, MdSort as Sort} from "react-icons/md";
 import endpoints from "../../../services/api";
+import countTasksOfUser from "../../../utils/countTasksOfUser";
+import departmentsIcons from "../../../utils/departmentsIcons";
 
 class HomepageLoggedIn extends Component {
     constructor() {
@@ -26,21 +27,7 @@ class HomepageLoggedIn extends Component {
         })
     }
 
-    countTasksOfUser(id, tasks) {
-        const result = tasks.filter(task => {
-            return task.responsible.some(({_id}) => _id === id);
-        });
-        return result.length;
-    }
-
     render() {
-
-        const icons = {
-            management: <Assessment size={25}/>,
-            creative: <Palette size={25}/>,
-            clientService: <Email size={25}/>,
-            sort: <Sort size={20}/>
-        }
 
         return (
 
@@ -50,22 +37,22 @@ class HomepageLoggedIn extends Component {
                     <table>
                         <thead>
                         <tr>
-                            <th>{icons.sort}</th>
+                            <th>{departmentsIcons.sort}</th>
                             <th>Tasks</th>
-                            <th>{icons.sort}</th>
+                            <th>{departmentsIcons.sort}</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.users && this.state.activeTasks.length > 0 && (
                             this.state.users.map(user => (
-                                this.countTasksOfUser(user._id, this.state.activeTasks) > 0
+                                countTasksOfUser(user._id, this.state.activeTasks) > 0
                                     ? (
                                         <tr key={user._id}>
                                             <td><Link
                                                 to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
                                             </td>
-                                            <td>{this.countTasksOfUser(user._id, this.state.activeTasks)}</td>
-                                            <td className="icon">{icons[user.department]}</td>
+                                            <td>{countTasksOfUser(user._id, this.state.activeTasks)}</td>
+                                            <td className="icon">{departmentsIcons[user.department]}</td>
                                         </tr>
                                     )
                                     : null

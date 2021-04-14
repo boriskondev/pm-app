@@ -4,6 +4,7 @@ import Header from "../../common/Header";
 import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
+import filterClientsAndProjects from "../../../utils/filterClientsAndProjects";
 
 class ProjectsStatus extends Component {
     constructor() {
@@ -23,34 +24,10 @@ class ProjectsStatus extends Component {
             .then(response => response.json())
             .then(data => {
                 this.setState(() => ({
-                    weeklyData: this.filterClientsAndProjects(data),
+                    weeklyData: filterClientsAndProjects(data),
                     activeTasks: data,
                 }));
             })
-    }
-
-    filterClientsAndProjects(data) {
-        let newArr = []
-        for (let task of data) {
-            let client = task.clientId.clientName;
-            let clientId = task.clientId._id;
-            let project = task.projectId.projectName;
-            let projectId = task.projectId._id;
-
-            let clientFound = newArr.filter(client => client._id === clientId)[0];
-
-            if (!clientFound) {
-                newArr.push({ clientName: client,  _id: clientId,
-                    projects: [{ projectName: project,  _id: projectId }] })
-
-            } else {
-                let projectFound = clientFound.projects.filter(project => project._id === projectId)[0];
-                if (!projectFound) {
-                    clientFound.projects.push({ projectName: project,  _id: projectId })
-                }
-            }
-        }
-        return newArr;
     }
 
     handleAccordionClick(e) {

@@ -1,18 +1,14 @@
 import {Component} from "react";
 import "./ProjectData.css";
+import editDate from "../../../utils/editDate";
+import filterByStatus from "../../../utils/filterByStatus";
 
 class ProjectData extends Component {
 
-    editDate(date) {
-        let [ year, month, day ] = date.slice(0, 10).split("-");
-        return `${day}.${month}.${year}`
-    }
-
-    filterProjects(data) {
-        return data.tasks.filter(task => task.status === "active");
-    }
-
     render() {
+
+        const status = "active";
+
         return (
             <>
                 {!this.props.clickedProjectData && (
@@ -33,7 +29,7 @@ class ProjectData extends Component {
                             </thead>
                             <tbody>
 
-                            {this.filterProjects(this.props.clickedProjectData).map(task => (
+                            {filterByStatus(this.props.clickedProjectData, status).map(task => (
                                 <tr key={task._id}>
                                     <td>{task.taskName}</td>
                                     <td>
@@ -45,7 +41,7 @@ class ProjectData extends Component {
                                             ))}
                                         </ul>
                                     </td>
-                                    <td>{this.editDate(task.startDate)} - {this.editDate(task.endDate)}</td>
+                                    <td>{editDate(task.startDate)} - {editDate(task.endDate)}</td>
                                     <td>{task.status}</td>
                                 </tr>
                             ))}

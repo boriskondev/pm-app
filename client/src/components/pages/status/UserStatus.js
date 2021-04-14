@@ -5,6 +5,7 @@ import "./UserStatus.css";
 import {Link} from "react-router-dom";
 import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
+import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClientAndProject"
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
@@ -17,15 +18,6 @@ const UserStatus = ({match}) => {
             .then(response => response.json())
             .then(data => setTasksOfUser(sortUserTasksByClientAndProject(data)));
     }, []);
-
-    const sortUserTasksByClientAndProject = (data) => {
-        data.sort((a, b) =>
-            (a.clientId.clientName > b.clientId.clientName)
-                ? 1 : (a.clientId.clientName === b.clientId.clientName)
-                ? ((a.projectId.projectName > b.projectId.projectName)
-                    ? 1 : -1) : -1)
-        return data;
-    }
 
     const handleDelete = async (id) => {
         const requestOptions = {
