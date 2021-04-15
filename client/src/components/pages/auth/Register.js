@@ -29,6 +29,23 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!state.username || !state.department || !state.email ||
+            !state.password || !state.repeatPassword) {
+            setError("All fields are required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
+        if (state.password !== state.repeatPassword) {
+            setError("Passwords do not match.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const {username, department, email, password, repeatPassword} = state;
 
         const newUserToAdd = {
@@ -84,7 +101,6 @@ const Register = () => {
                         onChange={handleFieldChange}
                         autoComplete="off"
                         autoFocus
-                        required
                     />
                 </div>
 
@@ -95,7 +111,6 @@ const Register = () => {
                         value={state.department}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     >
                         <option hidden>Choose department</option>
                         <option value="clientService">Client service department</option>
@@ -112,7 +127,6 @@ const Register = () => {
                         value={state.email}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     />
                 </div>
 
@@ -124,7 +138,6 @@ const Register = () => {
                         value={state.password}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     />
                 </div>
 
@@ -136,7 +149,6 @@ const Register = () => {
                         value={state.repeatPassword}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     />
                     {submitted && (<span className="success">{submitted}</span>)}
                     {error && (<span className="error">{error}</span>)}

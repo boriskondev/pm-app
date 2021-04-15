@@ -11,7 +11,7 @@ const AddTask = () => {
     const {loggedUser} = useContext(AuthContext);
 
     const [submitted, setSubmitted] = useState(false);
-    // const [error, setError] = useState(false);
+    const [error, setError] = useState(false);
 
     const [taskName, setTaskName] = useState("");
     const [clientsOptions, setClientsOptions] = useState("");
@@ -52,6 +52,14 @@ const AddTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!taskName || !clientId || !projectId || !startDate || !endDate || !peopleResponsible) {
+            setError("All fields are required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const newTaskToAdd = {
             taskName,
             createdBy: loggedUser.userId,
@@ -64,7 +72,7 @@ const AddTask = () => {
 
         fetchWrapper.post(endpoints.TASKS, newTaskToAdd)
             .then(() => {
-                setSubmitted(true);
+                setSubmitted(`${taskName} added successfully.`);
                 setTimeout(() => {
                     history.push("/")
                 }, 1500);
@@ -86,7 +94,6 @@ const AddTask = () => {
                             onChange={(e) => setTaskName(e.target.value)}
                             autoComplete="off"
                             autoFocus
-                            required
                         />
                     </div>
 
@@ -94,7 +101,6 @@ const AddTask = () => {
                         <label>Client</label>
                         <select
                             onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
-                            required
                         >
                             <option hidden>Choose client</option>
 
@@ -109,7 +115,6 @@ const AddTask = () => {
                         <label>Project</label>
                         <select
                             onChange={(e) => setProjectId(e.target.value)}
-                            required
                         >
 
                             <option hidden="hidden">Choose project</option>
@@ -127,13 +132,11 @@ const AddTask = () => {
                             <input
                                 type="date"
                                 onChange={(e) => setStartDate(e.target.value)}
-                                required
                             />
                             <span>-</span>
                             <input
                                 type="date"
                                 onChange={(e) => setEndDate(e.target.value)}
-                                required
                             />
                         </div>
                     </div>
@@ -144,7 +147,6 @@ const AddTask = () => {
                             onClick={(e) => handleResponsibleOptionsClick(e)}
                             size={responsibleOptions.length}
                             multiple
-                            required
                         >
 
                             {responsibleOptions && responsibleOptions.map(option => (
@@ -157,8 +159,8 @@ const AddTask = () => {
                             ))}
 
                         </select>
-                        {submitted && (<span className="success">{taskName} added successfully.</span>)}
-                        {/*{error && (<span className="error">{clientName} is already registered.</span>)}*/}
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
                     </div>
 
                 </fieldset>

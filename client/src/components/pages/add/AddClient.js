@@ -17,13 +17,21 @@ const AddClient = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!clientName) {
+            setError("The field is required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const newClientToAdd = {clientName, createdBy: loggedUser.userId};
 
         const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
-                setError(true);
+                setError(`${clientName} is already registered.`);
                 setTimeout(() => {
                     setError(false);
                 }, 1500);
@@ -55,10 +63,9 @@ const AddClient = () => {
                         onChange={(e) => setClientName(e.target.value)}
                         autoComplete="off"
                         autoFocus
-                        required
                     />
                     {submitted && (<span className="success">{clientName} added successfully.</span>)}
-                    {error && (<span className="error">{clientName} is already registered.</span>)}
+                    {error && (<span className="error">{error}</span>)}
                 </div>
 
                 <button className="add">Add</button>

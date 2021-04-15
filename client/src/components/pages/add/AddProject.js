@@ -25,13 +25,21 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!projectName || !clientId) {
+            setError("All fields are required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const newProjectToAdd = {projectName, clientId, createdBy: loggedUser.userId};
 
         const selectedClient = await fetchWrapper.get(endpoints.CLIENTS + `/${clientId}`);
 
         for (let project of selectedClient.projects) {
             if (project.projectName === projectName) {
-                setError(true);
+                setError(`${projectName} is already registered.`);
                 setTimeout(() => {
                     setError(false);
                 }, 1500);
@@ -41,7 +49,7 @@ const AddProject = () => {
 
         fetchWrapper.post(endpoints.PROJECTS, newProjectToAdd)
             .then(() => {
-                setSubmitted(true);
+                setSubmitted(`${projectName} added successfully.`);
                 setTimeout(() => {
                     history.push("/")
                 }, 1500);
@@ -62,7 +70,6 @@ const AddProject = () => {
                         onChange={(e) => setProjectName(e.target.value)}
                         autoComplete="off"
                         autoFocus
-                        required
                     />
                 </div>
 
@@ -70,15 +77,14 @@ const AddProject = () => {
                     <label>Client</label>
                     <select
                         onChange={(e) => setClientId(e.target.value)}
-                        required
                     >
                         <option hidden>Choose client</option>
                         {clientsOptions && clientsOptions.map(option => (
                             <option key={option._id} value={option._id}>{option.clientName}</option>
                         ))}
                     </select>
-                    {submitted && (<span className="success">{projectName} added successfully.</span>)}
-                    {error && (<span className="error">{projectName} is already registered.</span>)}
+                    {submitted && (<span className="success">{submitted}</span>)}
+                    {error && (<span className="error">{error}</span>)}
                 </div>
 
                 <button className="add" type="submit">Add</button>

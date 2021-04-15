@@ -28,6 +28,14 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!state.email || !state.password) {
+            setError("All fields are required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const { email, password } = state;
 
         const userToLogin = {
@@ -79,7 +87,6 @@ const Login = () => {
                         value={state.email}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     />
                 </div>
 
@@ -91,7 +98,6 @@ const Login = () => {
                         value={state.password}
                         onChange={handleFieldChange}
                         autoComplete="off"
-                        required
                     />
                     {submitted && (<span className="success">{submitted}</span>)}
                     {error && (<span className="error">{error}</span>)}
