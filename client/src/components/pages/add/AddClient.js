@@ -1,13 +1,13 @@
 import Header from "../../common/Header";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
-import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const AddClient = () => {
     const history = useHistory();
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
@@ -19,32 +19,26 @@ const AddClient = () => {
 
         const newClientToAdd = {clientName, createdBy: loggedUser.userId};
 
-        const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
+        const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
                 setError(true);
                 setTimeout(() => {
-                    window.location.reload()
-                }, 1500)
+                    setError(false);
+                }, 1500);
                 return;
             }
         }
 
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newClientToAdd)
-        };
-
-        fetch(endpoints.CLIENTS, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.post(endpoints.CLIENTS, newClientToAdd)
+            .then((res) => res)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
                     history.push("/")
                 }, 1500);
-            })
+            });
     }
 
     return (

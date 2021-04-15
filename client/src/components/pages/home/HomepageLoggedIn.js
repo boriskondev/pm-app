@@ -6,6 +6,7 @@ import endpoints from "../../../services/api";
 import countTasksOfUser from "../../../utils/countTasksOfUser";
 import departmentsIcons from "../../../utils/departmentsIcons";
 import LoadingIndicator from "../../common/LoadingIndicator";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 class HomepageLoggedIn extends Component {
     constructor() {
@@ -19,8 +20,8 @@ class HomepageLoggedIn extends Component {
 
     async componentDidMount() {
         Promise.all([
-            fetch(endpoints.USERS).then(response => response.json()),
-            fetch(endpoints.TASKS).then(response => response.json())
+            fetchWrapper.get(endpoints.USERS),
+            fetchWrapper.get(endpoints.TASKS)
         ]).then(([allUsersInDB, allTasksInDB]) => {
             this.setState({
                 users: allUsersInDB,

@@ -1,14 +1,14 @@
 import Header from "../../common/Header";
 import "../add/AddTask.css";
-import {useState, useEffect} from "react";
-import endpoints from "../../../services/api";
+import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
+import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
-import {useContext} from "react";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const EditTask = ({match}) => {
     const {id} = match.params;
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
@@ -33,9 +33,9 @@ const EditTask = ({match}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
-            const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json());
-            const taskData = await fetch(endpoints.TASKS + `/${id}`).then(response => response.json());
+            const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
+            const allUsersInDB = await fetchWrapper.get(endpoints.USERS);
+            const taskData = await fetchWrapper.get(endpoints.TASKS + `/${id}`);
 
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
@@ -77,14 +77,7 @@ const EditTask = ({match}) => {
             responsible: peopleResponsible
         };
 
-        const requestOptions = {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(taskToUpdate)
-        };
-
-        fetch(endpoints.TASKS + `/${id}`, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.put(endpoints.TASKS + `/${id}`, taskToUpdate)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
@@ -183,9 +176,9 @@ const EditTask = ({match}) => {
 
                 </fieldset>
 
-                { isNotCreator === false && (
+                {isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
-                ) }
+                )}
 
             </form>
         </>

@@ -1,14 +1,14 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
-import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const AddProject = () => {
     const history = useHistory();
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
@@ -18,8 +18,7 @@ const AddProject = () => {
     const [clientsOptions, setClientsOptions] = useState("");
 
     useEffect(() => {
-        fetch(endpoints.CLIENTS)
-            .then(response => response.json())
+        fetchWrapper.get(endpoints.CLIENTS)
             .then(data => setClientsOptions(data));
     }, []);
 
@@ -28,27 +27,19 @@ const AddProject = () => {
 
         const newProjectToAdd = {projectName, clientId, createdBy: loggedUser.userId};
 
-        const selectedClient = await fetch(endpoints.CLIENTS + `/${clientId}`)
-            .then(response => response.json());
+        const selectedClient = await fetchWrapper.get(endpoints.CLIENTS + `/${clientId}`);
 
         for (let project of selectedClient.projects) {
             if (project.projectName === projectName) {
                 setError(true);
                 setTimeout(() => {
-                    window.location.reload()
-                }, 1500)
+                    setError(false);
+                }, 1500);
                 return;
             }
         }
 
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newProjectToAdd)
-        };
-
-        fetch(endpoints.PROJECTS, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.post(endpoints.PROJECTS, newProjectToAdd)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {

@@ -1,13 +1,13 @@
 import Header from "../../common/Header";
-import {useState, useEffect} from "react";
-import endpoints from "../../../services/api";
+import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
+import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
-import {useContext} from "react";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const AddProject = ({match}) => {
     const {id} = match.params;
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
@@ -22,8 +22,8 @@ const AddProject = ({match}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const currentProjectData = await fetch(endpoints.PROJECTS + `/${id}`).then(response => response.json());
-            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
+            const currentProjectData = await fetchWrapper.get(endpoints.PROJECTS + `/${id}`);
+            const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
 
             setProjectName(currentProjectData.projectName);
             setClientName(currentProjectData.clientId.clientName);
@@ -41,27 +41,19 @@ const AddProject = ({match}) => {
 
         const projectToUpdate = {projectName, clientId};
 
-        const selectedClient = await fetch(endpoints.CLIENTS + `/${clientId}`)
-            .then(response => response.json());
+        const selectedClient = await fetchWrapper.get(endpoints.CLIENTS + `/${clientId}`);
 
         for (let project of selectedClient.projects) {
             if (project.projectName === projectName) {
                 setError(true);
                 setTimeout(() => {
-                    window.location.reload()
-                }, 1500)
+                    setError(false);
+                }, 1500);
                 return;
             }
         }
 
-        const requestOptions = {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(projectToUpdate)
-        };
-
-        fetch(endpoints.PROJECTS + `/${id}`, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.put(endpoints.PROJECTS + `/${id}`, projectToUpdate)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
@@ -105,9 +97,9 @@ const AddProject = ({match}) => {
                     {error && (<span className="error">{projectName} is already registered.</span>)}
                 </div>
 
-                { isNotCreator === false && (
+                {isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
-                ) }
+                )}
 
             </form>
         </>

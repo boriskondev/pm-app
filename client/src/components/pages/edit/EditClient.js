@@ -4,10 +4,11 @@ import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import {useContext} from "react";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const EditClient = ({match}) => {
     const {id} = match.params;
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
@@ -18,10 +19,9 @@ const EditClient = ({match}) => {
     const [clientName, setClientName] = useState("");
 
     useEffect(() => {
-        fetch(endpoints.CLIENTS + `/${id}`)
-            .then(response => response.json())
+        fetchWrapper.get(endpoints.CLIENTS + `/${id}`)
             .then(data => {
-                setClientName(data.clientName)
+                setClientName(data.clientName);
                 setIsNotCreator(data.createdBy !== loggedUser.userId);
             });
     }, []);
@@ -31,26 +31,19 @@ const EditClient = ({match}) => {
 
         const clientToUpdate = {clientName};
 
-        const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
+        const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
                 setError(true);
                 setTimeout(() => {
-                    window.location.reload()
-                }, 1500)
+                    setError(false);
+                }, 1500);
                 return;
             }
         }
 
-        const requestOptions = {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(clientToUpdate)
-        };
-
-        fetch(endpoints.CLIENTS + `/${id}`, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.put(endpoints.CLIENTS + `/${id}`, clientToUpdate)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
@@ -80,9 +73,9 @@ const EditClient = ({match}) => {
                     </div>
                 </fieldset>
 
-                { isNotCreator === false && (
+                {isNotCreator === false && (
                     <button className="add" type="submit">Edit</button>
-                ) }
+                )}
 
             </form>
         </>

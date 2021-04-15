@@ -5,6 +5,7 @@ import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 import filterClientsAndProjects from "../../../utils/filterClientsAndProjects";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 class ProjectsStatus extends Component {
     constructor() {
@@ -19,9 +20,8 @@ class ProjectsStatus extends Component {
         }
     }
 
-    async componentDidMount() {
-        await fetch(endpoints.TASKS)
-            .then(response => response.json())
+    componentDidMount() {
+        fetchWrapper.get(endpoints.TASKS)
             .then(data => {
                 this.setState(() => ({
                     weeklyData: filterClientsAndProjects(data),
@@ -41,9 +41,8 @@ class ProjectsStatus extends Component {
         }
     }
 
-    async handlePanelClick(e, id) {
-        await fetch(endpoints.PROJECTS + `/${id}`)
-            .then(response => response.json())
+    handlePanelClick(e, id) {
+        fetchWrapper.get(endpoints.PROJECTS + `/${id}`)
             .then(data => {
                 this.setState(() => ({
                     projectNotClicked: false,

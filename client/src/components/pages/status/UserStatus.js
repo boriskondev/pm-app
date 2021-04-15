@@ -1,12 +1,12 @@
 import Header from "../../common/Header";
-import {useState, useEffect} from "react";
-import endpoints from "../../../services/api";
 import "./UserStatus.css";
+import {useState, useEffect, useContext} from "react";
+import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
-import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
 import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClientAndProject";
-import LoadingIndicator from "../../common/LoadingIndicator"
+import LoadingIndicator from "../../common/LoadingIndicator";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
@@ -16,8 +16,7 @@ const UserStatus = ({match}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch(endpoints.TASKS_RESPONSIBLE + `/${id}`)
-            .then(response => response.json())
+        fetchWrapper.get(endpoints.TASKS_RESPONSIBLE + `/${id}`)
             .then(data => {
                 setTasksOfUser(sortUserTasksByClientAndProject(data));
                 setIsLoading(false)
@@ -25,22 +24,12 @@ const UserStatus = ({match}) => {
     }, []);
 
     const handleDelete = async (id) => {
-        const requestOptions = {
-            method: "DELETE"
-        };
-
-        fetch(endpoints.TASKS + `/${id}`, requestOptions)
-            .then(res => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
+        fetchWrapper._delete(endpoints.TASKS + `/${id}`)
+            .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
 
     const handleComplete = async (id) => {
-        const requestOptions = {
-            method: "PATCH",
-            headers: {"Content-type": "application/json"}
-        };
-
-        fetch(endpoints.TASKS + `/${id}`, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.patch(endpoints.TASKS + `/${id}`)
             .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
 
@@ -54,8 +43,6 @@ const UserStatus = ({match}) => {
                 {isLoading && (
                     <LoadingIndicator/>
                 )}
-
-
 
                 {tasksOfUser.length > 0 && (
                     <table>

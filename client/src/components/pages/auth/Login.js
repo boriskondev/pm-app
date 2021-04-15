@@ -6,9 +6,14 @@ import endpoints from "../../../services/api";
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const Login = () => {
     const history = useHistory();
+
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
     const { getLoggedIn } = useContext(AuthContext);
     const [state, setState] = useState({
         email: "",
@@ -30,6 +35,18 @@ const Login = () => {
             password
         };
 
+        const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
+
+        const alreadyRegistered = allUsersInDb.find(user => user.email === email);
+
+        if (!alreadyRegistered) {
+            setError("This user is not registered yet.")
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -38,10 +55,12 @@ const Login = () => {
         };
 
         fetch(endpoints.LOGIN, requestOptions)
-            .then(res => res)
-            .then(() => getLoggedIn())
             .then(() => {
-                history.push("/")
+                setSubmitted("User logged in successfully.")
+                setTimeout(() => {
+                    getLoggedIn()
+                    history.push("/")
+                }, 1500);
             })
             .catch(err => console.log("In catch" + err))
     }
@@ -74,6 +93,8 @@ const Login = () => {
                         autoComplete="off"
                         required
                     />
+                    {submitted && (<span className="success">{submitted}</span>)}
+                    {error && (<span className="error">{error}</span>)}
                 </div>
 
                 <button className="add" type="submit">Submit</button>

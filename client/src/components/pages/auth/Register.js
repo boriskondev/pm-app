@@ -1,15 +1,18 @@
 import Header from "../../common/Header";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import "./Register.css";
-import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
-import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import {Link, useHistory} from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const Register = () => {
     const history = useHistory();
-    const { getLoggedIn } = useContext(AuthContext);
+    const {getLoggedIn} = useContext(AuthContext);
+
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
     const [state, setState] = useState({
         username: "",
         department: "",
@@ -26,7 +29,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { username, department, email, password, repeatPassword } = state;
+        const {username, department, email, password, repeatPassword} = state;
 
         const newUserToAdd = {
             username,
@@ -36,6 +39,18 @@ const Register = () => {
             repeatPassword
         };
 
+        const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
+
+        for (let user of allUsersInDb) {
+            if (user.email === email) {
+                setError("This user is already registered.")
+                setTimeout(() => {
+                    setError(false);
+                }, 1500);
+                return;
+            }
+        }
+
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -44,10 +59,12 @@ const Register = () => {
         };
 
         fetch(endpoints.REGISTER, requestOptions)
-            .then(res => res)
-            .then(() => getLoggedIn())
             .then(() => {
-                history.push("/")
+                setSubmitted("User registered successfully.")
+                setTimeout(() => {
+                    getLoggedIn()
+                    history.push("/")
+                }, 1500);
             })
             .catch(err => console.log("In catch" + err));
     }
@@ -121,8 +138,9 @@ const Register = () => {
                         autoComplete="off"
                         required
                     />
+                    {submitted && (<span className="success">{submitted}</span>)}
+                    {error && (<span className="error">{error}</span>)}
                 </div>
-
 
                 <button className="add" type="submit">Submit</button>
 

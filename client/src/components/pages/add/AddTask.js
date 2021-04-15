@@ -1,14 +1,14 @@
 import Header from "../../common/Header";
 import "./AddTask.css";
-import {useState, useEffect} from "react";
-import endpoints from "../../../services/api";
+import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
-import {useContext} from "react";
+import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
+import fetchWrapper from "../../../services/fetchWrapper";
 
 const AddTask = () => {
     const history = useHistory();
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const [submitted, setSubmitted] = useState(false);
     // const [error, setError] = useState(false);
@@ -25,8 +25,8 @@ const AddTask = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allClientsInDB = await fetch(endpoints.CLIENTS).then(response => response.json());
-            const allUsersInDB = await fetch(endpoints.USERS).then(response => response.json());
+            const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
+            const allUsersInDB = await fetchWrapper.get(endpoints.USERS);
 
             setClientsOptions(allClientsInDB);
             setResponsibleOptions(allUsersInDB);
@@ -62,14 +62,7 @@ const AddTask = () => {
             responsible: peopleResponsible
         };
 
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newTaskToAdd)
-        };
-
-        fetch(endpoints.TASKS, requestOptions)
-            .then(res => res.json())
+        fetchWrapper.post(endpoints.TASKS, newTaskToAdd)
             .then(() => {
                 setSubmitted(true);
                 setTimeout(() => {
@@ -82,9 +75,9 @@ const AddTask = () => {
         <>
             <Header title="Add task"/>
 
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit}>
                 <fieldset disabled={false}>
-                {/*<fieldset disabled={false}>*/}
+                    {/*<fieldset disabled={false}>*/}
                     <div className="form-field">
                         <label>Име</label>
                         <input
