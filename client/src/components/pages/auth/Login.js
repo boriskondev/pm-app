@@ -3,8 +3,8 @@ import {useState} from "react";
 import "./Register.css";
 import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
-import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import {useHistory} from "react-router-dom";
+import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
 import fetchWrapper from "../../../services/fetchWrapper";
 
@@ -14,7 +14,7 @@ const Login = () => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
-    const { getLoggedIn } = useContext(AuthContext);
+    const {getLoggedIn} = useContext(AuthContext);
     const [state, setState] = useState({
         email: "",
         password: ""
@@ -36,7 +36,7 @@ const Login = () => {
             return;
         }
 
-        const { email, password } = state;
+        const {email, password} = state;
 
         const userToLogin = {
             email,
@@ -77,37 +77,39 @@ const Login = () => {
         <>
             <Header title="Log in"/>
 
-            <form className="login" onSubmit={handleSubmit}>
+            <section className="form-wrapper">
+                <form className="login" onSubmit={handleSubmit}>
 
-                <div className="form-field">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={state.email}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    />
-                </div>
+                    <div className="form-field">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={state.email}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        />
+                    </div>
 
-                <div className="form-field">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={state.password}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    />
-                    {submitted && (<span className="success">{submitted}</span>)}
-                    {error && (<span className="error">{error}</span>)}
-                </div>
+                    <div className="form-field">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={state.password}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        />
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
+                    </div>
 
-                <button className="add" type="submit">Submit</button>
+                    <button className="add" type="submit">Submit</button>
 
-                <p>You don't have an account? Register <Link to="/register">here.</Link></p>
+                    <p>You don't have an account? Register <Link to="/register">here.</Link></p>
 
-            </form>
+                </form>
+            </section>
         </>
     )
 }

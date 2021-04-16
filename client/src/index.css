@@ -41,12 +41,19 @@ h2 {
     color: #303030;
 }
 
+.form-wrapper {
+    width: 100%;
+    background-color: white;
+}
+
 form {
     width: 600px;
-    margin: 0 auto 50px auto;
+    margin: 60px auto;
     text-align: center;
     background-color: white;
     padding: 20px 40px;
+    border: 2px solid #D62130;
+    border-radius: 4px;
 }
 
 form .form-field {
@@ -158,12 +165,14 @@ fieldset {
     display: block;
     color: #4BB543;
     position: relative;
-    top: 10px
+    top: 10px;
+    font-weight: bold;
 }
 
 .error {
     display: block;
     color: #D62130;
     position: relative;
-    top: 10px
+    top: 10px;
+    font-weight: bold;
 }

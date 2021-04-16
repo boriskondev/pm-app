@@ -53,24 +53,27 @@ const AddClient = () => {
         <>
             <Header title="Add client"/>
 
-            <form onSubmit={handleSubmit}>
+            <section className="form-wrapper">
+                <form onSubmit={handleSubmit}>
 
-                <div className="form-field">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                        autoComplete="off"
-                        autoFocus
-                    />
-                    {submitted && (<span className="success">{clientName} added successfully.</span>)}
-                    {error && (<span className="error">{error}</span>)}
-                </div>
+                    <div className="form-field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={clientName}
+                            onChange={(e) => setClientName(e.target.value)}
+                            autoComplete="off"
+                            autoFocus
+                        />
+                        {submitted && (<span className="success">{clientName} added successfully.</span>)}
+                        {error && (<span className="error">{error}</span>)}
+                    </div>
 
-                <button className="add">Add</button>
+                    <button className="add">Add</button>
 
-            </form>
+                </form>
+            </section>
+
         </>
     )
 }

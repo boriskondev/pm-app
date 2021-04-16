@@ -60,36 +60,37 @@ const AddProject = () => {
         <>
             <Header title="Add project"/>
 
-            <form onSubmit={handleSubmit}>
+            <section className="form-wrapper">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={projectName}
+                            onChange={(e) => setProjectName(e.target.value)}
+                            autoComplete="off"
+                            autoFocus
+                        />
+                    </div>
 
-                <div className="form-field">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
-                        autoComplete="off"
-                        autoFocus
-                    />
-                </div>
+                    <div className="form-field">
+                        <label>Client</label>
+                        <select
+                            onChange={(e) => setClientId(e.target.value)}
+                        >
+                            <option hidden>Choose client</option>
+                            {clientsOptions && clientsOptions.map(option => (
+                                <option key={option._id} value={option._id}>{option.clientName}</option>
+                            ))}
+                        </select>
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
+                    </div>
 
-                <div className="form-field">
-                    <label>Client</label>
-                    <select
-                        onChange={(e) => setClientId(e.target.value)}
-                    >
-                        <option hidden>Choose client</option>
-                        {clientsOptions && clientsOptions.map(option => (
-                            <option key={option._id} value={option._id}>{option.clientName}</option>
-                        ))}
-                    </select>
-                    {submitted && (<span className="success">{submitted}</span>)}
-                    {error && (<span className="error">{error}</span>)}
-                </div>
+                    <button className="add" type="submit">Add</button>
 
-                <button className="add" type="submit">Add</button>
-
-            </form>
+                </form>
+            </section>
         </>
     )
 }

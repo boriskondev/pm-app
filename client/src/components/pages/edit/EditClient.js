@@ -29,6 +29,14 @@ const EditClient = ({match}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!clientName) {
+            setError("The field is required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const clientToUpdate = {clientName};
 
         const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
@@ -37,7 +45,7 @@ const EditClient = ({match}) => {
             if (client.clientName === clientName) {
                 setError(true);
                 setTimeout(() => {
-                    setError(false);
+                    setError(`${clientName} is already registered.`);
                 }, 1500);
                 return;
             }
@@ -56,28 +64,30 @@ const EditClient = ({match}) => {
         <>
             <Header title="Edit client"/>
 
-            <form onSubmit={handleSubmit}>
-                <fieldset disabled={isNotCreator}>
-                    <div className="form-field">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            value={clientName}
-                            onChange={(e) => setClientName(e.target.value)}
-                            autoComplete="off"
-                            autoFocus
-                            required
-                        />
-                        {submitted && (<span className="success">Client edited successfully.</span>)}
-                        {error && (<span className="error">{clientName} is already registered.</span>)}
-                    </div>
-                </fieldset>
+            <section className="form-wrapper">
+                <form onSubmit={handleSubmit}>
+                    <fieldset disabled={isNotCreator}>
+                        <div className="form-field">
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                value={clientName}
+                                onChange={(e) => setClientName(e.target.value)}
+                                autoComplete="off"
+                                autoFocus
+                            />
+                            {submitted && (<span className="success">{submitted}</span>)}
+                            {error && (<span className="error">{error}</span>)}
+                        </div>
+                    </fieldset>
 
-                {isNotCreator === false && (
-                    <button className="add" type="submit">Edit</button>
-                )}
+                    {isNotCreator === false && (
+                        <button className="add" type="submit">Edit</button>
+                    )}
 
-            </form>
+                </form>
+            </section>
+
         </>
     )
 }

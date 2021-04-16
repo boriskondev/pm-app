@@ -50,13 +50,11 @@ The application allows you to:
 * See overall status of active tasks
 * See overall status of active tasks per user
 
-## Status (11.04.2021)
+## Status (16.04.2021)
 The project is currently under development with many important features to be implemented:
-* Improved authentication
 * Clients and projects deletion
 * Considerable code refactoring and improvements
 * Transforming class components into functional components
-* Better error handling
 * Miscellaneous UX tweaks
 * Deployment and real-life tests
 

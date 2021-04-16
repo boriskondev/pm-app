@@ -81,93 +81,97 @@ const AddTask = () => {
 
     return (
         <>
+            <section className="form-wrapper">
+            </section>
+
             <Header title="Add task"/>
 
-            <form onSubmit={handleSubmit}>
-                <fieldset disabled={false}>
-                    {/*<fieldset disabled={false}>*/}
-                    <div className="form-field">
-                        <label>Име</label>
-                        <input
-                            type="text"
-                            value={taskName}
-                            onChange={(e) => setTaskName(e.target.value)}
-                            autoComplete="off"
-                            autoFocus
-                        />
-                    </div>
-
-                    <div className="form-field">
-                        <label>Client</label>
-                        <select
-                            onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
-                        >
-                            <option hidden>Choose client</option>
-
-                            {clientsOptions && clientsOptions.map(client => (
-                                <option key={client._id} value={client._id}>{client.clientName}</option>
-                            ))}
-
-                        </select>
-                    </div>
-
-                    <div className="form-field">
-                        <label>Project</label>
-                        <select
-                            onChange={(e) => setProjectId(e.target.value)}
-                        >
-
-                            <option hidden="hidden">Choose project</option>
-
-                            {projectsOptions && projectsOptions.map(project => (
-                                <option key={project._id} value={project._id}>{project.projectName}</option>
-                            ))}
-
-                        </select>
-                    </div>
-
-                    <div className="form-field dates">
-                        <label>Term</label>
-                        <div id="task-term">
+            <section className="form-wrapper">
+                <form onSubmit={handleSubmit}>
+                    <fieldset disabled={false}>
+                        <div className="form-field">
+                            <label>Name</label>
                             <input
-                                type="date"
-                                onChange={(e) => setStartDate(e.target.value)}
-                            />
-                            <span>-</span>
-                            <input
-                                type="date"
-                                onChange={(e) => setEndDate(e.target.value)}
+                                type="text"
+                                value={taskName}
+                                onChange={(e) => setTaskName(e.target.value)}
+                                autoComplete="off"
+                                autoFocus
                             />
                         </div>
-                    </div>
 
-                    <div className="form-field">
-                        <label>People responsible</label>
-                        <select
-                            onClick={(e) => handleResponsibleOptionsClick(e)}
-                            size={responsibleOptions.length}
-                            multiple
-                        >
+                        <div className="form-field">
+                            <label>Client</label>
+                            <select
+                                onChange={(e) => handleClientDropdownClick(e, clientsOptions)}
+                            >
+                                <option hidden>Choose client</option>
 
-                            {responsibleOptions && responsibleOptions.map(option => (
-                                <option
-                                    key={option._id}
-                                    value={option._id}
-                                >
-                                    {option.username}
-                                </option>
-                            ))}
+                                {clientsOptions && clientsOptions.map(client => (
+                                    <option key={client._id} value={client._id}>{client.clientName}</option>
+                                ))}
 
-                        </select>
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
-                    </div>
+                            </select>
+                        </div>
 
-                </fieldset>
+                        <div className="form-field">
+                            <label>Project</label>
+                            <select
+                                onChange={(e) => setProjectId(e.target.value)}
+                            >
 
-                <button className="add" type="submit">Add</button>
+                                <option hidden="hidden">Choose project</option>
 
-            </form>
+                                {projectsOptions && projectsOptions.map(project => (
+                                    <option key={project._id} value={project._id}>{project.projectName}</option>
+                                ))}
+
+                            </select>
+                        </div>
+
+                        <div className="form-field dates">
+                            <label>Term</label>
+                            <div id="task-term">
+                                <input
+                                    type="date"
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                                <span>-</span>
+                                <input
+                                    type="date"
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-field">
+                            <label>People responsible</label>
+                            <select
+                                onClick={(e) => handleResponsibleOptionsClick(e)}
+                                size={responsibleOptions.length}
+                                multiple
+                            >
+
+                                {responsibleOptions && responsibleOptions.map(option => (
+                                    <option
+                                        key={option._id}
+                                        value={option._id}
+                                    >
+                                        {option.username}
+                                    </option>
+                                ))}
+
+                            </select>
+                            {submitted && (<span className="success">{submitted}</span>)}
+                            {error && (<span className="error">{error}</span>)}
+                        </div>
+
+                    </fieldset>
+
+                    <button className="add" type="submit">Add</button>
+
+                </form>
+            </section>
         </>
     )
 }

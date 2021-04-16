@@ -2,7 +2,8 @@ form.register p {
     margin: 10px 0;
 }
 
-form.register p a {
+form.register p a,
+form.login p a{
     color: #D62130;
     font-weight: bold;
 }

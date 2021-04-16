@@ -90,75 +90,78 @@ const Register = () => {
         <>
             <Header title="Registration"/>
 
-            <form className="register" onSubmit={handleSubmit}>
+            <section className="form-wrapper">
+                <form className="register" onSubmit={handleSubmit}>
 
-                <div className="form-field">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={state.username}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                        autoFocus
-                    />
-                </div>
+                    <div className="form-field">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            id="username"
+                            value={state.username}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                            autoFocus
+                        />
+                    </div>
 
-                <div className="form-field">
-                    <label>Department</label>
-                    <select
-                        id="department"
-                        value={state.department}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    >
-                        <option hidden>Choose department</option>
-                        <option value="clientService">Client service department</option>
-                        <option value="creative">Creative department</option>
-                        <option value="management">Management department</option>
-                    </select>
-                </div>
+                    <div className="form-field">
+                        <label>Department</label>
+                        <select
+                            id="department"
+                            value={state.department}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        >
+                            <option hidden>Choose department</option>
+                            <option value="clientService">Client service department</option>
+                            <option value="creative">Creative department</option>
+                            <option value="management">Management department</option>
+                        </select>
+                    </div>
 
-                <div className="form-field">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={state.email}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    />
-                </div>
+                    <div className="form-field">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={state.email}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        />
+                    </div>
 
-                <div className="form-field">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={state.password}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    />
-                </div>
+                    <div className="form-field">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={state.password}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        />
+                    </div>
 
-                <div className="form-field">
-                    <label>Repeat password</label>
-                    <input
-                        type="password"
-                        id="repeatPassword"
-                        value={state.repeatPassword}
-                        onChange={handleFieldChange}
-                        autoComplete="off"
-                    />
-                    {submitted && (<span className="success">{submitted}</span>)}
-                    {error && (<span className="error">{error}</span>)}
-                </div>
+                    <div className="form-field">
+                        <label>Repeat password</label>
+                        <input
+                            type="password"
+                            id="repeatPassword"
+                            value={state.repeatPassword}
+                            onChange={handleFieldChange}
+                            autoComplete="off"
+                        />
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
+                    </div>
 
-                <button className="add" type="submit">Submit</button>
+                    <button className="add" type="submit">Submit</button>
 
-                <p>You already have an account? Enter <Link to="/login">here.</Link></p>
+                    <p>You already have an account? Enter <Link to="/login">here.</Link></p>
 
-            </form>
+                </form>
+            </section>
+
         </>
     )
 }

@@ -39,13 +39,21 @@ const AddProject = ({match}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!projectName || !clientId) {
+            setError("All fields are required.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const projectToUpdate = {projectName, clientId};
 
         const selectedClient = await fetchWrapper.get(endpoints.CLIENTS + `/${clientId}`);
 
         for (let project of selectedClient.projects) {
             if (project.projectName === projectName) {
-                setError(true);
+                setError(`${projectName} is already registered.`);
                 setTimeout(() => {
                     setError(false);
                 }, 1500);
@@ -55,7 +63,7 @@ const AddProject = ({match}) => {
 
         fetchWrapper.put(endpoints.PROJECTS + `/${id}`, projectToUpdate)
             .then(() => {
-                setSubmitted(true);
+                setSubmitted(`${projectName} edited successfully.`);
                 setTimeout(() => {
                     history.goBack();
                 }, 1500);
@@ -66,42 +74,43 @@ const AddProject = ({match}) => {
         <>
             <Header title="Edit project"/>
 
-            <form onSubmit={handleSubmit}>
-                <fieldset disabled={isNotCreator}>
+            <section className="form-wrapper">
+                <form onSubmit={handleSubmit}>
+                    <fieldset disabled={isNotCreator}>
+                        <div className="form-field">
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                value={projectName}
+                                onChange={(e) => setProjectName(e.target.value)}
+                                autoComplete="off"
+                                autoFocus
+                            />
+                        </div>
+                    </fieldset>
+
+
                     <div className="form-field">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            value={projectName}
-                            onChange={(e) => setProjectName(e.target.value)}
-                            autoComplete="off"
-                            autoFocus
-                            required
-                        />
+                        <label>Client</label>
+                        <select
+                            onChange={(e) => setClientId(e.target.value)}
+                        >
+                            <option hidden>{clientName}</option>
+                            {clientsOptions && clientsOptions.map(option => (
+                                <option key={option._id} value={option._id}>{option.clientName}</option>
+                            ))}
+                        </select>
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
                     </div>
-                </fieldset>
 
+                    {isNotCreator === false && (
+                        <button className="add" type="submit">Edit</button>
+                    )}
 
-                <div className="form-field">
-                    <label>Client</label>
-                    <select
-                        onChange={(e) => setClientId(e.target.value)}
-                        required
-                    >
-                        <option hidden>{clientName}</option>
-                        {clientsOptions && clientsOptions.map(option => (
-                            <option key={option._id} value={option._id}>{option.clientName}</option>
-                        ))}
-                    </select>
-                    {submitted && (<span className="success">Project edited successfully.</span>)}
-                    {error && (<span className="error">{projectName} is already registered.</span>)}
-                </div>
+                </form>
+            </section>
 
-                {isNotCreator === false && (
-                    <button className="add" type="submit">Edit</button>
-                )}
-
-            </form>
         </>
     )
 }
