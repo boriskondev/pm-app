@@ -1,6 +1,7 @@
 import {Component} from "react";
 import "./ProjectsStatus.css";
 import Header from "../../common/Header";
+import NoTasksYet from "../../common/NoTasksYet";
 import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
@@ -17,7 +18,7 @@ class ProjectsStatus extends Component {
             projectNotClicked: true,
             projectClickedId: null,
             projectClickedData: [],
-            activeTasks: "",
+            activeTasks: [],
             isLoading: true
         }
     }
@@ -80,26 +81,25 @@ class ProjectsStatus extends Component {
         if (this.state.isLoading) {
             return (
                 <>
-                    <Link to="/weekly-status"><Header title="Overview"/></Link>
+                    <Header title="Detailed overview"/>
                     <LoadingIndicator/>
                 </>
 
             )
         }
 
+        if (this.state.activeTasks.length === 0) {
+            return (
+                <>
+                    <Header title="Detailed overview"/>
+                    <NoTasksYet />
+                </>
+            )
+        }
+
         return (
             <>
                 <Header title="Detailed overview"/>
-
-                {this.state.activeTasks.length === 0 && (
-                    <section className="no-tasks-yet">
-                        <p>No active tasks. You need to add at least one&nbsp;
-                            <Link to="add-client"><span>client</span></Link>,&nbsp;
-                            <Link to="add-project"><span>project</span></Link> and&nbsp;
-                            <Link to="add-task"><span>task</span></Link>&nbsp;first.
-                        </p>
-                    </section>
-                )}
 
                 <section className="content-wrapper">
 

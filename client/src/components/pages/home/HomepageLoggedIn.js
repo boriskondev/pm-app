@@ -7,13 +7,14 @@ import countTasksOfUser from "../../../utils/countTasksOfUser";
 import departmentsIcons from "../../../utils/departmentsIcons";
 import LoadingIndicator from "../../common/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
+import NoTasksYet from "../../common/NoTasksYet";
 
 class HomepageLoggedIn extends Component {
     constructor() {
         super();
         this.state = {
             users: "",
-            activeTasks: "",
+            activeTasks: [],
             isLoading: true
         }
     }
@@ -43,17 +44,11 @@ class HomepageLoggedIn extends Component {
             )
         }
 
-        if (this.state.activeTasks === 0) {
+        if (this.state.activeTasks.length === 0) {
             return (
                 <>
                     <Link to="/weekly-status"><Header title="Overview"/></Link>
-                    <section className="no-tasks-yet">
-                        <p>No active tasks. You need to add at least one&nbsp;
-                            <Link to="add-client"><span>client</span></Link>,&nbsp;
-                            <Link to="add-project"><span>project</span></Link> and&nbsp;
-                            <Link to="add-task"><span>task</span></Link>&nbsp;first.
-                        </p>
-                    </section>
+                    <NoTasksYet />
                 </>
             )
         }
