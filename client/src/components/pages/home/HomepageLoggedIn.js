@@ -60,9 +60,9 @@ class HomepageLoggedIn extends Component {
                     <table>
                         <thead>
                         <tr>
-                            <th>{departmentsIcons.sort}</th>
+                            <th></th>
                             <th>Tasks</th>
-                            <th>{departmentsIcons.sort}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>

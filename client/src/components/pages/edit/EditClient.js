@@ -43,9 +43,9 @@ const EditClient = ({match}) => {
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
-                setError(true);
+                setError(`${clientName} is already added.`);
                 setTimeout(() => {
-                    setError(`${clientName} is already registered.`);
+                    setError(false);
                 }, 1500);
                 return;
             }
@@ -53,7 +53,7 @@ const EditClient = ({match}) => {
 
         fetchWrapper.put(endpoints.CLIENTS + `/${id}`, clientToUpdate)
             .then(() => {
-                setSubmitted(true);
+                setSubmitted(`${clientName} edited successfully.`);
                 setTimeout(() => {
                     history.goBack();
                 }, 1500);

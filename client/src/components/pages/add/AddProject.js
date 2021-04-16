@@ -39,7 +39,7 @@ const AddProject = () => {
 
         for (let project of selectedClient.projects) {
             if (project.projectName === projectName) {
-                setError(`${projectName} is already registered.`);
+                setError(`${projectName} is already added.`);
                 setTimeout(() => {
                     setError(false);
                 }, 1500);

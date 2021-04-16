@@ -111,7 +111,7 @@ class ProjectsStatus extends Component {
 
                         {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">
-                                <p>This week <span>{this.state.activeTasks.length}</span> tasks are waiting for us.</p>
+                                <p>This week <span>{this.state.activeTasks.length}</span> {this.state.activeTasks.length === 1 ? "task is" : "tasks are"} waiting for us.</p>
                                 <p>Choose client and project and let's begin :)</p>
                             </div>
                         )}

@@ -68,7 +68,7 @@ const EditTask = ({match}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!taskName || !clientId || !projectId || !startDate || !endDate || !peopleResponsible) {
+        if (!taskName || !clientId || !projectId || !startDate || !endDate || peopleResponsible.length === 0) {
             setError("All fields are required.");
             setTimeout(() => {
                 setError(false);

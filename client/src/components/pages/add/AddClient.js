@@ -31,7 +31,7 @@ const AddClient = () => {
 
         for (let client of allClientsInDB) {
             if (client.clientName === clientName) {
-                setError(`${clientName} is already registered.`);
+                setError(`${clientName} is already added.`);
                 setTimeout(() => {
                     setError(false);
                 }, 1500);
@@ -42,7 +42,7 @@ const AddClient = () => {
         fetchWrapper.post(endpoints.CLIENTS, newClientToAdd)
             .then((res) => res)
             .then(() => {
-                setSubmitted(true);
+                setSubmitted(`${clientName} added successfully.`);
                 setTimeout(() => {
                     history.push("/")
                 }, 1500);
@@ -65,7 +65,7 @@ const AddClient = () => {
                             autoComplete="off"
                             autoFocus
                         />
-                        {submitted && (<span className="success">{clientName} added successfully.</span>)}
+                        {submitted && (<span className="success">{submitted}</span>)}
                         {error && (<span className="error">{error}</span>)}
                     </div>
 
