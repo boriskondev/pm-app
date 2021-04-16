@@ -6,6 +6,7 @@ import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 import filterClientsAndProjects from "../../../utils/filterClientsAndProjects";
 import fetchWrapper from "../../../services/fetchWrapper";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 class ProjectsStatus extends Component {
     constructor() {
@@ -16,7 +17,8 @@ class ProjectsStatus extends Component {
             projectNotClicked: true,
             projectClickedId: null,
             projectClickedData: [],
-            activeTasks: ""
+            activeTasks: "",
+            isLoading: true
         }
     }
 
@@ -26,6 +28,7 @@ class ProjectsStatus extends Component {
                 this.setState(() => ({
                     weeklyData: filterClientsAndProjects(data),
                     activeTasks: data,
+                    isLoading: false
                 }));
             })
     }
@@ -74,9 +77,29 @@ class ProjectsStatus extends Component {
             </article>
         ));
 
+        if (this.state.isLoading) {
+            return (
+                <>
+                    <Link to="/weekly-status"><Header title="Overview"/></Link>
+                    <LoadingIndicator/>
+                </>
+
+            )
+        }
+
         return (
             <>
                 <Header title="Detailed overview"/>
+
+                {this.state.activeTasks.length === 0 && (
+                    <section className="no-tasks-yet">
+                        <p>No active tasks. You need to add at least one&nbsp;
+                            <Link to="add-client"><span>client</span></Link>,&nbsp;
+                            <Link to="add-project"><span>project</span></Link> and&nbsp;
+                            <Link to="add-task"><span>task</span></Link>&nbsp;first.
+                        </p>
+                    </section>
+                )}
 
                 <section className="content-wrapper">
 
@@ -86,16 +109,10 @@ class ProjectsStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.activeTasks.length === 0 && (
-                            <div className="message">
-                                <p>There are no tasks added yet :/</p>
-                            </div>
-                        )}
-
                         {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
                             <div className="message">
                                 <p>This week <span>{this.state.activeTasks.length}</span> tasks are waiting for us.</p>
-                                <p>Let's begin :)</p>
+                                <p>Choose client and project and let's begin :)</p>
                             </div>
                         )}
 

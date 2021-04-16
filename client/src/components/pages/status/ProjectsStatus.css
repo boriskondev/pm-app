@@ -89,3 +89,13 @@
     /*border: 0.5px solid #DDDDDD;*/
 }
 
+.no-tasks-yet {
+    text-align: center;
+    padding: 100px;
+    background-color: white;
+}
+
+.no-tasks-yet span{
+    font-weight: bold;
+}
+
