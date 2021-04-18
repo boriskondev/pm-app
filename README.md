@@ -50,11 +50,26 @@ The application allows you to:
 * See overall status of active tasks
 * See overall status of active tasks per user
 
-## Status (16.04.2021)
+## Status
 The project is currently under development with many important features to be implemented:
-* Clients and projects deletion
-* Considerable code refactoring and improvements
-* Transforming class components into functional components
-* Miscellaneous UX tweaks
-* Deployment and real-life tests
+
+* New pages:
+  * Profile - with edit profile option
+  * Search - by task, project and client
+  * Clients and projects deletion
+  * Admin
+  
+* Page updates:
+  * Homepage - sort option by name, task count and department
+  * User status - icons instead of buttons
+  * Add/edit task - better date picker component
+  * Where applicable - better tables design
+
+* Misc:
+  * Wrong password validation
+  * For later - change the basic validation with dedicated validation components
+  * Considerable code refactoring and improvements
+  * Transforming class components into functional components
+  * Deployment 
+  * Real-life users tests
 
