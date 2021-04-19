@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
 import fetchWrapper from "../../../services/fetchWrapper";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 const AddProject = ({match}) => {
     const {id} = match.params;
@@ -13,6 +14,7 @@ const AddProject = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(true);
     const [isNotCreator, setIsNotCreator] = useState(true);
 
     const [projectName, setProjectName] = useState("");
@@ -30,6 +32,7 @@ const AddProject = ({match}) => {
             setIsNotCreator(currentProjectData.createdBy !== loggedUser.userId);
             setClientId(currentProjectData.clientId._id);
             setClientsOptions(allClientsInDB);
+            setIsLoading(false)
         };
 
         fetchData();
@@ -68,6 +71,15 @@ const AddProject = ({match}) => {
                     history.goBack();
                 }, 1500);
             });
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <Header title="Edit project"/>
+                <LoadingIndicator/>
+            </>
+        )
     }
 
     return (

@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
 import fetchWrapper from "../../../services/fetchWrapper";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 const EditTask = ({match}) => {
     const {id} = match.params;
@@ -14,6 +15,7 @@ const EditTask = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(true);
     const [isNotCreator, setIsNotCreator] = useState(false);
 
     const [clientsOptions, setClientsOptions] = useState("");
@@ -45,7 +47,7 @@ const EditTask = ({match}) => {
             setClientId(taskData.clientId._id);
             setProjectName(taskData.projectId.projectName);
             setProjectId(taskData.projectId._id);
-            // setProjectsOptions(clientsOptions.filter(client => client._id === projectId)[0].projects)
+            setIsLoading(false)
         };
 
         fetchData();
@@ -92,6 +94,15 @@ const EditTask = ({match}) => {
                     history.goBack();
                 }, 1500);
             });
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <Header title="Edit task"/>
+                <LoadingIndicator/>
+            </>
+        )
     }
 
     return (

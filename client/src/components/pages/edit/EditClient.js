@@ -1,10 +1,10 @@
 import Header from "../../common/Header";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
-import {useContext} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 const EditClient = ({match}) => {
     const {id} = match.params;
@@ -14,6 +14,7 @@ const EditClient = ({match}) => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(true);
     const [isNotCreator, setIsNotCreator] = useState(true);
 
     const [clientName, setClientName] = useState("");
@@ -23,6 +24,7 @@ const EditClient = ({match}) => {
             .then(data => {
                 setClientName(data.clientName);
                 setIsNotCreator(data.createdBy !== loggedUser.userId);
+                setIsLoading(false);
             });
     }, []);
 
@@ -58,6 +60,15 @@ const EditClient = ({match}) => {
                     history.goBack();
                 }, 1500);
             })
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <Header title="Edit client"/>
+                <LoadingIndicator/>
+            </>
+        )
     }
 
     return (

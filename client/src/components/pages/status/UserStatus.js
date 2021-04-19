@@ -11,7 +11,7 @@ import icons from "../../../utils/icons";
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
-    const { loggedUser } = useContext(AuthContext);
+    const {loggedUser} = useContext(AuthContext);
 
     const [tasksOfUser, setTasksOfUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +45,12 @@ const UserStatus = ({match}) => {
                     <LoadingIndicator/>
                 )}
 
+                {tasksOfUser.length === 0 && !isLoading && (
+                    <p className="no-tasks">
+                        The user has 0 tasks. You can add tasks <Link><span>here</span></Link>.
+                    </p>
+                )}
+
                 {tasksOfUser.length > 0 && (
                     <table>
                         <thead>
@@ -56,36 +62,38 @@ const UserStatus = ({match}) => {
                         </tr>
                         </thead>
                         <tbody>
-
                         {tasksOfUser.map(task => (
                             <tr key={task._id}>
-                                <td><Link to={`/edit-client/${task.clientId._id}`}>{task.clientId.clientName}</Link></td>
-                                <td><Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link></td>
+                                <td>
+                                    <Link to={`/edit-client/${task.clientId._id}`}>{task.clientId.clientName}</Link>
+                                </td>
+                                <td>
+                                    <Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link>
+                                </td>
                                 <td>{task.taskName}</td>
                                 <td>
                                     <ul className="user-status-icons">
-                                        { task.createdBy === loggedUser.userId ? (
-                                            <>
-                                                <Link to={`/edit-task/${task._id}`}><li>{icons.edit}</li></Link>
-                                                <li onClick={(e) => handleComplete(task._id)}>{icons.complete}</li>
-                                                <li onClick={(e) => handleDelete(task._id)}>{icons.delete}</li>
-                                            </>
-                                        ) : (
-                                            <Link to={`/edit-task/${task._id}`}><li>{icons.more}</li></Link>
-                                        ) }
+                                        {task.createdBy === loggedUser.userId
+                                            ? (
+                                                <>
+                                                    <Link to={`/edit-task/${task._id}`}>
+                                                        <li>{icons.edit}</li>
+                                                    </Link>
+                                                    <li onClick={(e) => handleComplete(task._id)}>{icons.complete}</li>
+                                                    <li onClick={(e) => handleDelete(task._id)}>{icons.delete}</li>
+                                                </>
+                                            )
+                                            : (
+                                                <Link to={`/edit-task/${task._id}`}>
+                                                    <li>{icons.more}</li>
+                                                </Link>
+                                            )}
                                     </ul>
                                 </td>
                             </tr>
                         ))}
-
                         </tbody>
                     </table>
-                )}
-
-                {tasksOfUser.length === 0 && !isLoading && (
-                    <p style={{padding: "120px", textAlign: "center", fontSize: "16px", backgroundColor: "white"}}>
-                        The user has 0 tasks. You can add tasks <Link><span style={{fontWeight: "bold"}}>here</span></Link>.
-                    </p>
                 )}
             </section>
 
