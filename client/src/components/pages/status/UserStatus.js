@@ -7,6 +7,7 @@ import AuthContext from "../../../context/AuthContext";
 import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClientAndProject";
 import LoadingIndicator from "../../common/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
+import icons from "../../../utils/icons";
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
@@ -62,24 +63,17 @@ const UserStatus = ({match}) => {
                                 <td><Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link></td>
                                 <td>{task.taskName}</td>
                                 <td>
-                                    { task.createdBy === loggedUser.userId && (
-                                        <div className="buttons-div">
-                                            <Link to={`/edit-task/${task._id}`}>
-                                                <button className="edit">Edit</button>
-                                            </Link>
-                                            <button className="complete" onClick={(e) => handleComplete(task._id)}>Complete</button>
-                                            <button className="delete" onClick={(e) => handleDelete(task._id)}>Delete</button>
-                                        </div>
-                                    ) }
-
-                                    { task.createdBy !== loggedUser.userId && (
-                                        <div className="buttons-div">
-                                            <Link to={`/edit-task/${task._id}`}>
-                                                <button className="edit">Details</button>
-                                            </Link>
-                                        </div>
-                                    ) }
-
+                                    <ul className="user-status-icons">
+                                        { task.createdBy === loggedUser.userId ? (
+                                            <>
+                                                <Link to={`/edit-task/${task._id}`}><li>{icons.edit}</li></Link>
+                                                <li onClick={(e) => handleComplete(task._id)}>{icons.complete}</li>
+                                                <li onClick={(e) => handleDelete(task._id)}>{icons.delete}</li>
+                                            </>
+                                        ) : (
+                                            <Link to={`/edit-task/${task._id}`}><li>{icons.more}</li></Link>
+                                        ) }
+                                    </ul>
                                 </td>
                             </tr>
                         ))}

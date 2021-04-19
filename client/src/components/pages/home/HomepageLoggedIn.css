@@ -45,7 +45,7 @@
     background-color: #F3F3F3;
 }
 
-.weekly-overview .icon {
+.weekly-overview .homepage-icon {
     color: #D62130;
     padding: 0;
     margin: auto 0;
@@ -70,7 +70,7 @@
     font-weight: bold;
 }
 
-.weekly-overview .icon:hover {
+.weekly-overview .homepage-icon:hover {
     color: white;
 }
 

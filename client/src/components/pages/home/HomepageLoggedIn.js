@@ -4,7 +4,7 @@ import Header from "../../common/Header";
 import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
 import countTasksOfUser from "../../../utils/countTasksOfUser";
-import departmentsIcons from "../../../utils/departmentsIcons";
+import icons from "../../../utils/icons";
 import LoadingIndicator from "../../common/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
 import NoTasksYet from "../../common/NoTasksYet";
@@ -75,7 +75,7 @@ class HomepageLoggedIn extends Component {
                                                 to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
                                             </td>
                                             <td>{countTasksOfUser(user._id, this.state.activeTasks)}</td>
-                                            <td className="icon">{departmentsIcons[user.department]}</td>
+                                            <td className="homepage-icon">{icons[user.department]}</td>
                                         </tr>
                                     )
                                     : null
