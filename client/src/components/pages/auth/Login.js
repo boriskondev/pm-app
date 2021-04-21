@@ -62,15 +62,21 @@ const Login = () => {
             credentials: "include"
         };
 
-        fetch(endpoints.LOGIN, requestOptions)
-            .then(() => {
-                setSubmitted("User logged in successfully.")
-                setTimeout(() => {
-                    getLoggedIn()
-                    history.push("/")
-                }, 1500);
-            })
-            .catch(err => console.log("In catch" + err))
+        const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
+
+        if (!loginResponse.ok) {
+            setError("Wrong password.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
+        setSubmitted("User logged in successfully.")
+        setTimeout(() => {
+            getLoggedIn()
+            history.push("/")
+        }, 1500);
     }
 
     return (

@@ -18,7 +18,7 @@ const post = async (url, data) => {
 
     return fetch(url, requestOptions)
         .then(res => res.json())
-        .catch(error => console.log(error));
+        .catch(error => console.log("In fetch" + error));
 }
 
 const put = async (url, data) => {

@@ -56,23 +56,24 @@ The project is currently under development with many important features to be im
 * New pages:
   * Profile - with edit profile option
   * Search - by task, project and client
+  * Admin
   * Add absence
     * Email notifications option
-  * Admin
   
 * Page updates:
+  * Clients and projects deletion
   * Homepage - sort option by name, task count and department
   * ~~User status - icons instead of buttons~~
   * Add/edit task - better date picker component
   * Add/edit task - radio buttons for responsible field
   * Where applicable - better tables design
-  * Clients and projects deletion
 
 * Misc:
-  * Wrong password validation
-  * For later - change the basic validation with dedicated validation components
+  * Deployment
+  * Real-life users tests
+  * ~~Wrong login password validation~~
+  * For later - change the basic validation with dedicated validation component/s
   * Considerable code refactoring and improvements
   * Transforming class components into functional components
-  * Deployment 
-  * Real-life users tests
+
 
