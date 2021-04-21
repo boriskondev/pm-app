@@ -56,7 +56,8 @@ The project is currently under development with many important features to be im
 * New pages:
   * Profile - with edit profile option
   * Search - by task, project and client
-  * Clients and projects deletion
+  * Add absence
+    * Email notifications option
   * Admin
   
 * Page updates:
@@ -65,6 +66,7 @@ The project is currently under development with many important features to be im
   * Add/edit task - better date picker component
   * Add/edit task - radio buttons for responsible field
   * Where applicable - better tables design
+  * Clients and projects deletion
 
 * Misc:
   * Wrong password validation
