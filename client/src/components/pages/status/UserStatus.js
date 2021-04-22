@@ -34,6 +34,8 @@ const UserStatus = ({match}) => {
             .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
     }
 
+    console.log(loggedUser)
+
     return (
 
         <>

@@ -1,0 +1,27 @@
+.user-info{
+    background-color: white;
+}
+
+.user-info table {
+    margin: 30px auto;
+    /*border: 3px solid #D62130;*/
+}
+
+.user-info table tr td {
+    padding: 10px 0;
+}
+
+.user-info table tr td:nth-child(1) {
+    color: #D62130;
+    padding-right: 20px;
+}
+
+.user-info table tr td:nth-child(2) {
+    font-size: 22px;
+    text-align: left;
+}
+
+.user-info button {
+    display: block;
+    margin: 40px auto;
+}

@@ -50,6 +50,7 @@ function Navigation() {
                         { loggedUser && (
                             <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
                         ) }
+                        <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
                     </ul>
                 </>

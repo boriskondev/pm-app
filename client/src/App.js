@@ -23,6 +23,8 @@ import EditTask from "./components/pages/edit/EditTask";
 import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
+import Profile from "./components/pages/profile/Profile";
+
 import PageNotFound from "./components/common/PageNotFound";
 
 import {useContext} from "react";
@@ -59,6 +61,7 @@ function App() {
                         <Route path="/add-client" exact component={AddClient}/>
                         <Route path="/add-project" exact component={AddProject}/>
                         <Route path="/add-task" exact component={AddTask}/>
+                        <Route path="/profile" exact component={Profile}/>
                         <Route path="/register" exact component={Register}/>
                         <Route path="/login" exact component={Login}/>
                         <Route component={PageNotFound}/>
