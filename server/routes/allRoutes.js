@@ -18,9 +18,9 @@ router.get("/loggedUser", authController.getLoggedUserInfo);
 // Users
 router.get("/users", userController.findAll);
 router.get("/users/:id", userController.findOne);
-router.put("/users/:id", userController.updateUser);
-router.delete("/users/:id", userController.deleteUser);
 router.get("/users/:id/tasks", userController.getAllTasks);
+router.patch("/users/:id", userController.updateUser);
+// router.delete("/users/:id", userController.deleteUser);
 
 // Clients
 router.post("/clients", clientController.create);

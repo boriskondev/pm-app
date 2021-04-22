@@ -24,6 +24,7 @@ import Register from "./components/pages/auth/Register";
 import Login from "./components/pages/auth/Login";
 
 import Profile from "./components/pages/profile/Profile";
+import EditProfile from "./components/pages/profile/EditProfile";
 
 import PageNotFound from "./components/common/PageNotFound";
 
@@ -62,6 +63,7 @@ function App() {
                         <Route path="/add-project" exact component={AddProject}/>
                         <Route path="/add-task" exact component={AddTask}/>
                         <Route path="/profile" exact component={Profile}/>
+                        <Route path="/edit-profile" exact component={EditProfile}/>
                         <Route path="/register" exact component={Register}/>
                         <Route path="/login" exact component={Login}/>
                         <Route component={PageNotFound}/>
