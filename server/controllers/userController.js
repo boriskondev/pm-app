@@ -26,7 +26,10 @@ const userController = {
     findOne: async (req, res) => {
         try {
             const id = req.params.id;
-            const foundUser = await User.findById(id);
+            const foundUser = await User
+                .findById(id)
+                .select({"username": 1, "email": 1, "department": 1, "_id": 0})
+            ;
             res.status(200).json(foundUser);
         } catch (err) {
             res.status(404).json({message: error.message});
