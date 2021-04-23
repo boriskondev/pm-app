@@ -14,12 +14,12 @@ function Navigation() {
     async function logoutHandler() {
         await axios.get(endpoints.LOGOUT);
         await getLoggedIn();
-        history.push("/")
+        history.push("/");
     }
 
-    // useEffect(() => {
-    //     getLoggedIn();
-    // }, []);
+    useEffect(() => {
+
+    })
 
     return (
         <nav>

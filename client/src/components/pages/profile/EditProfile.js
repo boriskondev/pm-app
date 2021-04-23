@@ -64,7 +64,7 @@ const EditProfile = ({match}) => {
                 setSubmitted("User edited successfully.")
                 setTimeout(() => {
                     getLoggedIn();
-                    history.goBack();
+                    history.push("/");
                 }, 1500);
             })
             .catch(err => console.log("In catch" + err));
