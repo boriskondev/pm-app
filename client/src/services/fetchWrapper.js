@@ -34,10 +34,11 @@ const put = async (url, data) => {
         .catch(error => console.log(error));
 }
 
-const patch = async (url) => {
+const patch = async (url, data) => {
     const requestOptions = {
         method: "PATCH",
         headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data),
         credentials: "include"
     };
 

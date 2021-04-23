@@ -19,7 +19,7 @@ const userController = {
             const id = req.params.id;
             const foundUser = await User
                 .findById(id)
-                .select({"username": 1, "email": 1, "department": 1, "_id": 0})
+                .select({"username": 1, "email": 1, "department": 1})
             ;
             res.status(200).json(foundUser);
         } catch (err) {

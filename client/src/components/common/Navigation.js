@@ -2,9 +2,10 @@ import "./Navigation.css";
 import {Link} from "react-router-dom";
 import endpoints from "../../services/api";
 import {useHistory} from "react-router-dom";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import fetchWrapper from "../../services/fetchWrapper";
 
 function Navigation() {
     const history = useHistory();
@@ -15,6 +16,10 @@ function Navigation() {
         await getLoggedIn();
         history.push("/")
     }
+
+    // useEffect(() => {
+    //     getLoggedIn();
+    // }, []);
 
     return (
         <nav>

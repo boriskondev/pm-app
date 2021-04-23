@@ -19,7 +19,7 @@ const Register = () => {
         email: "",
         password: "",
         repeatPassword: "",
-    })
+    });
 
     const handleFieldChange = (e) => {
         const {id, value} = e.target

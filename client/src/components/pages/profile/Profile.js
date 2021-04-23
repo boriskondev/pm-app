@@ -48,7 +48,7 @@ const Profile = () => {
                             <td>{departments[userData.department]}</td>
                         </tr>
                     </table>
-                    <Link to="edit-profile"><button className="add">Edit profile</button></Link>
+                    <Link to={`/edit-profile/${userData._id}`}><button className="add">Edit profile</button></Link>
                 </div>
             )}
         </>

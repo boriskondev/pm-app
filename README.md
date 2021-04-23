@@ -54,7 +54,7 @@ The application allows you to:
 The project is currently under development with many important features to be implemented:
 
 * New pages:
-  * Profile - with edit profile option
+  * ~~Profile - with edit profile option~~
   * Search - by task, project and client
   * Admin
   * Add absence
