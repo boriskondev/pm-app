@@ -42,11 +42,22 @@ const AddTask = () => {
         setProjectsOptions(clientWithProjectsToEnlist.projects);
     }
 
+    const filterName = (id) => {
+        const findName = responsibleOptions.filter(person => person._id === id)[0];
+        return findName.username;
+    }
+
     const handleResponsibleOptionsClick = (e) => {
         const personIdClicked = e.target.value;
         if (!peopleResponsible.includes(personIdClicked)) {
             setPeopleResponsible([...peopleResponsible, personIdClicked])
         }
+    }
+
+    const handleNameClick = (id) => {
+        const index = peopleResponsible.indexOf(id);
+        peopleResponsible.splice(index, 1);
+        setPeopleResponsible(peopleResponsible.filter(person => person._id !== id));
     }
 
     const handleSubmit = async (e) => {
@@ -78,6 +89,8 @@ const AddTask = () => {
                 }, 1500);
             });
     }
+
+    console.log(peopleResponsible);
 
     return (
         <>
@@ -160,11 +173,25 @@ const AddTask = () => {
                                         {option.username}
                                     </option>
                                 ))}
-
                             </select>
-                            {submitted && (<span className="success">{submitted}</span>)}
-                            {error && (<span className="error">{error}</span>)}
+
+                            <div className="responsible-chosen">
+                                <ul>
+                                    { peopleResponsible.length > 0 && peopleResponsible.map(id => (
+                                        <li key={id}
+                                            onClick={() => handleNameClick(id)}
+                                        >
+                                            {filterName(id)}
+                                        </li>
+                                    ))
+                                    }
+                                </ul>
+                            </div>
+
                         </div>
+
+                        {submitted && (<span className="success">{submitted}</span>)}
+                        {error && (<span className="error">{error}</span>)}
 
                     </fieldset>
 

@@ -6,7 +6,7 @@ import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
 
 const EditProfile = ({match}) => {
-    const {getLoggedIn} = useContext(AuthContext);
+    const {getLoggedIn, loggedUser} = useContext(AuthContext);
 
     const {id} = match.params;
     const history = useHistory();
@@ -28,7 +28,7 @@ const EditProfile = ({match}) => {
         }, []);
 
     const handleFieldChange = (e) => {
-        const {id, value} = e.target
+        const {id, value} = e.target;
         setState(prevState => ({...prevState, [id]: value}))
     }
 

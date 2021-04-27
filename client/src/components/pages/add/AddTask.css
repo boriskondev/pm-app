@@ -10,3 +10,27 @@ form .form-field #task-term input {
 form .form-field span {
     margin: auto 20px;
 }
+
+.responsible-chosen {
+    margin: 10px;
+}
+
+.responsible-chosen ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.responsible-chosen ul li {
+    width: 80px;
+    color: #303030;
+    padding: 5px;
+    margin: 5px;
+    font-size: 20px;
+    border: 2px solid #D62130;
+}
+
+.responsible-chosen ul li:hover {
+    color: white;
+    background-color: #D62130;
+}

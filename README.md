@@ -65,7 +65,8 @@ The project is currently under development with many important features to be im
   * Homepage - sort option by name, task count and department
   * ~~User status - icons instead of buttons~~
   * Add/edit task - better date picker component
-  * Add/edit task - radio buttons for responsible field
+  * ~~Add task - better and "mindful" names selection~~
+  * Edit task - better and "mindful" names selection
   * Where applicable - better tables design
 
 * Misc:
