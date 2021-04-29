@@ -42,22 +42,15 @@ const AddTask = () => {
         setProjectsOptions(clientWithProjectsToEnlist.projects);
     }
 
-    const filterName = (id) => {
-        const findName = responsibleOptions.filter(person => person._id === id)[0];
-        return findName.username;
-    }
-
-    const handleResponsibleOptionsClick = (e) => {
-        const personIdClicked = e.target.value;
-        if (!peopleResponsible.includes(personIdClicked)) {
-            setPeopleResponsible([...peopleResponsible, personIdClicked])
+    const handleResponsibleFieldClick = (e, id) => {
+       e.target.classList.toggle("name-clicked")
+        if (!peopleResponsible.includes(id)) {
+            setPeopleResponsible([...peopleResponsible, id])
+        } else {
+            const index = peopleResponsible.indexOf(id);
+            peopleResponsible.splice(index, 1);
+            setPeopleResponsible(peopleResponsible.filter(person => person._id !== id));
         }
-    }
-
-    const handleNameClick = (id) => {
-        const index = peopleResponsible.indexOf(id);
-        peopleResponsible.splice(index, 1);
-        setPeopleResponsible(peopleResponsible.filter(person => person._id !== id));
     }
 
     const handleSubmit = async (e) => {
@@ -89,8 +82,6 @@ const AddTask = () => {
                 }, 1500);
             });
     }
-
-    console.log(peopleResponsible);
 
     return (
         <>
@@ -159,32 +150,17 @@ const AddTask = () => {
 
                         <div className="form-field">
                             <label>People responsible</label>
-                            <select
-                                onClick={(e) => handleResponsibleOptionsClick(e)}
-                                size={responsibleOptions.length}
-                                multiple
-                            >
-
-                                {responsibleOptions && responsibleOptions.map(option => (
-                                    <option
-                                        key={option._id}
-                                        value={option._id}
-                                    >
-                                        {option.username}
-                                    </option>
-                                ))}
-                            </select>
 
                             <div className="responsible-chosen">
                                 <ul>
-                                    { peopleResponsible.length > 0 && peopleResponsible.map(id => (
-                                        <li key={id}
-                                            onClick={() => handleNameClick(id)}
+                                    {responsibleOptions && responsibleOptions.map(person => (
+                                        <li
+                                            key={person._id}
+                                            onClick={(e) => handleResponsibleFieldClick(e, person._id)}
                                         >
-                                            {filterName(id)}
+                                            {person.username}
                                         </li>
-                                    ))
-                                    }
+                                    ))}
                                 </ul>
                             </div>
 
