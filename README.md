@@ -53,27 +53,22 @@ The application allows you to:
 ## Status
 The project is currently under development with many important features to be implemented:
 
-* New pages:
-  * ~~Profile - with edit profile option~~
-  * Search - by task, project and client
-  * Admin
-  * Add absence
-    * Email notifications option
-  
 * Page updates:
   * Clients and projects deletion
   * Homepage - sort option by name, task count and department
-  * ~~User status - icons instead of buttons~~
-  * Add/edit task - better date picker component
-  * ~~Add task - better and "mindful" names selection~~
-  * Edit task - better and "mindful" names selection
   * Where applicable - better tables design
+  * Add/edit task - better date picker component
+  * Edit profile context update issue check
+
+* New pages:
+  * Search - by task, project and client
+  * Add absence
+    * Email notifications option
+  * Admin
 
 * Misc:
   * Deployment
   * Real-life users tests
-  * ~~Wrong login password validation~~
-  * For later - change the basic validation with dedicated validation component/s
   * Considerable code refactoring and improvements
   * Transforming class components into functional components
 
