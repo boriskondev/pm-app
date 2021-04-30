@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {useState, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
@@ -65,9 +66,9 @@ const AddClient = () => {
                             autoComplete="off"
                             autoFocus
                         />
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
                     </div>
+
+                    <Notifications submitted={submitted} error={error}/>
 
                     <button className="add">Add</button>
 

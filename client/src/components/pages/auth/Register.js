@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {useState, useContext} from "react";
 import "./Register.css";
 import endpoints from "../../../services/api";
@@ -151,9 +152,9 @@ const Register = () => {
                             onChange={handleFieldChange}
                             autoComplete="off"
                         />
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
                     </div>
+
+                    <Notifications submitted={submitted} error={error}/>
 
                     <button className="add" type="submit">Submit</button>
 

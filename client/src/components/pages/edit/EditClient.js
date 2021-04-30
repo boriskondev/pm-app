@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {useEffect, useState, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
@@ -87,13 +88,14 @@ const EditClient = ({match}) => {
                                 autoComplete="off"
                                 autoFocus
                             />
-                            {submitted && (<span className="success">{submitted}</span>)}
-                            {error && (<span className="error">{error}</span>)}
                         </div>
                     </fieldset>
 
                     {isNotCreator === false && (
-                        <button className="add" type="submit">Edit</button>
+                        <>
+                            <Notifications submitted={submitted} error={error}/>
+                            <button className="add" type="submit">Edit</button>
+                        </>
                     )}
 
                 </form>

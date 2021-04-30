@@ -29,6 +29,10 @@ form .form-field .responsible-chosen ul li {
     margin: 5px;
     font-size: 20px;
     border: 2px solid #D62130;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 form .form-field .responsible-chosen ul li.name-clicked {

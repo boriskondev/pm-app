@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import "../add/AddTask.css";
 import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
@@ -60,10 +61,14 @@ const EditTask = ({match}) => {
         setProjectsOptions(clientWithProjectsToEnlist.projects);
     }
 
-    const handleResponsibleOptionsClick = (e) => {
-        const personIdClicked = e.target.value;
-        if (!peopleResponsible.includes(personIdClicked)) {
-            setPeopleResponsible([...peopleResponsible, personIdClicked])
+    const handleResponsibleFieldClick = (e, id) => {
+        e.target.classList.toggle("name-clicked")
+        if (!peopleResponsible.includes(id)) {
+            setPeopleResponsible([...peopleResponsible, id])
+        } else {
+            const index = peopleResponsible.indexOf(id);
+            peopleResponsible.splice(index, 1);
+            setPeopleResponsible(peopleResponsible.filter(person => person._id !== id));
         }
     }
 
@@ -169,30 +174,28 @@ const EditTask = ({match}) => {
 
                         <div className="form-field">
                             <label>People responsible</label>
-                            <select
-                                onClick={(e) => handleResponsibleOptionsClick(e)}
-                                size={responsibleOptions.length}
-                                multiple
-                            >
 
-                                {responsibleOptions && responsibleOptions.map(option => (
-                                    <option
-                                        key={option._id}
-                                        value={option._id}
-                                    >
-                                        {option.username}
-                                    </option>
-                                ))}
-
-                            </select>
-                            {submitted && (<span className="success">{submitted}</span>)}
-                            {error && (<span className="error">{error}</span>)}
+                            <div className="responsible-chosen">
+                                <ul>
+                                    {responsibleOptions && responsibleOptions.map(person => (
+                                        <li
+                                            key={person._id}
+                                            onClick={(e) => handleResponsibleFieldClick(e, person._id)}
+                                        >
+                                            {person.username}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
 
                     </fieldset>
 
                     {isNotCreator === false && (
-                        <button className="add" type="submit">Edit</button>
+                        <>
+                            <Notifications submitted={submitted} error={error}/>
+                            <button className="add" type="submit">Edit</button>
+                        </>
                     )}
 
                 </form>

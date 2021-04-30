@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {Link, useHistory} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
@@ -108,9 +109,9 @@ const EditProfile = ({match}) => {
                             onChange={handleFieldChange}
                             autoComplete="off"
                         />
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
                     </div>
+
+                    <Notifications submitted={submitted} error={error}/>
 
                     <button className="add" type="submit">Submit</button>
 

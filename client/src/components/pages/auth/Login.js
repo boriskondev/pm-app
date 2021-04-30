@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {useState} from "react";
 import "./Register.css";
 import {Link} from "react-router-dom";
@@ -106,9 +107,9 @@ const Login = () => {
                             onChange={handleFieldChange}
                             autoComplete="off"
                         />
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
                     </div>
+
+                    <Notifications submitted={submitted} error={error}/>
 
                     <button className="add" type="submit">Submit</button>
 

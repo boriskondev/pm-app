@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import "./AddTask.css";
 import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
@@ -85,9 +86,6 @@ const AddTask = () => {
 
     return (
         <>
-            <section className="form-wrapper">
-            </section>
-
             <Header title="Add task"/>
 
             <section className="form-wrapper">
@@ -166,10 +164,9 @@ const AddTask = () => {
 
                         </div>
 
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
-
                     </fieldset>
+
+                    <Notifications submitted={submitted} error={error}/>
 
                     <button className="add" type="submit">Add</button>
 

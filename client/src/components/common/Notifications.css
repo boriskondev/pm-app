@@ -1,0 +1,21 @@
+.notifications {
+    height: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.notifications .success {
+    display: block;
+    color: #4BB543;
+    position: relative;
+    top: 10px;
+    font-weight: bold;
+}
+
+.notifications .error {
+    display: block;
+    color: #D62130;
+    position: relative;
+    top: 10px;
+    font-weight: bold;
+}

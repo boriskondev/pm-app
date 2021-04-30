@@ -1,4 +1,5 @@
 import Header from "../../common/Header";
+import Notifications from "../../common/Notifications";
 import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
 import endpoints from "../../../services/api";
@@ -112,12 +113,13 @@ const AddProject = ({match}) => {
                                 <option key={option._id} value={option._id}>{option.clientName}</option>
                             ))}
                         </select>
-                        {submitted && (<span className="success">{submitted}</span>)}
-                        {error && (<span className="error">{error}</span>)}
                     </div>
 
                     {isNotCreator === false && (
-                        <button className="add" type="submit">Edit</button>
+                        <>
+                            <Notifications submitted={submitted} error={error}/>
+                            <button className="add" type="submit">Edit</button>
+                        </>
                     )}
 
                 </form>
