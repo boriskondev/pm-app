@@ -43,7 +43,7 @@ const patch = async (url, data) => {
     };
 
     return fetch(url, requestOptions)
-        .then(res => res.json())
+        .then(res => res)
         .catch(error => console.log(error));
 }
 

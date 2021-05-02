@@ -1,14 +1,11 @@
 import Header from "../../common/Header";
 import Notifications from "../../common/Notifications";
-import {Link, useHistory} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
+import {useEffect, useState} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
 import endpoints from "../../../services/api";
-import AuthContext from "../../../context/AuthContext";
 
 const EditProfile = ({match}) => {
-    const {getLoggedIn, loggedUser} = useContext(AuthContext);
-
     const {id} = match.params;
     const history = useHistory();
 
@@ -21,12 +18,12 @@ const EditProfile = ({match}) => {
         repeatPassword: ""
     });
 
-        useEffect(() => {
-            fetchWrapper.get(endpoints.USERS + `/${id}`)
-                .then(data => {
-                    setState({username: data.username});
-                });
-        }, []);
+    useEffect(() => {
+        fetchWrapper.get(endpoints.USERS + `/${id}`)
+            .then(data => {
+                setState({username: data.username});
+            });
+    }, []);
 
     const handleFieldChange = (e) => {
         const {id, value} = e.target;
@@ -61,13 +58,13 @@ const EditProfile = ({match}) => {
         };
 
         fetchWrapper.patch(endpoints.USERS + `/${id}`, editedUser)
+            .then(() => setSubmitted("User edited successfully."))
             .then(() => {
-                setSubmitted("User edited successfully.")
                 setTimeout(() => {
-                    getLoggedIn();
                     history.push("/");
                 }, 1500);
             })
+
             .catch(err => console.log("In catch" + err));
     }
 

@@ -32,12 +32,16 @@ import {useContext} from "react";
 import AuthContext from "./context/AuthContext";
 
 function App() {
-    const {loggedIn} = useContext(AuthContext);
+    const {loggedIn, getLoggedIn, loggedUser} = useContext(AuthContext);
 
     return (
         <div className="App">
 
-            <Navigation/>
+            <Navigation
+                loggedIn={loggedIn}
+                getLoggedIn={getLoggedIn}
+                loggedUser={loggedUser}
+            />
 
             {loggedIn === false && (
                 <Main>

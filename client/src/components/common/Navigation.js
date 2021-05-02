@@ -2,24 +2,16 @@ import "./Navigation.css";
 import {Link} from "react-router-dom";
 import endpoints from "../../services/api";
 import {useHistory} from "react-router-dom";
-import {useContext, useEffect} from "react";
-import AuthContext from "../../context/AuthContext";
 import axios from "axios";
-import fetchWrapper from "../../services/fetchWrapper";
 
-function Navigation() {
+function Navigation({loggedIn, getLoggedIn}) {
     const history = useHistory();
-    const { loggedIn, getLoggedIn, loggedUser } = useContext(AuthContext);
 
     async function logoutHandler() {
         await axios.get(endpoints.LOGOUT);
         await getLoggedIn();
         history.push("/");
     }
-
-    useEffect(() => {
-
-    })
 
     return (
         <nav>
@@ -52,9 +44,7 @@ function Navigation() {
                         <li><Link to="/add-client">Add client</Link></li>
                     </ul>
                     <ul>
-                        { loggedUser && (
-                            <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
-                        ) }
+                        {/*<li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>*/}
                         <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
                     </ul>
