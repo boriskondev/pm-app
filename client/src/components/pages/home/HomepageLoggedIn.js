@@ -1,4 +1,3 @@
-import {Component} from "react";
 import "./HomepageLoggedIn.css";
 import Header from "../../common/Header";
 import {Link} from "react-router-dom";
@@ -8,51 +7,47 @@ import icons from "../../../utils/icons";
 import LoadingIndicator from "../../common/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
 import NoTasksYet from "../../common/NoTasksYet";
+import {useState, useEffect} from "react";
 
-class HomepageLoggedIn extends Component {
-    constructor() {
-        super();
-        this.state = {
-            users: "",
-            activeTasks: [],
-            isLoading: true
-        }
+const HomepageLoggedIn = () => {
+    const [users, setUsers] = useState([]);
+    const [activeTasks, setActiveTasks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const allUsersInDB = await fetchWrapper.get(endpoints.USERS);
+            const allTasksInDB = await fetchWrapper.get(endpoints.TASKS);
+
+            setUsers(allUsersInDB);
+            setActiveTasks(allTasksInDB);
+            setIsLoading(false);
+        };
+
+        fetchData();
+
+    }, []);
+
+    if (isLoading) {
+        return (
+            <>
+                <Link to="/weekly-status"><Header title="Overview"/></Link>
+                <LoadingIndicator />
+            </>
+
+        )
     }
 
-    async componentDidMount() {
-        Promise.all([
-            fetchWrapper.get(endpoints.USERS),
-            fetchWrapper.get(endpoints.TASKS)
-        ]).then(([allUsersInDB, allTasksInDB]) => {
-            this.setState({
-                users: allUsersInDB,
-                activeTasks: allTasksInDB,
-                isLoading: false
-            });
-        })
+    if (activeTasks.length === 0) {
+        return (
+            <>
+                <Link to="/weekly-status"><Header title="Overview"/></Link>
+                <NoTasksYet />
+            </>
+        )
     }
 
-    render() {
-
-        if (this.state.isLoading) {
-            return (
-                <>
-                    <Link to="/weekly-status"><Header title="Overview"/></Link>
-                    <LoadingIndicator />
-                </>
-
-            )
-        }
-
-        if (this.state.activeTasks.length === 0) {
-            return (
-                <>
-                    <Link to="/weekly-status"><Header title="Overview"/></Link>
-                    <NoTasksYet />
-                </>
-            )
-        }
-
+    if (!isLoading && activeTasks.length > 0) {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
@@ -66,15 +61,15 @@ class HomepageLoggedIn extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.users && this.state.activeTasks.length > 0 && (
-                            this.state.users.map(user => (
-                                countTasksOfUser(user._id, this.state.activeTasks) > 0
+                        {users && (
+                            users.map(user => (
+                                countTasksOfUser(user._id, activeTasks) > 0
                                     ? (
                                         <tr key={user._id}>
                                             <td><Link
                                                 to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
                                             </td>
-                                            <td>{countTasksOfUser(user._id, this.state.activeTasks)}</td>
+                                            <td>{countTasksOfUser(user._id, activeTasks)}</td>
                                             <td className="homepage-icon">{icons[user.department]}</td>
                                         </tr>
                                     )
@@ -84,7 +79,7 @@ class HomepageLoggedIn extends Component {
                         <tfoot>
                         <tr>
                             <td></td>
-                            <td>{this.state.activeTasks.length}</td>
+                            <td>{activeTasks.length}</td>
                             <td></td>
                         </tr>
                         </tfoot>
