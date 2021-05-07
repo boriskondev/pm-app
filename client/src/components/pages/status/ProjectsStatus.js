@@ -1,4 +1,3 @@
-import {Component} from "react";
 import "./ProjectsStatus.css";
 import Header from "../../common/Header";
 import NoTasksYet from "../../common/NoTasksYet";
@@ -8,33 +7,25 @@ import {Link} from "react-router-dom";
 import filterClientsAndProjects from "../../../utils/filterClientsAndProjects";
 import fetchWrapper from "../../../services/fetchWrapper";
 import LoadingIndicator from "../../common/LoadingIndicator";
+import {useState, useEffect} from "react";
 
-class ProjectsStatus extends Component {
-    constructor() {
-        super();
+const ProjectsStatus = () => {
+    const [weeklyData, setWeeklyData] = useState([]);
+    const [projectNotClicked, setProjectNotClicked] = useState(true);
+    const [projectClickedData, setProjectClickedData] = useState([]);
+    const [activeTasks, setActiveTasks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-        this.state = {
-            weeklyData: [],
-            projectNotClicked: true,
-            projectClickedId: null,
-            projectClickedData: [],
-            activeTasks: [],
-            isLoading: true
-        }
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         fetchWrapper.get(endpoints.TASKS)
             .then(data => {
-                this.setState(() => ({
-                    weeklyData: filterClientsAndProjects(data),
-                    activeTasks: data,
-                    isLoading: false
-                }));
-            })
-    }
+                setWeeklyData(filterClientsAndProjects(data));
+                setActiveTasks(data);
+                setIsLoading(false);
+            });
+    }, []);
 
-    handleAccordionClick(e) {
+    const handleAccordionClick = (e) => {
         let accordion = e.target;
         accordion.classList.toggle("active");
         let accordionPanel = accordion.nextElementSibling;
@@ -45,58 +36,54 @@ class ProjectsStatus extends Component {
         }
     }
 
-    handlePanelClick(e, id) {
+    const handlePanelClick = (e, id) => {
         fetchWrapper.get(endpoints.PROJECTS + `/${id}`)
             .then(data => {
-                this.setState(() => ({
-                    projectNotClicked: false,
-                    projectClickedId: id,
-                    projectClickedData: data,
-                }));
-            })
+                setProjectClickedData(data);
+                setProjectNotClicked(false);
+            });
     }
 
-    render() {
-        const sidebarData = this.state.weeklyData.map(client => (
-            <article key={client._id}>
-                <button className="project-accordion"
-                        onClick={(e) => this.handleAccordionClick(e)}
-                >
-                    {client.clientName}
-                </button>
-                <div className="project-panel">
-                    <ul>
-                        {client.projects.map(project => (
-                            <li key={project._id} value={project._id}
-                                onClick={(e) => this.handlePanelClick(e, project._id)}>
-                                <Link>{project.projectName}</Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+    const sidebarData = weeklyData.map(client => (
+        <article key={client._id}>
+            <button className="project-accordion"
+                    onClick={(e) => handleAccordionClick(e)}
+            >
+                {client.clientName}
+            </button>
+            <div className="project-panel">
+                <ul>
+                    {client.projects.map(project => (
+                        <li key={project._id} value={project._id}
+                            onClick={(e) => handlePanelClick(e, project._id)}>
+                            <Link>{project.projectName}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </article>
+    ));
 
-            </article>
-        ));
+    if (isLoading) {
+        return (
+            <>
+                <Header title="Detailed overview"/>
+                <LoadingIndicator/>
+            </>
 
-        if (this.state.isLoading) {
-            return (
-                <>
-                    <Header title="Detailed overview"/>
-                    <LoadingIndicator/>
-                </>
+        )
+    }
 
-            )
-        }
+    if (activeTasks.length === 0) {
+        return (
+            <>
+                <Header title="Detailed overview"/>
+                <NoTasksYet/>
+            </>
+        )
+    }
 
-        if (this.state.activeTasks.length === 0) {
-            return (
-                <>
-                    <Header title="Detailed overview"/>
-                    <NoTasksYet />
-                </>
-            )
-        }
-
+    if (!isLoading && activeTasks.length > 0) {
         return (
             <>
                 <Header title="Detailed overview"/>
@@ -109,15 +96,17 @@ class ProjectsStatus extends Component {
 
                     <section className="project-info">
 
-                        {this.state.projectNotClicked && this.state.activeTasks.length > 0 && (
+                        {projectNotClicked && activeTasks.length > 0 && (
                             <div className="message">
-                                <p>This week <span>{this.state.activeTasks.length}</span> {this.state.activeTasks.length === 1 ? "task is" : "tasks are"} waiting for us.</p>
+                                <p>This
+                                    week <span>{activeTasks.length}</span> {activeTasks.length === 1 ? "task is" : "tasks are"} waiting
+                                    for us.</p>
                                 <p>Choose client and project and let's begin :)</p>
                             </div>
                         )}
 
-                        {!this.state.projectNotClicked && this.state.activeTasks && (
-                            <ProjectData clickedProjectData={this.state.projectClickedData}/>
+                        {!projectNotClicked && activeTasks && (
+                            <ProjectData clickedProjectData={projectClickedData}/>
                         )}
 
                     </section>
