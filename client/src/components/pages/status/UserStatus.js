@@ -8,6 +8,7 @@ import sortUserTasksByClientAndProject from "../../../utils/sortUserTasksByClien
 import LoadingIndicator from "../../common/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
 import icons from "../../../utils/icons";
+import Modal from "../../common/Modal";
 
 const UserStatus = ({match}) => {
     const {id, name} = match.params;
@@ -15,6 +16,8 @@ const UserStatus = ({match}) => {
 
     const [tasksOfUser, setTasksOfUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         fetchWrapper.get(endpoints.TASKS_RESPONSIBLE + `/${id}`)
@@ -24,9 +27,20 @@ const UserStatus = ({match}) => {
             });
     }, []);
 
-    const handleDelete = async (id) => {
+    const handleShowModal = () => {
+        setShowModal(true);
+    }
+
+    const handleHideModal = () => {
+        setShowModal(false);
+    }
+
+    const handleDelete = (id) => {
         fetchWrapper._delete(endpoints.TASKS + `/${id}`)
-            .then(() => setTasksOfUser(tasksOfUser.filter(task => task._id !== id)));
+            .then(() => {
+                setTasksOfUser(tasksOfUser.filter(task => task._id !== id));
+                setShowModal(false);
+            })
     }
 
     const handleComplete = async (id) => {
@@ -79,8 +93,16 @@ const UserStatus = ({match}) => {
                                                     <Link to={`/edit-task/${task._id}`}>
                                                         <li>{icons.edit}</li>
                                                     </Link>
-                                                    <li onClick={(e) => handleComplete(task._id)}>{icons.complete}</li>
-                                                    <li onClick={(e) => handleDelete(task._id)}>{icons.delete}</li>
+                                                    <li onClick={() => handleComplete(task._id)}>{icons.complete}</li>
+                                                    <li onClick={() => handleShowModal()}>{icons.delete}</li>
+                                                    <Modal
+                                                        showModal={showModal}
+                                                        closeModal={handleHideModal}
+                                                        deleteModal={handleDelete}
+                                                        id={task._id}
+                                                    >
+                                                        <p>Do you really want to delete the task?</p>
+                                                    </Modal>
                                                 </>
                                             )
                                             : (
