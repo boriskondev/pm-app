@@ -70,6 +70,5 @@ The project is currently under development with many important features to be im
   * Deployment
   * Real-life users tests
   * Considerable code refactoring and improvements
-  * Transforming class components into functional components
 
 

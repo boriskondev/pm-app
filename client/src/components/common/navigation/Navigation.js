@@ -4,7 +4,7 @@ import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 
-function Navigation({loggedIn, getLoggedIn}) {
+function Navigation({loggedIn, getLoggedIn, loggedUser}) {
     const history = useHistory();
 
     async function logoutHandler() {
@@ -44,7 +44,7 @@ function Navigation({loggedIn, getLoggedIn}) {
                         <li><Link to="/add-client">Add client</Link></li>
                     </ul>
                     <ul>
-                        {/*<li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>*/}
+                        <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
                         <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
                     </ul>
