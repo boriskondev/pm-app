@@ -1,12 +1,12 @@
 import "./Profile.css";
-import Header from "../../common/Header";
+import Header from "../../common/parts/Header";
 import {useState, useEffect, useContext} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
 import AuthContext from "../../../context/AuthContext";
 import endpoints from "../../../services/api";
 import departments from "../../../utils/departments";
 import icons from "../../../utils/icons";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import {Link} from "react-router-dom";
 
 const Profile = () => {

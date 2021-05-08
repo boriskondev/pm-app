@@ -1,11 +1,11 @@
-import Header from "../../common/Header";
-import Notifications from "../../common/Notifications";
+import Header from "../../common/parts/Header";
+import Notifications from "../../common/parts/Notifications";
 import {useEffect, useState, useContext} from "react";
 import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import fetchWrapper from "../../../services/fetchWrapper";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 
 const EditClient = ({match}) => {
     const {id} = match.params;

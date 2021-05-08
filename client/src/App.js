@@ -2,9 +2,9 @@ import "./App.css";
 
 import {Route, Switch} from "react-router-dom";
 
-import Navigation from "./components/common/Navigation";
-import Main from "./components/common/Main";
-import Footer from "./components/common/Footer";
+import Navigation from "./components/common/navigation/Navigation";
+import Main from "./components/common/parts/Main";
+import Footer from "./components/common/navigation/Footer";
 
 import HomepageGuest from "./components/pages/home/HomepageGuest";
 import HomepageLoggedIn from "./components/pages/home/HomepageLoggedIn";
@@ -26,7 +26,7 @@ import Login from "./components/pages/auth/Login";
 import Profile from "./components/pages/profile/Profile";
 import EditProfile from "./components/pages/profile/EditProfile";
 
-import PageNotFound from "./components/common/PageNotFound";
+import PageNotFound from "./components/pages/404/PageNotFound";
 
 import {useContext} from "react";
 import AuthContext from "./context/AuthContext";

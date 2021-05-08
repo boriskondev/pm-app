@@ -17,6 +17,13 @@
     left:50%;
     transform: translate(-50%,-50%);
     padding: 20px;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
 }
 
 .show {
@@ -25,6 +32,8 @@
 
 .show p {
     color: #303030;
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 .hide {

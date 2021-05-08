@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "../../common/parts/Header";
 import {Link} from "react-router-dom";
 import "./PageNotFound.css";
 

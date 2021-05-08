@@ -1,12 +1,12 @@
-import Header from "../../common/Header";
-import Notifications from "../../common/Notifications";
+import Header from "../../common/parts/Header";
+import Notifications from "../../common/parts/Notifications";
 import "../add/AddTask.css";
 import {useState, useEffect, useContext} from "react";
 import {useHistory} from "react-router-dom";
 import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
 import fetchWrapper from "../../../services/fetchWrapper";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 
 const EditTask = ({match}) => {
     const {id} = match.params;

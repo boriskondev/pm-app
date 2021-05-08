@@ -1,5 +1,5 @@
-import Header from "../../common/Header";
-import Notifications from "../../common/Notifications";
+import Header from "../../common/parts/Header";
+import Notifications from "../../common/parts/Notifications";
 import {useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";

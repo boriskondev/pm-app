@@ -1,12 +1,12 @@
 import "./ProjectsStatus.css";
-import Header from "../../common/Header";
-import NoTasksYet from "../../common/NoTasksYet";
+import Header from "../../common/parts/Header";
+import NoTasksYet from "../../common/parts/NoTasksYet";
 import ProjectData from "./ProjectData";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 import filterClientsAndProjects from "../../../utils/filterClientsAndProjects";
 import fetchWrapper from "../../../services/fetchWrapper";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import {useState, useEffect} from "react";
 
 const ProjectsStatus = () => {

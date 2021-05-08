@@ -1,12 +1,12 @@
 import "./HomepageLoggedIn.css";
-import Header from "../../common/Header";
+import Header from "../../common/parts/Header";
 import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
 import countTasksOfUser from "../../../utils/countTasksOfUser";
 import icons from "../../../utils/icons";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import fetchWrapper from "../../../services/fetchWrapper";
-import NoTasksYet from "../../common/NoTasksYet";
+import NoTasksYet from "../../common/parts/NoTasksYet";
 import {useState, useEffect} from "react";
 
 const HomepageLoggedIn = () => {

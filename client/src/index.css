@@ -110,39 +110,37 @@ button.add {
     padding: 10px 20px;
 }
 
+button.delete,
 button.complete {
     color: white;
     border-style: none;
     background: #D62130;
     font-size: 12px;
     padding: 10px 20px;
-    margin: auto 10px;
     width: 120px;
     font-weight: bold;
 }
 
-button.edit {
+button.cancel {
     color: #D51F2F;
     background: white;
     border: 1px solid #D62130;
     font-size: 12px;
     padding: 10px 20px;
-    margin: auto 10px;
     width: 120px;
     font-weight: bold;
 }
 
-button.delete {
-    color: white;
-    background: #303030;
-    border-style: none;
-    font-size: 12px;
-    padding: 10px 20px;
-    margin: auto 10px;
-    width: 120px;
-    font-weight: bold;
-
-}
+/*button.delete {*/
+/*    color: white;*/
+/*    background: #303030;*/
+/*    border-style: none;*/
+/*    font-size: 12px;*/
+/*    padding: 10px 20px;*/
+/*    margin: auto 10px;*/
+/*    width: 120px;*/
+/*    font-weight: bold;*/
+/*}*/
 
 /*::placeholder {*/
 /*    color: rebeccapurple;*/

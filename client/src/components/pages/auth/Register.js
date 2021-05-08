@@ -1,5 +1,5 @@
-import Header from "../../common/Header";
-import Notifications from "../../common/Notifications";
+import Header from "../../common/parts/Header";
+import Notifications from "../../common/parts/Notifications";
 import {useState, useContext} from "react";
 import "./Register.css";
 import endpoints from "../../../services/api";

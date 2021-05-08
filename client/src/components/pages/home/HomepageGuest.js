@@ -1,6 +1,6 @@
 import "./HomepageGuest.css";
-import Header from "../../common/Header";
-import LoadingIndicator from "../../common/LoadingIndicator";
+import Header from "../../common/parts/Header";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import fetchWrapper from "../../../services/fetchWrapper";

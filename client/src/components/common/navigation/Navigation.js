@@ -1,6 +1,6 @@
 import "./Navigation.css";
 import {Link} from "react-router-dom";
-import endpoints from "../../services/api";
+import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 

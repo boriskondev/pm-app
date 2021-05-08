@@ -1,5 +1,5 @@
-import Header from "../../common/Header";
-import Notifications from "../../common/Notifications";
+import Header from "../../common/parts/Header";
+import Notifications from "../../common/parts/Notifications";
 import "./AddTask.css";
 import {useState, useEffect, useContext} from "react";
 import endpoints from "../../../services/api";
