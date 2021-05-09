@@ -14,6 +14,25 @@ const HomepageLoggedIn = () => {
     const [activeTasks, setActiveTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // const filterData = (users, activeTasks) => {
+    //     let data = [];
+    //     for (let i = 0; i < users.length; i++) {
+    //         let user = users[i];
+    //         if (countTasksOfUser(user._id, activeTasks) > 0) {
+    //             let userData = {
+    //                 _id: user._id,
+    //                 username: user.username,
+    //                 currentTasks: countTasksOfUser(user._id, activeTasks),
+    //                 department: user.department
+    //             }
+    //             data.push(userData);
+    //         }
+    //     }
+    //     return data;
+    // }
+    //
+    // const result = filterData(users, activeTasks);
+
     useEffect(() => {
         const fetchData = async () => {
             const allUsersInDB = await fetchWrapper.get(endpoints.USERS);
@@ -32,7 +51,7 @@ const HomepageLoggedIn = () => {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
-                <LoadingIndicator />
+                <LoadingIndicator/>
             </>
 
         )
@@ -42,7 +61,7 @@ const HomepageLoggedIn = () => {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
-                <NoTasksYet />
+                <NoTasksYet/>
             </>
         )
     }
