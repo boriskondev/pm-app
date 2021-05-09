@@ -83,3 +83,9 @@
     margin: 20px auto 30px auto;
     display: block;
 }
+
+.weekly-overview .sort-icon {
+    position: relative;
+    bottom: 5px;
+    left: 8px;
+}

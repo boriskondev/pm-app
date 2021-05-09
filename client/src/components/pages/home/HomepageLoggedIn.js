@@ -10,42 +10,67 @@ import NoTasksYet from "../../common/parts/NoTasksYet";
 import {useState, useEffect} from "react";
 
 const HomepageLoggedIn = () => {
-    const [users, setUsers] = useState([]);
+    const [dataToDisplay, setDataToDisplay] = useState([]);
     const [activeTasks, setActiveTasks] = useState([]);
+    const [currentSort, setCurrentSort] = useState("sortDefault");
     const [isLoading, setIsLoading] = useState(true);
 
-    // const filterData = (users, activeTasks) => {
-    //     let data = [];
-    //     for (let i = 0; i < users.length; i++) {
-    //         let user = users[i];
-    //         if (countTasksOfUser(user._id, activeTasks) > 0) {
-    //             let userData = {
-    //                 _id: user._id,
-    //                 username: user.username,
-    //                 currentTasks: countTasksOfUser(user._id, activeTasks),
-    //                 department: user.department
-    //             }
-    //             data.push(userData);
-    //         }
-    //     }
-    //     return data;
-    // }
-    //
-    // const result = filterData(users, activeTasks);
+    const filterData = (users, activeTasks) => {
+        let data = [];
+        for (let i = 0; i < users.length; i++) {
+            let user = users[i];
+            if (countTasksOfUser(user._id, activeTasks) > 0) {
+                let userData = {
+                    _id: user._id,
+                    username: user.username,
+                    currentTasks: countTasksOfUser(user._id, activeTasks),
+                    department: user.department
+                }
+                data.push(userData);
+            }
+        }
+        return data;
+    }
+
+    const sortTypes = {
+        sortUp: {
+            class: "sort-up",
+            fn: (a, b) => a.currentTasks - b.currentTasks
+        },
+        sortDown: {
+            class: "sort-down",
+            fn: (a, b) => b.currentTasks - a.currentTasks
+        },
+        sortDefault: {
+            class: "sort",
+            fn: (a, b) => a
+        }
+    };
+
+    const onSortChange = () => {
+        let nextSort;
+        if (currentSort === "sortDown") nextSort = "sortUp";
+        else if (currentSort === "sortUp") nextSort = "sortDefault";
+        else if (currentSort === "sortDefault") nextSort = "sortDown";
+
+        setCurrentSort(nextSort);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             const allUsersInDB = await fetchWrapper.get(endpoints.USERS);
             const allTasksInDB = await fetchWrapper.get(endpoints.TASKS);
 
-            setUsers(allUsersInDB);
-            setActiveTasks(allTasksInDB);
             setIsLoading(false);
+            setActiveTasks(allTasksInDB);
+            setDataToDisplay(filterData(allUsersInDB, allTasksInDB));
+
         };
 
         fetchData();
 
     }, []);
+
 
     if (isLoading) {
         return (
@@ -57,7 +82,7 @@ const HomepageLoggedIn = () => {
         )
     }
 
-    if (activeTasks.length === 0) {
+    if (dataToDisplay.length === 0) {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
@@ -66,7 +91,7 @@ const HomepageLoggedIn = () => {
         )
     }
 
-    if (!isLoading && activeTasks.length > 0) {
+    if (!isLoading && dataToDisplay.length > 0) {
         return (
             <>
                 <Link to="/weekly-status"><Header title="Overview"/></Link>
@@ -75,25 +100,23 @@ const HomepageLoggedIn = () => {
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Tasks</th>
+                            <th>
+                                Tasks
+                                    <i className="sort-icon" onClick={(e) => onSortChange(e)}>{icons[currentSort]}</i>
+                            </th>
                             <th>Department</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {users && (
-                            users.map(user => (
-                                countTasksOfUser(user._id, activeTasks) > 0
-                                    ? (
-                                        <tr key={user._id}>
-                                            <td><Link
-                                                to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
-                                            </td>
-                                            <td>{countTasksOfUser(user._id, activeTasks)}</td>
-                                            <td className="homepage-icon">{icons[user.department]}</td>
-                                        </tr>
-                                    )
-                                    : null
-                            )))}
+                        {dataToDisplay.sort(sortTypes[currentSort].fn).map(user => (
+                            <tr key={user._id}>
+                                <td><Link
+                                    to={`weekly-status/${user._id}/${user.username}`}>{user.username}</Link>
+                                </td>
+                                <td>{user.currentTasks}</td>
+                                <td className="homepage-icon">{icons[user.department]}</td>
+                            </tr>
+                        ))}
                         </tbody>
                         <tfoot>
                         <tr>

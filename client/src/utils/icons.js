@@ -2,7 +2,6 @@ import {
     MdAssessment as Assessment,
     MdPhone as Phone,
     MdPalette as Palette,
-    MdSort as Sort,
     MdDelete as Delete,
     MdEdit as Edit,
     MdDone as Done,
@@ -12,14 +11,19 @@ import {
 
 import {
     FaUser as User,
-    FaCodeBranch as Department
+    FaCodeBranch as Department,
+    FaSort as Sort,
+    FaSortUp as SortUp,
+    FaSortDown as SortDown
 } from "react-icons/fa"
 
 const icons = {
     management: <Assessment size={25}/>,
     creative: <Palette size={25}/>,
     clientService: <Phone size={25}/>,
-    sort: <Sort size={20}/>,
+    sortDefault: <Sort size={18}/>,
+    sortUp: <SortUp size={18}/>,
+    sortDown: <SortDown size={18}/>,
     delete: <Delete size={25}/>,
     edit: <Edit size={25}/>,
     complete: <Done size={25}/>,
