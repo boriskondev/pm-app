@@ -44,7 +44,9 @@ function Navigation({loggedIn, getLoggedIn, loggedUser}) {
                         <li><Link to="/add-client">Add client</Link></li>
                     </ul>
                     <ul>
-                        <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
+                        { loggedUser && loggedUser.username !== undefined && (
+                            <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
+                            )}
                         <li><Link to="/profile">Profile</Link></li>
                         <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
                     </ul>
