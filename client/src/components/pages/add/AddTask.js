@@ -65,6 +65,17 @@ const AddTask = () => {
             return;
         }
 
+        const startDateToDate = new Date(startDate);
+        const endDateToDate = new Date(endDate);
+
+        if (startDateToDate > endDateToDate) {
+            setError("Start date cannot be later than the end date.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
+        }
+
         const newTaskToAdd = {
             taskName,
             createdBy: loggedUser.userId,
