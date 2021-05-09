@@ -15,7 +15,7 @@ import {
     FaCodeBranch as Department
 } from "react-icons/fa"
 
-export default {
+const icons = {
     management: <Assessment size={25}/>,
     creative: <Palette size={25}/>,
     clientService: <Phone size={25}/>,
@@ -28,3 +28,5 @@ export default {
     department: <Department size={30}/>,
     email: <Email size={30}/>,
 }
+
+export default icons;

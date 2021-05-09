@@ -1,4 +1,4 @@
-export default (data) => {
+const filterClientsAndProjects = (data) => {
     let newArr = []
     for (let task of data) {
         let client = task.clientId.clientName;
@@ -23,3 +23,5 @@ export default (data) => {
     }
     return newArr;
 }
+
+export default filterClientsAndProjects;

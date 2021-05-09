@@ -1,4 +1,4 @@
-export default (data) => {
+const sortUserTasksByClientAndProject = (data) => {
     data.sort((a, b) =>
         (a.clientId.clientName > b.clientId.clientName)
             ? 1 : (a.clientId.clientName === b.clientId.clientName)
@@ -6,3 +6,5 @@ export default (data) => {
                 ? 1 : -1) : -1)
     return data;
 }
+
+export default sortUserTasksByClientAndProject;
