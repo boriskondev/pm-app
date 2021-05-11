@@ -1,4 +1,4 @@
-import "./HomepageLoggedIn.css";
+import "./HomepageUser.css";
 import Header from "../../common/parts/Header";
 import {Link} from "react-router-dom";
 import endpoints from "../../../services/api";
@@ -9,7 +9,7 @@ import fetchWrapper from "../../../services/fetchWrapper";
 import NoTasksYet from "../../common/parts/NoTasksYet";
 import {useState, useEffect} from "react";
 
-const HomepageLoggedIn = () => {
+const HomepageUser = () => {
     const [dataToDisplay, setDataToDisplay] = useState([]);
     const [activeTasks, setActiveTasks] = useState([]);
     const [currentSort, setCurrentSort] = useState("sortDefault");
@@ -34,25 +34,18 @@ const HomepageLoggedIn = () => {
 
     const sortTypes = {
         sortUp: {
-            class: "sort-up",
             fn: (a, b) => a.currentTasks - b.currentTasks
         },
         sortDown: {
-            class: "sort-down",
             fn: (a, b) => b.currentTasks - a.currentTasks
-        },
-        sortDefault: {
-            class: "sort",
-            fn: (a, b) => a
         }
     };
 
     const onSortChange = () => {
         let nextSort;
-        if (currentSort === "sortDown") nextSort = "sortUp";
-        else if (currentSort === "sortUp") nextSort = "sortDefault";
-        else if (currentSort === "sortDefault") nextSort = "sortDown";
-
+        if (currentSort === "sortDefault") nextSort = "sortDown";
+        else if (currentSort === "sortDown") nextSort = "sortUp";
+        else if (currentSort === "sortUp") nextSort = "sortDown";
         setCurrentSort(nextSort);
     };
 
@@ -102,7 +95,7 @@ const HomepageLoggedIn = () => {
                             <th>Name</th>
                             <th>
                                 Tasks
-                                    <i className="sort-icon" onClick={(e) => onSortChange(e)}>{icons[currentSort]}</i>
+                                <i className="sort-icon" onClick={(e) => onSortChange(e)}>{icons[currentSort]}</i>
                             </th>
                             <th>Department</th>
                         </tr>
@@ -132,5 +125,5 @@ const HomepageLoggedIn = () => {
     }
 }
 
-export default HomepageLoggedIn;
+export default HomepageUser;
 

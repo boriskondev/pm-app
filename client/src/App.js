@@ -7,7 +7,7 @@ import Main from "./components/common/parts/Main";
 import Footer from "./components/common/navigation/Footer";
 
 import HomepageGuest from "./components/pages/home/HomepageGuest";
-import HomepageLoggedIn from "./components/pages/home/HomepageLoggedIn";
+import HomepageUser from "./components/pages/home/HomepageUser";
 
 import ProjectsStatus from "./components/pages/status/ProjectsStatus";
 import UserStatus from "./components/pages/status/UserStatus";
@@ -57,7 +57,7 @@ function App() {
             {loggedIn === true && (
                 <Main>
                     <Switch>
-                        <Route path="/" exact component={HomepageLoggedIn}/>
+                        <Route path="/" exact component={HomepageUser}/>
                         <Route path="/weekly-status" exact component={ProjectsStatus}/>
                         <Route path="/weekly-status/:id/:name" exact component={UserStatus}/>
                         <Route path="/edit-client/:id" exact component={EditClient}/>
