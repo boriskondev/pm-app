@@ -10,9 +10,9 @@ function Footer() {
             <div className="statistics">
                 <p>Find</p>
                 <ul>
-                    <li><Link>Tasks</Link></li>
                     <li><Link>Clients</Link></li>
                     <li><Link>Projects</Link></li>
+                    <li><Link>Tasks</Link></li>
                 </ul>
             </div>
         </footer>

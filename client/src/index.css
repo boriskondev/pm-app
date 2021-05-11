@@ -93,13 +93,13 @@ form .form-field input:hover {
     cursor: text;
 }
 
-button {
+/*button {*/
     /*font-size: 12px;*/
     /*padding: 10px 20px;*/
     /*margin: auto 10px;*/
     /*width: 120px;*/
     /*font-weight: bold;*/
-}
+/*}*/
 
 button.add {
     font-size: 20px;

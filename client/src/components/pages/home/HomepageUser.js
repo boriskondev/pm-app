@@ -38,6 +38,9 @@ const HomepageUser = () => {
         },
         sortDown: {
             fn: (a, b) => b.currentTasks - a.currentTasks
+        },
+        sortDefault: {
+            fn: (a, b) => a
         }
     };
 
