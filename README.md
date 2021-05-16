@@ -53,20 +53,14 @@ The application allows you to:
 ## Status
 The project is currently under development with many important features to be implemented:
 
-* Page updates:
-  * Clients and projects deletion
-  * Homepage - sort option by name, task count and department
-  * Where applicable - better tables design
-  * Add/edit task - better date picker component
-  * Edit profile context update issue check
-
 * New pages:
-  * Search - by task, project and client
-  * Add absence
-    * Email notifications option
+  * Search - by task, project and client / with slients and projects deletion
+  * Add absence with email notifications option
   * Admin
 
 * Misc:
+  * Where applicable - better tables design
+  * Add/edit task - better date picker component
   * Deployment
   * Real-life users tests
   * Considerable code refactoring and improvements

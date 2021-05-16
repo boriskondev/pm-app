@@ -71,6 +71,7 @@ form .form-field label {
     margin-bottom: 10px;
 }
 
+input,
 form .form-field input,
 form .form-field select {
     width: 100%;
@@ -84,11 +85,13 @@ form .form-field select {
     /*background-color: rgba(48, 48, 48,  0.05);*/
 }
 
+input:focus,
 form .form-field input:focus,
 form .form-field select:focus {
     outline-width: 0;
 }
 
+input:hover,
 form .form-field input:hover {
     cursor: text;
 }

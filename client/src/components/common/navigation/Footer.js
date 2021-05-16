@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css"
 import {Link} from "react-router-dom";
+import SearchClients from "../../pages/search/SearchClients";
 
 function Footer() {
 
@@ -8,11 +9,11 @@ function Footer() {
         <footer>
             <img src={process.env.PUBLIC_URL + "/images/logos/footer-logo.png"} alt="footer-logo"/>
             <div className="statistics">
-                <p>Find</p>
+                <p>Search</p>
                 <ul>
-                    <li><Link>Clients</Link></li>
-                    <li><Link>Projects</Link></li>
-                    <li><Link>Tasks</Link></li>
+                    <li><Link to="/search-clients">Clients</Link></li>
+                    {/*<li><Link>Projects</Link></li>*/}
+                    {/*<li><Link>Tasks</Link></li>*/}
                 </ul>
             </div>
         </footer>

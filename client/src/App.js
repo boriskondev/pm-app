@@ -26,13 +26,15 @@ import Login from "./components/pages/auth/Login";
 import Profile from "./components/pages/profile/Profile";
 import EditProfile from "./components/pages/profile/EditProfile";
 
+import SearchClients from "./components/pages/search/SearchClients";
+
 import PageNotFound from "./components/pages/404/PageNotFound";
 
 import {useContext} from "react";
 import AuthContext from "./context/AuthContext";
 
 function App() {
-    const {loggedIn, getLoggedIn, loggedUser} = useContext(AuthContext);
+    const {loggedIn} = useContext(AuthContext);
 
     return (
         <div className="App">
@@ -64,6 +66,7 @@ function App() {
                         <Route path="/add-task" exact component={AddTask}/>
                         <Route path="/profile" exact component={Profile}/>
                         <Route path="/edit-profile/:id" exact component={EditProfile}/>
+                        <Route path="/search-clients" exact component={SearchClients}/>
                         <Route path="/register" exact component={Register}/>
                         <Route path="/login" exact component={Login}/>
                         <Route component={PageNotFound}/>
