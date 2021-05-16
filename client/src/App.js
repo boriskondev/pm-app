@@ -37,11 +37,7 @@ function App() {
     return (
         <div className="App">
 
-            <Navigation
-                loggedIn={loggedIn}
-                getLoggedIn={getLoggedIn}
-                loggedUser={loggedUser}
-            />
+            <Navigation/>
 
             {loggedIn === false && (
                 <Main>

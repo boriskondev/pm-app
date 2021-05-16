@@ -4,10 +4,14 @@ import {useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
 import endpoints from "../../../services/api";
+import {useContext} from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const EditProfile = ({match}) => {
     const {id} = match.params;
     const history = useHistory();
+
+    const {setLoggedUser} = useContext(AuthContext);
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
@@ -61,6 +65,7 @@ const EditProfile = ({match}) => {
             .then(() => setSubmitted("User edited successfully."))
             .then(() => {
                 setTimeout(() => {
+                    setLoggedUser(prev => ({...prev, username: editedUser.username}))
                     history.push("/");
                 }, 1500);
             })
