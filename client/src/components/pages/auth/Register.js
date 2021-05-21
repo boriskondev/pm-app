@@ -57,16 +57,24 @@ const Register = () => {
             repeatPassword
         };
 
-        const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
+        try {
+            const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
 
-        for (let user of allUsersInDb) {
-            if (user.email === email) {
-                setError("This user is already registered.")
-                setTimeout(() => {
-                    setError(false);
-                }, 1500);
-                return;
+            for (let user of allUsersInDb) {
+                if (user.email === email) {
+                    setError("This user is already registered.")
+                    setTimeout(() => {
+                        setError(false);
+                    }, 1500);
+                    return;
+                }
             }
+        } catch (error) {
+            setError("You cannot register at the moment. Please try again later.");
+            setTimeout(() => {
+                setError(false);
+            }, 1500);
+            return;
         }
 
         const requestOptions = {
