@@ -92,7 +92,7 @@ const UserStatus = ({match}) => {
                         {tasksOfUser.map(task => (
                             <tr key={task._id}>
                                 <td>
-                                    <Link to={`/edit-client/${task.clientId._id}`}>{task.clientId.clientName}</Link>
+                                    {task.clientId.clientName}
                                 </td>
                                 <td>
                                     <Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link>

@@ -91,13 +91,17 @@ const EditClient = ({match}) => {
                         </div>
                     </fieldset>
 
-                    {isNotCreator === false && (
+                    {isNotCreator
+                        ? (
+                            <div className="notifications">
+                                <span className="error">You are not allowed to edit this.</span>
+                            </div>
+                        ) : (
                         <>
                             <Notifications submitted={submitted} error={error}/>
                             <button className="add" type="submit">Edit</button>
                         </>
                     )}
-
                 </form>
             </section>
 

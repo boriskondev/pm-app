@@ -3,6 +3,8 @@ import Header from "../../common/parts/Header";
 import {useState, useEffect} from "react";
 import fetchWrapper from "../../../services/fetchWrapper";
 import endpoints from "../../../services/api";
+import {Link} from "react-router-dom";
+import SearchBar from "../../common/parts/SearchBar";
 
 const SearchClients = () => {
     const [input, setInput] = useState("");
@@ -33,22 +35,30 @@ const SearchClients = () => {
         <>
             <Header title="Search clients"/>
             <section className="search-wrapper">
-                <div className="search-bar">
-                    <input
-                        value={input}
-                        type="text"
-                        autoComplete="off"
-                        autoFocus
-                        placeholder={"Enter client name"}
-                        onChange={(e) => updateInput(e.target.value)}
-                    />
-                </div>
+
+                <SearchBar
+                    input={input}
+                    updateInput={updateInput}
+                    placeholder="Enter client name"
+                    onChange={(e) => updateInput(e.target.value)}
+                />
+
                 <div className="search-result">
                     {clientsList.length > 0
                         ? clientsList.map(client => (
-                            <div className="client">{client.clientName}</div>
+                            <Link
+                                style={{textDecoration: "none"}}
+                                to={`/edit-client/${client._id}`}>
+                                <div className="client">
+                                    {client.clientName}
+                                </div>
+                            </Link>
                         ))
-                        : null}
+                        : (
+                            <div className="notifications">
+                                <span className="error">No results found :(</span>
+                            </div>
+                        )}
                 </div>
             </section>
         </>

@@ -16,7 +16,7 @@ function Footer() {
                     <p>Search</p>
                     <ul>
                         <li><Link to="/search-clients">Clients</Link></li>
-                        {/*<li><Link>Projects</Link></li>*/}
+                        <li><Link to="/search-projects">Projects</Link></li>
                         {/*<li><Link>Tasks</Link></li>*/}
                     </ul>
                 </div>
