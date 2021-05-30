@@ -60,7 +60,6 @@ const HomepageUser = () => {
             setIsLoading(false);
             setActiveTasks(allTasksInDB);
             setDataToDisplay(filterData(allUsersInDB, allTasksInDB));
-
         };
 
         fetchData();

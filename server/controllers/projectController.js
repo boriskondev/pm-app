@@ -23,7 +23,14 @@ const projectController = {
 
     findAll: async (req, res) => {
         try {
-            const allProjects = await Project.find();
+            const allProjects = await Project
+                .find()
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    }
+                ]);
             res.status(200).json(allProjects);
         } catch (error) {
             res.status(404).json({message: error.message});

@@ -115,12 +115,17 @@ const AddProject = ({match}) => {
                         </select>
                     </div>
 
-                    {isNotCreator === false && (
-                        <>
-                            <Notifications submitted={submitted} error={error}/>
-                            <button className="add" type="submit">Edit</button>
-                        </>
-                    )}
+                    {isNotCreator
+                        ? (
+                            <div className="notifications">
+                                <span className="error">You are not allowed to edit this.</span>
+                            </div>
+                        ) : (
+                            <>
+                                <Notifications submitted={submitted} error={error}/>
+                                <button className="add" type="submit">Edit</button>
+                            </>
+                        )}
 
                 </form>
             </section>

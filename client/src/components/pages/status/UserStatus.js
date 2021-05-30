@@ -95,7 +95,7 @@ const UserStatus = ({match}) => {
                                     {task.clientId.clientName}
                                 </td>
                                 <td>
-                                    <Link to={`/edit-project/${task.projectId._id}`}>{task.projectId.projectName}</Link>
+                                    {task.projectId.projectName}
                                 </td>
                                 <td>{task.taskName}</td>
                                 <td>

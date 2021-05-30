@@ -5,17 +5,20 @@ import fetchWrapper from "../../../services/fetchWrapper";
 import endpoints from "../../../services/api";
 import {Link} from "react-router-dom";
 import SearchBar from "../../common/parts/SearchBar";
+import LoadingIndicator from "../../common/parts/LoadingIndicator";
 
 const SearchClients = () => {
     const [input, setInput] = useState("");
     const [clientsListDefault, setClientsListDefault] = useState([]);
     const [clientsList, setClientsList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchData = async () => {
         return await fetchWrapper.get(endpoints.CLIENTS)
             .then(data => {
-                setClientsList(data)
-                setClientsListDefault(data)
+                setClientsList(data);
+                setClientsListDefault(data);
+                setIsLoading(false);
             });
     }
 
@@ -31,6 +34,16 @@ const SearchClients = () => {
         fetchData()
     }, []);
 
+    if (isLoading) {
+        return (
+            <>
+                <Header title="Search clients"/>
+                <LoadingIndicator/>
+            </>
+
+        )
+    }
+
     return (
         <>
             <Header title="Search clients"/>
@@ -44,13 +57,13 @@ const SearchClients = () => {
                 />
 
                 <div className="search-result">
-                    {clientsList.length > 0
+                    {clientsList && clientsList.length > 0
                         ? clientsList.map(client => (
                             <Link
                                 style={{textDecoration: "none"}}
                                 to={`/edit-client/${client._id}`}>
-                                <div className="client">
-                                    {client.clientName}
+                                <div className="result-card">
+                                    <p>{client.clientName}</p>
                                 </div>
                             </Link>
                         ))

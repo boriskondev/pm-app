@@ -54,7 +54,7 @@ The application allows you to:
 The project is currently under development with many important features to be implemented:
 
 * New pages:
-  * Search - by task, project and client / with slients and projects deletion
+  * Search - by task, project and client / with clients and projects deletion
   * Add absence with email notifications option
   * Admin
 

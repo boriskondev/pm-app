@@ -13,17 +13,19 @@
     margin: 60px auto;
 }
 
-.search-result .client {
+.search-result .result-card {
     width: 150px;
     height: 150px;
     margin: 10px;
     border: 2px solid #D62130;
     border-radius: 4px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
+    word-wrap: anywhere
 }
