@@ -82,9 +82,9 @@ const UserStatus = ({match}) => {
                     <table>
                         <thead>
                         <tr>
+                            <th>Task</th>
                             <th>Client</th>
                             <th>Project</th>
-                            <th>Task</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -92,12 +92,14 @@ const UserStatus = ({match}) => {
                         {tasksOfUser.map(task => (
                             <tr key={task._id}>
                                 <td>
+                                    {task.taskName}
+                                </td>
+                                <td>
                                     {task.clientId.clientName}
                                 </td>
                                 <td>
                                     {task.projectId.projectName}
                                 </td>
-                                <td>{task.taskName}</td>
                                 <td>
                                     <ul className="user-status-icons">
                                         {task.createdBy === loggedUser.userId

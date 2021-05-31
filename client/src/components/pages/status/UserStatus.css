@@ -10,6 +10,7 @@
     width: 65%;
     border-collapse: collapse;
     margin: 30px auto 50px auto;
+    /*margin: 50px auto 50px auto;*/
 }
 
 /*.user-weekly-info table th:nth-child(4) {*/
@@ -34,6 +35,14 @@
     background-color: #D62130;
     color: rgb(255, 255, 255);
 }
+
+/*.user-weekly-info table thead {*/
+/*    display: none;*/
+/*}*/
+
+/*.user-weekly-info tbody tr:first-child {*/
+/*    border-top: 2px solid #D62130;*/
+/*}*/
 
 .user-weekly-info tbody tr:last-child {
     border-bottom: 2px solid #D62130;
