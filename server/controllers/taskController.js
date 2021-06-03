@@ -80,6 +80,30 @@ const taskController = {
         }
     },
 
+    findAll: async (req, res) => {
+        try {
+            const allTasks = await Task
+                .find()
+                .populate([
+                    {
+                        path: "clientId",
+                        select: {"clientName": 1, "_id": 1}
+                    },
+                    {
+                        path: "projectId",
+                        select: {"projectName": 1, "_id": 1}
+                    },
+                    {
+                        path: "responsible",
+                        select: {"username": 1, "_id": 1}
+                    }]);
+            res.status(200).json(allTasks);
+
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
     findOne: async (req, res) => {
         try {
             const id = req.params.id;

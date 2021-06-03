@@ -49,20 +49,17 @@ The application allows you to:
 * Create/edit/complete/delete task
 * See overall status of active tasks
 * See overall status of active tasks per user
+* Search by client/project/task name
+* Edit profile name and password
 
 ## Status
 The project is currently under development with many important features to be implemented:
+* Considerable code refactoring and improvements
+* Add absence page with email notification
+* Admin page
+* Add/edit task - better date picker component
+* Deployment
+* Real-life users tests
 
-* New pages:
-  * Search - by task, project and client / with clients and projects deletion
-  * Add absence with email notifications option
-  * Admin
-
-* Misc:
-  * Where applicable - better tables design
-  * Add/edit task - better date picker component
-  * Deployment
-  * Real-life users tests
-  * Considerable code refactoring and improvements
 
 

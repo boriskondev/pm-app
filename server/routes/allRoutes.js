@@ -37,6 +37,7 @@ router.put("/projects/:id", projectController.edit);
 // Tasks
 router.post("/tasks", taskController.create);
 router.get("/tasks", taskController.findAllActive);
+router.get("/tasksAll", taskController.findAll);
 router.get("/tasks/completed", taskController.findAllComplete);
 router.get("/tasks/:id", taskController.findOne);
 router.get("/tasks/responsible/:id", taskController.findTasksOfUser);

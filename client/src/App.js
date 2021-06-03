@@ -28,6 +28,7 @@ import EditProfile from "./components/pages/profile/EditProfile";
 
 import SearchClients from "./components/pages/search/SearchClients";
 import SearchProjects from "./components/pages/search/SearchProjects";
+import SearchTasks from "./components/pages/search/SearchTasks";
 
 import PageNotFound from "./components/pages/404/PageNotFound";
 
@@ -69,6 +70,7 @@ function App() {
                         <Route path="/edit-profile/:id" exact component={EditProfile}/>
                         <Route path="/search-clients" exact component={SearchClients}/>
                         <Route path="/search-projects" exact component={SearchProjects}/>
+                        <Route path="/search-tasks" exact component={SearchTasks}/>
                         <Route path="/register" exact component={Register}/>
                         <Route path="/login" exact component={Login}/>
                         <Route component={PageNotFound}/>

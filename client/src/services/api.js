@@ -10,6 +10,7 @@ const endpoints = {
     CLIENTS: `${baseURL}/clients`,
     PROJECTS: `${baseURL}/projects`,
     TASKS: `${baseURL}/tasks`,
+    TASKS_ALL: `${baseURL}/tasksAll`,
     TASKS_RESPONSIBLE: `${baseURL}/tasks/responsible`
 }
 
