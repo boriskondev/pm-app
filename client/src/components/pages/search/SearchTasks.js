@@ -62,10 +62,12 @@ const SearchTasks = () => {
                                 style={{textDecoration: "none"}}
                                 to={`/edit-task/${task._id}`}>
                                 <div className="result-card-task">
-                                    <p>{task.taskName}</p>
                                     <div className="result-card-task-details">
-                                        <p className="result-client">{task.clientId.clientName}</p>
-                                        <p className="result-project">{task.projectId.projectName}</p>
+                                        <p>{task.taskName}</p>
+                                        <div className="result-card-task-client-and-project">
+                                            <p className="result-client">{task.clientId.clientName}</p>
+                                            <p className="result-project">{task.projectId.projectName}</p>
+                                        </div>
                                     </div>
                                     <p className="status">{task.status}</p>
                                 </div>

@@ -1,16 +1,13 @@
 .search-result-tasks {
     background-color: white;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    flex-direction: column;
     width: 800px;
     margin: 60px auto;
 }
 
 .search-result-tasks .result-card-task {
-    width: 100%;
-    margin: 5px;
+    margin: 5px 10px;
     border: 2px solid #D62130;
     border-radius: 4px;
     padding: 10px;
@@ -18,23 +15,41 @@
     font-weight: bold;
     word-wrap: anywhere;
     display: flex;
+    justify-content: space-around;
 }
 
-.search-result-tasks .result-card-task-details {
+.search-result-task .result-card-task-details {
     margin-top: 10px;
     display: flex;
+    flex-wrap: wrap;
     font-weight: normal;
     font-size: 12px;
     color: #999999;
+    flex-basis: 50%;
+
 }
 
-.result-client {
+.search-result-task .result-card-task-details p {
+    width: 100%;
+}
+
+.result-card-task-client-and-project {
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #999999;
+}
+
+.result-card-task-client-and-project p:nth-child(1) {
     margin-right: 10px;
 }
 
 .status {
-    margin-top: 10px;
-    font-size: 12px;
-    font-weight: normal;
-    position: relative;
+    font-size: 16px;
+    align-self: center;
+    margin-left: 10px;
+    padding: 5px;
+    border: 2px solid #D62130;
+    font-weight: bold;
 }
