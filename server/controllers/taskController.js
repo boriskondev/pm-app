@@ -55,6 +55,17 @@ const taskController = {
         }
     },
 
+    findAllActiveCount: async (req, res) => {
+        try {
+            const filter = {status: "active"};
+            const allTasks = await Task.find(filter);
+            res.status(200).json(allTasks.length);
+
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
     findAllComplete: async (req, res) => {
         try {
             const filter = {status: "complete"};

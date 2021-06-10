@@ -37,6 +37,15 @@ const projectController = {
         }
     },
 
+    findAllCount: async (req, res) => {
+        try {
+            const allProjects = await Project.find();
+            res.status(200).json(allProjects.length);
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
+    },
+
     findOne: async (req, res) => {
         try {
             const id = req.params.id;

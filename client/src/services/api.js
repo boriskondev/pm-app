@@ -8,8 +8,11 @@ const endpoints = {
     LOGGED_USER: `${baseURL}/loggedUser`,
     USERS: `${baseURL}/users`,
     CLIENTS: `${baseURL}/clients`,
+    CLIENTS_COUNT: `${baseURL}/clientsAll`,
     PROJECTS: `${baseURL}/projects`,
+    PROJECTS_COUNT: `${baseURL}/projectsAll`,
     TASKS: `${baseURL}/tasks`,
+    TASKS_COUNT: `${baseURL}/tasksCount`,
     TASKS_ALL: `${baseURL}/tasksAll`,
     TASKS_RESPONSIBLE: `${baseURL}/tasks/responsible`
 }

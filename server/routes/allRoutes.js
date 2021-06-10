@@ -25,18 +25,21 @@ router.patch("/users/:id", userController.updateUser);
 // Clients
 router.post("/clients", clientController.create);
 router.get("/clients", clientController.findAll);
+router.get("/clientsAll", clientController.findAllCount);
 router.get("/clients/:id", clientController.findOne);
 router.put("/clients/:id", clientController.edit);
 
-// Project
+// Projects
 router.post("/projects", projectController.create);
 router.get("/projects", projectController.findAll);
+router.get("/projectsAll", projectController.findAllCount);
 router.get("/projects/:id", projectController.findOne);
 router.put("/projects/:id", projectController.edit);
 
 // Tasks
 router.post("/tasks", taskController.create);
 router.get("/tasks", taskController.findAllActive);
+router.get("/tasksCount", taskController.findAllActiveCount);
 router.get("/tasksAll", taskController.findAll);
 router.get("/tasks/completed", taskController.findAllComplete);
 router.get("/tasks/:id", taskController.findOne);

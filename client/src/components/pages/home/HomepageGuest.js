@@ -14,13 +14,13 @@ const HomepageGuest = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS);
-            const allProjectsInDB = await fetchWrapper.get(endpoints.PROJECTS);
-            const allTasksInDB = await fetchWrapper.get(endpoints.TASKS);
+            const allClientsInDB = await fetchWrapper.get(endpoints.CLIENTS_COUNT);
+            const allProjectsInDB = await fetchWrapper.get(endpoints.PROJECTS_COUNT);
+            const allTasksInDB = await fetchWrapper.get(endpoints.TASKS_COUNT);
 
-            setClients(allClientsInDB.length);
-            setProjects(allProjectsInDB.length);
-            setTasks(allTasksInDB.length);
+            setClients(allClientsInDB);
+            setProjects(allProjectsInDB);
+            setTasks(allTasksInDB);
             setIsLoading(false);
         };
 
@@ -39,7 +39,7 @@ const HomepageGuest = () => {
                 ) }
 
                 { clients !== undefined && projects !== undefined && tasks !== undefined && (
-                    <div className="status">
+                    <div className="home-status">
                         <ul>
                             <li>Clients: <span>{clients}</span></li>
                             <li>Projects: <span>{projects}</span></li>
