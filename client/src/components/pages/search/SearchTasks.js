@@ -6,6 +6,7 @@ import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import SearchBar from "../../common/parts/SearchBar";
 import {Link} from "react-router-dom";
 import "./SearchTasks.css";
+import SearchTasksCard from "./SearchTasksCard";
 
 const SearchTasks = () => {
     const [input, setInput] = useState("");
@@ -58,21 +59,7 @@ const SearchTasks = () => {
                 <div className="search-result-tasks">
                     {tasksList && tasksList.length > 0
                         ? tasksList.map(task => (
-                            <Link
-                                style={{textDecoration: "none"}}
-                                to={`/edit-task/${task._id}`}>
-                                <div className="result-card-task">
-                                    <div className="result-card-task-details">
-                                        <p>{task.taskName}</p>
-                                        <div className="result-card-task-client-and-project">
-                                            <p className="result-client">{task.clientId.clientName}</p>
-                                            <p className="result-project">{task.projectId.projectName}</p>
-                                        </div>
-                                    </div>
-                                    <p className="status">{task.status}</p>
-                                </div>
-
-                            </Link>
+                            <SearchTasksCard task={task}/>
                         ))
                         : (
                             <div className="notifications">

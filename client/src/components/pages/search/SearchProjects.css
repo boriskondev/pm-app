@@ -1,5 +1,5 @@
-.search-result .result-card {
-    font-size: 22px;
+.search-result .result-card.project-card {
+    font-size: 16px;
 }
 
 .result-card-client {

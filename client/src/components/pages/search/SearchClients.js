@@ -62,7 +62,7 @@ const SearchClients = () => {
                             <Link
                                 style={{textDecoration: "none"}}
                                 to={`/edit-client/${client._id}`}>
-                                <div className="result-card">
+                                <div className="result-card client-card">
                                     <p>{client.clientName}</p>
                                 </div>
                             </Link>
