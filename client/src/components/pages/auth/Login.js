@@ -1,12 +1,11 @@
 import Header from "../../common/parts/Header";
 import Notifications from "../../common/parts/Notifications";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import "./Register.css";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import endpoints from "../../../services/api";
-import {useHistory} from "react-router-dom";
-import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
+import setAndUnsetError from "../../../utils/setAndUnsetError";
 
 const Login = () => {
     const history = useHistory();
@@ -26,23 +25,13 @@ const Login = () => {
         setState(prevState => ({...prevState, [id]: value}))
     }
 
-    const setAndUnsetError = (message, time) => {
-        setError(message)
-        setTimeout(() => {
-            setError(false);
-        }, time);
-    }
-
     const timeoutLength = 1500;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!state.email || !state.password) {
-            setError("All fields are required.");
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
+            setAndUnsetError(setError, "All fields are required", timeoutLength);
             return;
         }
 
@@ -62,16 +51,23 @@ const Login = () => {
 
         const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
 
-        if (loginResponse.status === 400) {
-            setAndUnsetError("Email or password is missing.", timeoutLength);
-            return;
-        } else if (loginResponse.status === 401) {
-            setAndUnsetError("Wrong password.", timeoutLength);
-            return;
-        } else if (loginResponse.status === 404) {
-            setAndUnsetError("User does not exist.", timeoutLength);
+        let message = null;
+
+        if (loginResponse.status === 400) message = "One or more fields are empty.";
+        else if (loginResponse.status === 401) message = "Wrong password.";
+        else if (loginResponse.status === 404) message = "User does not exist.";
+
+        if (message) {
+            setAndUnsetError(setError, message, timeoutLength);
             return;
         }
+
+        setSubmitted("User logged in successfully.");
+
+        setTimeout(() => {
+            getLoggedIn();
+            history.push("/");
+        }, 1500);
     }
 
     return (
