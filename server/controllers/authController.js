@@ -62,19 +62,19 @@ const login = async (req, res) => {
         const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({errorMessage: "Please enter all required fields."});
+            return res.status(400).json("Email or password is missing.");
         }
 
         const existingUser = await User.findOne({email: email});
 
         if (!existingUser) {
-            return res.status(401).json({errorMessage: "Wrong email or password."});
+            return res.status(404).send();
         }
 
         const passwordCorrect = await bcrypt.compare(password, existingUser.password);
 
         if (!passwordCorrect) {
-            return res.status(401).json({errorMessage: "Wrong email or password."});
+            return res.status(401).send();
         }
 
         // Sign the token

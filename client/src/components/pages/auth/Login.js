@@ -7,7 +7,6 @@ import endpoints from "../../../services/api";
 import {useHistory} from "react-router-dom";
 import {useContext} from "react";
 import AuthContext from "../../../context/AuthContext";
-import fetchWrapper from "../../../services/fetchWrapper";
 
 const Login = () => {
     const history = useHistory();
@@ -16,6 +15,7 @@ const Login = () => {
     const [error, setError] = useState(false);
 
     const {getLoggedIn} = useContext(AuthContext);
+
     const [state, setState] = useState({
         email: "",
         password: ""
@@ -25,6 +25,15 @@ const Login = () => {
         const {id, value} = e.target
         setState(prevState => ({...prevState, [id]: value}))
     }
+
+    const setAndUnsetError = (message, time) => {
+        setError(message)
+        setTimeout(() => {
+            setError(false);
+        }, time);
+    }
+
+    const timeoutLength = 1500;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,18 +53,6 @@ const Login = () => {
             password
         };
 
-        const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
-
-        const alreadyRegistered = allUsersInDb.find(user => user.email === email);
-
-        if (!alreadyRegistered) {
-            setError("This user is not registered yet.")
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
-            return;
-        }
-
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -65,19 +62,16 @@ const Login = () => {
 
         const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
 
-        if (!loginResponse.ok) {
-            setError("Wrong password.");
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
+        if (loginResponse.status === 400) {
+            setAndUnsetError("Email or password is missing.", timeoutLength);
+            return;
+        } else if (loginResponse.status === 401) {
+            setAndUnsetError("Wrong password.", timeoutLength);
+            return;
+        } else if (loginResponse.status === 404) {
+            setAndUnsetError("User does not exist.", timeoutLength);
             return;
         }
-
-        setSubmitted("User logged in successfully.")
-        setTimeout(() => {
-            getLoggedIn()
-            history.push("/")
-        }, 1500);
     }
 
     return (

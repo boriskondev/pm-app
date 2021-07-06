@@ -4,7 +4,6 @@ import endpoints from "../../../services/api";
 import Header from "../../common/parts/Header";
 import LoadingIndicator from "../../common/parts/LoadingIndicator";
 import SearchBar from "../../common/parts/SearchBar";
-import {Link} from "react-router-dom";
 import "./SearchTasks.css";
 import SearchTasksCard from "./SearchTasksCard";
 
