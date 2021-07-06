@@ -5,7 +5,7 @@ import "./Register.css";
 import endpoints from "../../../services/api";
 import {Link, useHistory} from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
-import fetchWrapper from "../../../services/fetchWrapper";
+import setAndUnsetError from "../../../utils/setAndUnsetError";
 
 const Register = () => {
     const history = useHistory();
@@ -23,27 +23,23 @@ const Register = () => {
     });
 
     const handleFieldChange = (e) => {
-        const {id, value} = e.target
-        setState(prevState => ({...prevState, [id]: value}))
+        const {id, value} = e.target;
+        setState(prevState => ({...prevState, [id]: value}));
     }
+
+    const timeoutLength = 1500;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!state.username || !state.department || !state.email ||
             !state.password || !state.repeatPassword) {
-            setError("All fields are required.");
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
+            setAndUnsetError(setError, "All fields are required.", timeoutLength);
             return;
         }
 
         if (state.password !== state.repeatPassword) {
-            setError("Passwords do not match.");
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
+            setAndUnsetError(setError, "Passwords do not match.", timeoutLength);
             return;
         }
 
@@ -57,26 +53,6 @@ const Register = () => {
             repeatPassword
         };
 
-        try {
-            const allUsersInDb = await fetchWrapper.get(endpoints.USERS);
-
-            for (let user of allUsersInDb) {
-                if (user.email === email) {
-                    setError("This user is already registered.")
-                    setTimeout(() => {
-                        setError(false);
-                    }, 1500);
-                    return;
-                }
-            }
-        } catch (error) {
-            setError("You cannot register at the moment. Please try again later.");
-            setTimeout(() => {
-                setError(false);
-            }, 1500);
-            return;
-        }
-
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -84,15 +60,32 @@ const Register = () => {
             credentials: "include"
         };
 
-        fetch(endpoints.REGISTER, requestOptions)
-            .then(() => {
-                setSubmitted("User registered successfully.")
-                setTimeout(() => {
-                    getLoggedIn()
-                    history.push("/")
-                }, 1500);
-            })
-            .catch(err => console.log("In catch" + err));
+        try {
+            const registerResponse = await fetch(endpoints.REGISTER, requestOptions);
+
+            let message = null;
+
+            if (registerResponse.status === 400) message = "Enter all required fields.";
+            else if (registerResponse.status === 406) message = "This email is already registered.";
+            else if (registerResponse.status === 418) message = "Passwords do not match.";
+
+            if (message) {
+                setAndUnsetError(setError, message, timeoutLength);
+                return;
+            }
+
+            setSubmitted("User registered successfully.");
+
+            setTimeout(() => {
+                getLoggedIn();
+                history.push("/");
+            }, 1500);
+
+        } catch (error) {
+            console.log(error);
+            setAndUnsetError(setError, "You cannot register now.", timeoutLength);
+            // return;
+        }
     }
 
     return (

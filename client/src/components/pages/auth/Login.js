@@ -21,8 +21,8 @@ const Login = () => {
     })
 
     const handleFieldChange = (e) => {
-        const {id, value} = e.target
-        setState(prevState => ({...prevState, [id]: value}))
+        const {id, value} = e.target;
+        setState(prevState => ({...prevState, [id]: value}));
     }
 
     const timeoutLength = 1500;
@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
 
         if (!state.email || !state.password) {
-            setAndUnsetError(setError, "All fields are required", timeoutLength);
+            setAndUnsetError(setError, "All fields are required.", timeoutLength);
             return;
         }
 
@@ -49,25 +49,32 @@ const Login = () => {
             credentials: "include"
         };
 
-        const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
+        try {
+            const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
 
-        let message = null;
+            let message = null;
 
-        if (loginResponse.status === 400) message = "One or more fields are empty.";
-        else if (loginResponse.status === 401) message = "Wrong password.";
-        else if (loginResponse.status === 404) message = "User does not exist.";
+            if (loginResponse.status === 400) message = "Enter all required fields.";
+            else if (loginResponse.status === 401) message = "Wrong password.";
+            else if (loginResponse.status === 404) message = "User does not exist.";
 
-        if (message) {
-            setAndUnsetError(setError, message, timeoutLength);
-            return;
+            if (message) {
+                setAndUnsetError(setError, message, timeoutLength);
+                return;
+            }
+
+            setSubmitted("User logged in successfully.");
+
+            setTimeout(() => {
+                getLoggedIn();
+                history.push("/");
+            }, 1500);
+
+        } catch (error) {
+            console.log(error);
+            setAndUnsetError(setError, "You cannot login now.", timeoutLength);
+            // return;
         }
-
-        setSubmitted("User logged in successfully.");
-
-        setTimeout(() => {
-            getLoggedIn();
-            history.push("/");
-        }, 1500);
     }
 
     return (

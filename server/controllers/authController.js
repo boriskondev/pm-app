@@ -9,21 +9,17 @@ const register = async (req, res) => {
 
         // Validation
         if (!username || !department || !email || !password) {
-            return res.status(400).json({errorMessage: "Please enter all required fields."});
+            return res.status(400).send();
         }
 
-        // if (password.length < 6) {
-        //     return res.status(400).json({errorMessage: "Please enter a password of at least 6 characters."});
-        // }
-
         if (password !== repeatPassword) {
-            return res.status(400).json({errorMessage: "Please enter the same password twice."});
+            return res.status(418).send();
         }
 
         const existingUser = await User.findOne({email: email});
 
         if (existingUser) {
-            return res.status(400).json({errorMessage: "An account with this email already exists."});
+            return res.status(406).send();
         }
 
         // Hashing
@@ -62,7 +58,7 @@ const login = async (req, res) => {
         const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(400).json("Email or password is missing.");
+            return res.status(400).send();
         }
 
         const existingUser = await User.findOne({email: email});
