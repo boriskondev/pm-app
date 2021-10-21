@@ -22,7 +22,7 @@ const EditProfile = ({match}) => {
         repeatPassword: ""
     });
 
-    useEffect(() => {
+    useEffect((id) => {
         fetchWrapper.get(endpoints.USERS + `/${id}`)
             .then(data => {
                 setState({username: data.username});

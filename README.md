@@ -1,6 +1,8 @@
 ## PM APP
 This application is a simple project management solution for the company I am currently working in.
 
+The life version is already deployed and can be seen here https://mtest3.netlify.app/
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)

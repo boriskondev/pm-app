@@ -12,9 +12,15 @@ function Navigation() {
     const {loggedIn, getLoggedIn, loggedUser} = useContext(AuthContext);
 
     async function logoutHandler() {
-        await axios.get(endpoints.LOGOUT);
+        const res = await axios.get(endpoints.LOGOUT);
         await getLoggedIn();
         history.push("/");
+
+        // const res = await axios.get(endpoints.LOGOUT);
+        // if (res.status === 200) {
+        //     await getLoggedIn();
+        //     history.push("/");
+        // }
     }
 
     return (

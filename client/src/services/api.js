@@ -1,4 +1,5 @@
-const baseURL = "http://localhost:4000";
+const baseURL = "https://mtest3.herokuapp.com";
+// const baseURL = "http://localhost:5000";
 
 const endpoints = {
     REGISTER: `${baseURL}/register`,
