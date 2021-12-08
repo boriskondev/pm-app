@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-// const requireAuth = require("../middleware/requireAuth");
+// const { requireAuth } = require('../middleware/authMiddleware');
 
+// Controllers
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const clientController = require("../controllers/clientController");
@@ -16,9 +17,9 @@ router.get("/loggedIn", authController.loggedIn);
 router.get("/loggedUser", authController.getLoggedUserInfo);
 
 // Users
-router.get("/users", userController.findAll);
+router.get("/users", requireAuth, userController.findAll);
 router.get("/users/:id", userController.findOne);
-router.get("/users/:id/tasks", userController.getAllTasks);
+router.get("/users/:id/tasks",  userController.getAllTasks);
 router.patch("/users/:id", userController.updateUser);
 // router.delete("/users/:id", userController.deleteUser);
 
