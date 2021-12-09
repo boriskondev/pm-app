@@ -1,41 +1,41 @@
 form .form-field #task-term {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 form .form-field #task-term input {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 form .form-field span {
-    margin: auto 20px;
+  margin: auto 20px;
 }
 
 form .form-field .responsible-chosen {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 form .form-field .responsible-chosen ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
 form .form-field .responsible-chosen ul li {
-    width: 90px;
-    height: 40px;
-    color: #303030;
-    padding: 5px;
-    margin: 5px;
-    font-size: 20px;
-    border: 2px solid #D62130;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 90px;
+  height: 40px;
+  color: #303030;
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
+  border: 2px solid #d62130;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form .form-field .responsible-chosen ul li.name-clicked {
-    color: white;
-    background-color: #D62130;
+  color: white;
+  background-color: #d62130;
 }

@@ -1,70 +1,96 @@
 import "./Navigation.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import endpoints from "../../../services/api";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {useContext} from "react";
+import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 
 function Navigation() {
-    const history = useHistory();
+  const history = useHistory();
 
-    const {loggedIn, getLoggedIn, loggedUser} = useContext(AuthContext);
+  const { loggedIn, getLoggedIn, loggedUser } = useContext(AuthContext);
 
-    async function logoutHandler() {
-        const res = await axios.get(endpoints.LOGOUT);
-        await getLoggedIn();
-        history.push("/");
+  async function logoutHandler() {
+    const res = await axios.get(endpoints.LOGOUT);
+    await getLoggedIn();
+    history.push("/");
 
-        // const res = await axios.get(endpoints.LOGOUT);
-        // if (res.status === 200) {
-        //     await getLoggedIn();
-        //     history.push("/");
-        // }
-    }
+    // const res = await axios.get(endpoints.LOGOUT);
+    // if (res.status === 200) {
+    //     await getLoggedIn();
+    //     history.push("/");
+    // }
+  }
 
-    return (
-        <nav>
-            {loggedIn === false && (
-                <>
-                    <ul>
-                        <li>
-                            <Link to="/">
-                                <img src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"} alt="header-logo"/>
-                            </Link>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li><Link to="/register">Register</Link></li>
-                        <li><Link to="/login">Log in</Link></li>
-                    </ul>
-                </>
+  return (
+    <nav>
+      {loggedIn === false && (
+        <>
+          <ul>
+            <li>
+              <Link to="/">
+                <img
+                  src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"}
+                  alt="header-logo"
+                />
+              </Link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
+          </ul>
+        </>
+      )}
+
+      {loggedIn === true && (
+        <>
+          <ul>
+            <li>
+              <Link to="/">
+                <img
+                  src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"}
+                  alt="header-logo"
+                />
+              </Link>
+            </li>
+            <li>
+              <Link to="/add-task">Add task</Link>
+            </li>
+            <li>
+              <Link to="/add-project">Add project</Link>
+            </li>
+            <li>
+              <Link to="/add-client">Add client</Link>
+            </li>
+            <li>
+              <Link to="/add-absence">Add absence</Link>
+            </li>
+          </ul>
+          <ul>
+            {loggedUser && loggedUser.username !== undefined && (
+              <li className="user-welcome">
+                Welcome, <span>{loggedUser.username}</span>
+              </li>
             )}
-
-            {loggedIn === true && (
-                <>
-                    <ul>
-                        <li>
-                            <Link to="/">
-                                <img src={process.env.PUBLIC_URL + "/images/logos/header-logo.png"} alt="header-logo"/>
-                            </Link>
-                        </li>
-                        <li><Link to="/add-task">Add task</Link></li>
-                        <li><Link to="/add-project">Add project</Link></li>
-                        <li><Link to="/add-client">Add client</Link></li>
-                    </ul>
-                    <ul>
-                        { loggedUser && loggedUser.username !== undefined && (
-                            <li className="user-welcome">Welcome, <span>{loggedUser.username}</span></li>
-                            )}
-                        <li><Link to="/profile">Profile</Link></li>
-                        <li><Link to="/" onClick={logoutHandler}>Exit</Link></li>
-                    </ul>
-                </>
-            )}
-        </nav>
-    )
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={logoutHandler}>
+                Exit
+              </Link>
+            </li>
+          </ul>
+        </>
+      )}
+    </nav>
+  );
 }
 
 export default Navigation;
-
