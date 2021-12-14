@@ -54,9 +54,10 @@ The application allows you to:
 
 - Register
 - Log in
-- Create/edit client
-- Create/edit project
-- Create/edit/complete/delete task
+- Add/edit client
+- Add/edit project
+- Add/edit/complete/delete task
+- Add absence and send notification email
 - See overall status of active tasks
 - See overall status of active tasks per user
 - Search by client/project/task name
