@@ -1,8 +1,8 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
 }
 
 /*body {*/
@@ -12,126 +12,126 @@
 /*}*/
 
 a {
-    text-decoration: none;
-    color: #303030;
+  text-decoration: none;
+  color: #303030;
 }
 
 a:visited {
-    color: #303030;
+  color: #303030;
 }
 
 a:hover {
-    /*color: #909090;*/
-    text-decoration: #D62130 underline;
+  /*color: #909090;*/
+  text-decoration: #d62130 underline;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 h1 {
-    font-size: 60px;
-    font-weight: 300;
-    color: #303030;
+  font-size: 60px;
+  font-weight: 300;
+  color: #303030;
 }
 
 h2 {
-    font-size: 50px;
-    font-weight: 300;
-    color: #303030;
+  font-size: 50px;
+  font-weight: 300;
+  color: #303030;
 }
 
 .form-wrapper {
-    width: 100%;
-    background-color: white;
+  width: 100%;
+  background-color: white;
 }
 
 form {
-    width: 600px;
-    margin: 60px auto;
-    text-align: center;
-    background-color: white;
-    padding: 20px 40px;
-    border: 2px solid #D62130;
-    border-radius: 4px;
+  width: 600px;
+  margin: 60px auto;
+  text-align: center;
+  background-color: white;
+  padding: 20px 40px;
+  border: 2px solid #d62130;
+  border-radius: 4px;
 }
 
 form .form-field {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 form .form-field label {
-    display: block;
-    font-size: 24px;
-    text-align: center;
-    /*background-color: #D62130;*/
-    color: #303030;
-    /*padding: 10px;*/
-    font-weight: bold;
-    margin-bottom: 10px;
+  display: block;
+  font-size: 24px;
+  text-align: center;
+  /*background-color: #D62130;*/
+  color: #303030;
+  /*padding: 10px;*/
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 input,
 form .form-field input,
 form .form-field select {
-    width: 100%;
-    font-size: 20px;
-    border-style: none;
-    border-bottom: 2px solid #D62130;
-    overflow: hidden;
-    padding: 10px;
-    color: #303030;
-    /*background-color: rgba(214, 33, 48,  0.1);*/
-    /*background-color: rgba(48, 48, 48,  0.05);*/
+  width: 100%;
+  font-size: 20px;
+  border-style: none;
+  border-bottom: 2px solid #d62130;
+  overflow: hidden;
+  padding: 10px;
+  color: #303030;
+  /*background-color: rgba(214, 33, 48,  0.1);*/
+  /*background-color: rgba(48, 48, 48,  0.05);*/
 }
 
 input:focus,
 form .form-field input:focus,
 form .form-field select:focus {
-    outline-width: 0;
+  outline-width: 0;
 }
 
 input:hover,
 form .form-field input:hover {
-    cursor: text;
+  cursor: text;
 }
 
 /*button {*/
-    /*font-size: 12px;*/
-    /*padding: 10px 20px;*/
-    /*margin: auto 10px;*/
-    /*width: 120px;*/
-    /*font-weight: bold;*/
+/*font-size: 12px;*/
+/*padding: 10px 20px;*/
+/*margin: auto 10px;*/
+/*width: 120px;*/
+/*font-weight: bold;*/
 /*}*/
 
 button.add {
-    font-size: 20px;
-    color: white;
-    border-style: none;
-    background: #D62130;
-    margin: 20px;
-    padding: 10px 20px;
+  font-size: 20px;
+  color: white;
+  border-style: none;
+  background: #d62130;
+  margin: 20px;
+  padding: 10px 20px;
 }
 
 button.delete,
 button.complete {
-    color: white;
-    border-style: none;
-    background: #D62130;
-    font-size: 12px;
-    padding: 10px 20px;
-    width: 120px;
-    font-weight: bold;
+  color: white;
+  border-style: none;
+  background: #d62130;
+  font-size: 12px;
+  padding: 10px 20px;
+  width: 120px;
+  font-weight: bold;
 }
 
 button.cancel {
-    color: #D51F2F;
-    background: white;
-    border: 1px solid #D62130;
-    font-size: 12px;
-    padding: 10px 20px;
-    width: 120px;
-    font-weight: bold;
+  color: #d51f2f;
+  background: white;
+  border: 1px solid #d62130;
+  font-size: 12px;
+  padding: 10px 20px;
+  width: 120px;
+  font-weight: bold;
 }
 
 /*button.delete {*/
@@ -150,14 +150,14 @@ button.cancel {
 /*}*/
 
 ::selection {
-    background: #D62130;
-    color: white;
+  background: #d62130;
+  color: white;
 }
 
 ::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 fieldset {
-    border: none;
+  border: none;
 }
