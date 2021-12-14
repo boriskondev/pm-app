@@ -1,39 +1,39 @@
 .search-wrapper {
-    width: 100%;
-    min-height: 50vh;
-    background-color: white;
+  width: 100%;
+  min-height: 50vh;
+  background-color: white;
 }
 
 .search-result {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 800px;
-    margin: 60px auto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 800px;
+  margin: 60px auto;
 }
 
 .search-result .result-card {
-    width: 120px;
-    height: 120px;
-    margin: 10px;
-    border: 2px solid #D62130;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    word-wrap: anywhere;
-    transition: transform .2s;
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+  border: 2px solid #d62130;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  word-wrap: anywhere;
+  transition: transform 0.2s;
 }
 
 .search-result .result-card.client-card {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .search-result .result-card:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }

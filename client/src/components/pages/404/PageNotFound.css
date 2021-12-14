@@ -1,10 +1,10 @@
 .not-found {
-    padding: 120px;
-    text-align: center;
-    font-size: 16px;
-    background-color: white;
+  padding: 120px;
+  text-align: center;
+  font-size: 16px;
+  background-color: white;
 }
 
 .not-found span {
-    font-weight: bold;
+  font-weight: bold;
 }

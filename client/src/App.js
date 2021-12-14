@@ -6,23 +6,21 @@ import Footer from "./components/common/navigation/Footer";
 import RoutesLogged from "./components/routes/RoutesLogged";
 import RoutesNotLogged from "./components/routes/RoutesNotLogged";
 
-import {useContext} from "react";
+import { useContext } from "react";
 import AuthContext from "./context/AuthContext";
 
 function App() {
-    const {loggedIn} = useContext(AuthContext);
+  const { loggedIn } = useContext(AuthContext);
 
-    return (
-        <div className="App">
-            <Navigation/>
+  return (
+    <div className="App">
+      <Navigation />
 
-            <Main>
-                {loggedIn ? <RoutesLogged/> : <RoutesNotLogged/>}
-            </Main>
+      <Main>{loggedIn ? <RoutesLogged /> : <RoutesNotLogged />}</Main>
 
-            <Footer/>
-        </div>
-    );
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

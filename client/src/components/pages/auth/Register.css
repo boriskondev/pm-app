@@ -1,9 +1,9 @@
 form.register p {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 form.register p a,
-form.login p a{
-    color: #D62130;
-    font-weight: bold;
+form.login p a {
+  color: #d62130;
+  font-weight: bold;
 }

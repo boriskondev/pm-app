@@ -1,31 +1,31 @@
 .guest-home {
-    background-color: white;
-    text-align: center;
-    padding: 100px;
+  background-color: white;
+  text-align: center;
+  padding: 100px;
 }
 
 .guest-home .home-status {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .guest-home .home-status ul {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .guest-home .home-status ul li {
-    margin: 40px;
+  margin: 40px;
 }
 
 .guest-home .home-status ul li span {
-    color: #D62130;
-    font-weight: bold;
+  color: #d62130;
+  font-weight: bold;
 }
 
 .guest-home p {
-    margin: 20px;
+  margin: 20px;
 }
 
 .guest-home p span {
-    font-weight: bold;
+  font-weight: bold;
 }

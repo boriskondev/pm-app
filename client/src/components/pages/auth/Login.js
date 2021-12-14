@@ -1,121 +1,123 @@
 import Header from "../../common/parts/Header";
 import Notifications from "../../common/parts/Notifications";
-import {useState, useContext} from "react";
+import { useState, useContext } from "react";
 import "./Register.css";
-import {Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import endpoints from "../../../services/api";
 import AuthContext from "../../../context/AuthContext";
 import setAndUnsetError from "../../../utils/setAndUnsetError";
 
 const Login = () => {
-    const history = useHistory();
+  const history = useHistory();
 
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
-    const {getLoggedIn} = useContext(AuthContext);
+  const { getLoggedIn } = useContext(AuthContext);
 
-    const [state, setState] = useState({
-        email: "",
-        password: ""
-    })
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
 
-    const handleFieldChange = (e) => {
-        const {id, value} = e.target;
-        setState(prevState => ({...prevState, [id]: value}));
+  const handleFieldChange = (e) => {
+    const { id, value } = e.target;
+    setState((prevState) => ({ ...prevState, [id]: value }));
+  };
+
+  const timeoutLength = 1500;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!state.email || !state.password) {
+      setAndUnsetError(setError, "All fields are required.", timeoutLength);
+      return;
     }
 
-    const timeoutLength = 1500;
+    const { email, password } = state;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const userToLogin = {
+      email,
+      password,
+    };
 
-        if (!state.email || !state.password) {
-            setAndUnsetError(setError, "All fields are required.", timeoutLength);
-            return;
-        }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userToLogin),
+      credentials: "include",
+    };
 
-        const {email, password} = state;
+    try {
+      const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
 
-        const userToLogin = {
-            email,
-            password
-        };
+      let message = null;
 
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(userToLogin),
-            credentials: "include"
-        };
+      if (loginResponse.status === 400) message = "Enter all required fields.";
+      else if (loginResponse.status === 401) message = "Wrong password.";
+      else if (loginResponse.status === 404) message = "User does not exist.";
 
-        try {
-            const loginResponse = await fetch(endpoints.LOGIN, requestOptions);
+      if (message) {
+        setAndUnsetError(setError, message, timeoutLength);
+        return;
+      }
 
-            let message = null;
+      setSubmitted("User logged in successfully.");
 
-            if (loginResponse.status === 400) message = "Enter all required fields.";
-            else if (loginResponse.status === 401) message = "Wrong password.";
-            else if (loginResponse.status === 404) message = "User does not exist.";
-
-            if (message) {
-                setAndUnsetError(setError, message, timeoutLength);
-                return;
-            }
-
-            setSubmitted("User logged in successfully.");
-
-            setTimeout(() => {
-                getLoggedIn();
-                history.push("/");
-            }, 1500);
-
-        } catch (error) {
-            console.log(error);
-            setAndUnsetError(setError, "You cannot login now.", timeoutLength);
-            // return;
-        }
+      setTimeout(() => {
+        getLoggedIn();
+        history.push("/");
+      }, 1500);
+    } catch (error) {
+      console.log(error);
+      setAndUnsetError(setError, "You cannot login now.", timeoutLength);
+      // return;
     }
+  };
 
-    return (
-        <>
-            <Header title="Log in"/>
+  return (
+    <>
+      <Header title="Log in" />
 
-            <section className="form-wrapper">
-                <form className="login" onSubmit={handleSubmit}>
+      <section className="form-wrapper">
+        <form className="login" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label>Email</label>
+            <input
+              type="email"
+              id="email"
+              value={state.email}
+              onChange={handleFieldChange}
+              autoComplete="off"
+            />
+          </div>
 
-                    <div className="form-field">
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={state.email}
-                            onChange={handleFieldChange}
-                            autoComplete="off"
-                        />
-                    </div>
+          <div className="form-field">
+            <label>Password</label>
+            <input
+              type="password"
+              id="password"
+              value={state.password}
+              onChange={handleFieldChange}
+              autoComplete="off"
+            />
+          </div>
 
-                    <div className="form-field">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={state.password}
-                            onChange={handleFieldChange}
-                            autoComplete="off"
-                        />
-                    </div>
+          <Notifications submitted={submitted} error={error} />
 
-                    <Notifications submitted={submitted} error={error}/>
+          <button className="add" type="submit">
+            Submit
+          </button>
 
-                    <button className="add" type="submit">Submit</button>
-
-                    <p>You don't have an account? Register <Link to="/register">here.</Link></p>
-
-                </form>
-            </section>
-        </>
-    )
-}
+          <p>
+            You don't have an account? Register{" "}
+            <Link to="/register">here.</Link>
+          </p>
+        </form>
+      </section>
+    </>
+  );
+};
 
 export default Login;

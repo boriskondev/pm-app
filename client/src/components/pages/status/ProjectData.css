@@ -1,62 +1,62 @@
 .project-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-left: 20px;
-    background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-left: 20px;
+  background-color: white;
 }
 
 .project-info h2 {
-    font-size: 28px;
-    padding: 30px;
-    text-align: center;
-    font-weight: bold;
+  font-size: 28px;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .project-info table {
-    width: 95%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+  width: 95%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .project-info table th,
 .project-info table td {
-    padding: 10px;
-    font-size: 14px;
-    text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
 }
 
 .project-info table tr td:nth-child(1) {
-    width: 40%;
+  width: 40%;
 }
 
 .project-info table thead tr th {
-    color: black;
-    font-size: 20px;
-    font-weight: normal;
-    padding: 18px;
-    border-bottom: 2px solid #D62130;
+  color: black;
+  font-size: 20px;
+  font-weight: normal;
+  padding: 18px;
+  border-bottom: 2px solid #d62130;
 }
 
 .project-info thead tr:hover th {
-    background-color: #D62130;
-    color: rgb(255, 255, 255);
+  background-color: #d62130;
+  color: rgb(255, 255, 255);
 }
 
 .project-info tbody tr:last-child {
-    border-bottom: 2px solid #D62130;
+  border-bottom: 2px solid #d62130;
 }
 
 .project-info table tbody tr:nth-child(even) {
-    background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 
 .project-info tr:hover td {
-    background-color: #D62130;
-    color: rgb(255, 255, 255);
+  background-color: #d62130;
+  color: rgb(255, 255, 255);
 }
 
 .project-info tr:hover td a {
-    color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }

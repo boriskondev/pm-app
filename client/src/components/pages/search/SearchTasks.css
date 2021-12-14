@@ -1,8 +1,8 @@
 .search-result-tasks {
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 800px;
-    margin: 60px auto;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 800px;
+  margin: 60px auto;
 }

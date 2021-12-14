@@ -1,91 +1,91 @@
-.weekly-overview{
-    background-color: white;
-    /*width: 60%;*/
-    /*margin: 0 auto;*/
+.weekly-overview {
+  background-color: white;
+  /*width: 60%;*/
+  /*margin: 0 auto;*/
 }
 
 .weekly-overview table {
-    width: 60%;
-    border-collapse: collapse;
-    margin: 30px auto;
+  width: 60%;
+  border-collapse: collapse;
+  margin: 30px auto;
 }
 
 .weekly-overview th,
 .weekly-overview td {
-    padding: 10px;
-    font-size: 20px;
-    text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .weekly-overview tr td:nth-child(1) {
-    width: 30%;
+  width: 30%;
 }
 .weekly-overview tr td:nth-child(2) {
-    width: 30%;
+  width: 30%;
 }
 
 .weekly-overview tr td:nth-child(3) {
-    width: 30%;
+  width: 30%;
 }
 
 .weekly-overview table thead tr th {
-    color: black;
-    font-size: 32px;
-    font-weight: normal;
-    padding: 18px;
-    border-bottom: 2px solid #D62130;
+  color: black;
+  font-size: 32px;
+  font-weight: normal;
+  padding: 18px;
+  border-bottom: 2px solid #d62130;
 }
 
 .weekly-overview table thead tr:hover th {
-    background-color: #D62130;
-    color: rgb(255, 255, 255);
+  background-color: #d62130;
+  color: rgb(255, 255, 255);
 }
 
 .weekly-overview table tbody tr:nth-child(even) {
-    background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 
 .weekly-overview .homepage-icon {
-    color: #D62130;
-    padding: 0;
-    margin: auto 0;
+  color: #d62130;
+  padding: 0;
+  margin: auto 0;
 }
 
 .weekly-overview tfoot td {
-    font-size: 32px;
-    padding: 18px;
-    border-top: 2px solid #D62130;
+  font-size: 32px;
+  padding: 18px;
+  border-top: 2px solid #d62130;
 }
 
 .weekly-overview tr:hover td {
-    background-color: #D62130;
-    color: rgb(255, 255, 255);
+  background-color: #d62130;
+  color: rgb(255, 255, 255);
 }
 
 .weekly-overview tr:hover td a {
-    color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
 .weekly-overview tr:hover td a:hover {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .weekly-overview .homepage-icon:hover {
-    color: white;
+  color: white;
 }
 
 .weekly-overview svg {
-    position: relative;
-    top: 2px;
+  position: relative;
+  top: 2px;
 }
 
 .weekly-overview button.add {
-    margin: 20px auto 30px auto;
-    display: block;
+  margin: 20px auto 30px auto;
+  display: block;
 }
 
 .weekly-overview .sort-icon {
-    position: relative;
-    bottom: 5px;
-    left: 8px;
+  position: relative;
+  bottom: 5px;
+  left: 8px;
 }

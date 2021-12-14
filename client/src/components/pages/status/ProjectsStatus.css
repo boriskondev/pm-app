@@ -1,13 +1,13 @@
 .content-wrapper {
-    display: flex;
-    margin: 0 10px 10px 10px;
+  display: flex;
+  margin: 0 10px 10px 10px;
 }
 
 .content-wrapper .projects-list {
-    min-width: 20%;
-    overflow-y: scroll;
-    height: 500px;
-    /*margin-left: 20px;*/
+  min-width: 20%;
+  overflow-y: scroll;
+  height: 500px;
+  /*margin-left: 20px;*/
 }
 
 /*::-webkit-scrollbar-track {*/
@@ -28,68 +28,68 @@
 /*}*/
 
 .content-wrapper .project-accordion {
-    background-color: white;
-    color: #303030;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 32px;
-    transition: 0.4s;
-    /*border-top: 1px solid #D51F2F;*/
+  background-color: white;
+  color: #303030;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 32px;
+  transition: 0.4s;
+  /*border-top: 1px solid #D51F2F;*/
 }
 
-.content-wrapper .active, .project-accordion:hover {
-    /*background-color: #EC9CA3;*/
-    color: white;
-    background-color: #D62130;
-    text-decoration: none;
+.content-wrapper .active,
+.project-accordion:hover {
+  /*background-color: #EC9CA3;*/
+  color: white;
+  background-color: #d62130;
+  text-decoration: none;
 }
 
 .content-wrapper .project-panel {
-    padding: 0 18px;
-    display: none;
-    background-color: white;
-    overflow: hidden;
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
 }
 
 .content-wrapper .project-panel ul li a:hover {
-    font-weight: bold;
-    text-decoration: none;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .content-wrapper .project-panel ul {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .content-wrapper .project-panel ul li {
-    font-size: 18px;
-    margin: 15px 0;
-    text-align: left;
+  font-size: 18px;
+  margin: 15px 0;
+  text-align: left;
 }
 
 .content-wrapper .project-info {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .content-wrapper .project-info .message {
-    margin: auto auto;
-    text-align: center;
+  margin: auto auto;
+  text-align: center;
 }
 
 .content-wrapper .project-info .message p {
-    margin: 20px;
-    font-size: 22px;
+  margin: 20px;
+  font-size: 22px;
 }
 
 .content-wrapper .project-info .message p span {
-    color: #D62130;
-    font-weight: bold;
+  color: #d62130;
+  font-weight: bold;
 }
 
 .content-wrapper table tbody tr {
-    /*border: 0.5px solid #DDDDDD;*/
+  /*border: 0.5px solid #DDDDDD;*/
 }
-
