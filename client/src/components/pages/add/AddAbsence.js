@@ -3,8 +3,15 @@ import Header from "../../common/parts/Header";
 import Notifications from "../../common/parts/Notifications";
 import { useState, useEffect, useContext } from "react";
 import absenceTypes from "../../../utils/absenceTypes.js";
+import endpoints from "../../../services/api";
+import fetchWrapper from "../../../services/fetchWrapper";
+import { useHistory } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
 
 function AddAbsence() {
+  const history = useHistory();
+  const { loggedUser } = useContext(AuthContext);
+
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
@@ -13,8 +20,6 @@ function AddAbsence() {
   const [details, setDetails] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
-  // console.log(absenceId, details, startDate, endDate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,19 +44,19 @@ function AddAbsence() {
     }
 
     const emailToSend = {
+      sender: loggedUser.username,
       absenceType,
+      details,
       startDate,
       endDate,
     };
 
-    console.log(emailToSend);
-
-    // fetchWrapper.post(endpoints.TASKS, newTaskToAdd).then(() => {
-    //   setSubmitted(`${taskName} added successfully.`);
-    //   setTimeout(() => {
-    //     history.push("/");
-    //   }, 1500);
-    // });
+    fetchWrapper.post(endpoints.SEND_EMAIL, emailToSend).then(() => {
+      setSubmitted("Email sent successfully.");
+      setTimeout(() => {
+        history.push("/");
+      }, 1500);
+    });
   };
   return (
     <>

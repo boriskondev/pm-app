@@ -8,6 +8,7 @@ const userController = require("../controllers/userController");
 const clientController = require("../controllers/clientController");
 const projectController = require("../controllers/projectController");
 const taskController = require("../controllers/taskController");
+const emailController = require("../controllers/emailController");
 
 // Auth
 router.post("/register", authController.register);
@@ -48,5 +49,8 @@ router.get("/tasks/responsible/:id", taskController.findTasksOfUser);
 router.delete("/tasks/:id", taskController.delete);
 router.patch("/tasks/:id", taskController.complete);
 router.put("/tasks/:id", taskController.edit);
+
+// Emails
+router.post("/send-email", emailController.send);
 
 module.exports = router;
