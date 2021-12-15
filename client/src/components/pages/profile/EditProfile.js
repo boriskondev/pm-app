@@ -8,10 +8,10 @@ import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 
 const EditProfile = ({ match }) => {
+  const { loggedUser, setLoggedUser } = useContext(AuthContext);
+
   const { id } = match.params;
   const history = useHistory();
-
-  const { setLoggedUser } = useContext(AuthContext);
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
@@ -22,11 +22,11 @@ const EditProfile = ({ match }) => {
     repeatPassword: "",
   });
 
-  useEffect((id) => {
-    fetchWrapper.get(endpoints.USERS + `/${id}`).then((data) => {
-      setState({ username: data.username });
-    });
-  }, []);
+  // useEffect((id) => {
+  //   fetchWrapper.get(endpoints.USERS + `/${id}`).then((data) => {
+  //     setState({ username: data.username });
+  //   });
+  // }, []);
 
   const handleFieldChange = (e) => {
     const { id, value } = e.target;

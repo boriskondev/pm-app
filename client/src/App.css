@@ -1,0 +1,30 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+:root {
+  --nav-height: 90px;
+  --footer-height: 160px;
+  --header-height: 140px;
+}
+
+nav {
+  height: var(--nav-height);
+}
+
+footer {
+  height: var(--footer-height);
+}
+
+main {
+  min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+}
+
+/* .content-wrapper {
+  height: calc(
+    100vh - var(--nav-height) - var(--footer-height) - var(--header-height)
+  );
+} */

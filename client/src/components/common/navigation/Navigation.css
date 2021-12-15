@@ -1,7 +1,7 @@
 nav {
   position: sticky;
   top: 0;
-  height: 90px;
+  /* height: 90px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

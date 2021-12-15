@@ -1,13 +1,14 @@
 header {
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    padding: 20px;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  padding: 20px;
+  background-color: #f0f0f0;
 }
 
 header h1 {
-    margin: 0;
-    padding: 20px;
+  margin: 0;
+  padding: 20px;
 }
