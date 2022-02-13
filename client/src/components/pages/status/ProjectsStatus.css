@@ -10,22 +10,24 @@
   /*margin-left: 20px;*/
 }
 
-/* ::-webkit-scrollbar-track {*/
-/*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
-/*    -webkit-border-radius: 10px;*/
-/*    border-radius: 10px;*/
-/*}*/
+/* ::-webkit-scrollbar-track {
+  box-shadow: white;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
 
-/*::-webkit-scrollbar-thumb {*/
-/*    -webkit-border-radius: 10px;*/
-/*    border-radius: 10px;*/
-/*    background: #303030;*/
-/*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
-/*}*/
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #303030;
+  box-shadow: white;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
 
-/*::-webkit-scrollbar-thumb:window-inactive {*/
-/*    background: rgba(255,0,0,0.4);*/
-/*} */
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0.4);
+} */
 
 .content-wrapper .project-accordion {
   background-color: white;
