@@ -28,7 +28,6 @@ const emailController = {
       to: receivers,
       subject: `${sender} added a new absence`,
       html: `<div className="email" style="
-        border: 1px solid black;
         padding: 20px;
         font-family: sans-serif;
         font-size: 20px; 
