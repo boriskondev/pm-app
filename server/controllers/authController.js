@@ -46,9 +46,16 @@ const register = async (req, res) => {
     );
 
     // Send to token in HTTP-only cookie
+    // res
+    //   .cookie("token", token, {
+    //     httpOnly: true,
+    //   })
+    //   .send();
+
     res
       .cookie("token", token, {
-        httpOnly: true,
+        sameSite: "none",
+        secure: true,
       })
       .send();
   } catch (err) {
